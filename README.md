@@ -81,7 +81,7 @@
 
 * Logo:
 
-  ![Pinux](/home/lantian/File/Software-Engine/Sources/Photo/BlogPedestrain.png)
+  ![BlogPedestrain](/home/lantian/File/Software-Engine/Sources/Photo/BlogPedestrain.png)
 
 ### 4.Requirement analysis
 
