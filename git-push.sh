@@ -8,3 +8,5 @@ git commit -m "$dating $1"   # commit the changes
 git push origin master   # push commit into the Github in the back station and kill the output.
 git log    # show the log
 # taqini say 0x29a , No 0x29a , I am so weak :)
+# GMFTBY say he is weak, taqini doesn't think so :-p (GMFTBY Orz TaQini)
+
