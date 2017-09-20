@@ -1,4 +1,4 @@
-# JavaScript入门
+# 一.JavaScript入门
 
 ## 1.什么是JavaScript
 
@@ -561,3 +561,4 @@ labelname :
    * 异常可以使任何的JavaScript的对象(String , Number , Boolean , Object)
 
      err是我们抛出的异常，以便我们之后对接收的异常信息进行判断和分析处理
+
