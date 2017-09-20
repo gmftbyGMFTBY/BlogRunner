@@ -1,14 +1,12 @@
-# JavaScript Notebook
+# JavaScript入门
 
 ## 1.什么是JavaScript
 
-### 1.定义
-
-1. JavaScript是轻量级的编程语言
-2. JavaScript是可插入的HTML页面的编程代码
-3. JavaScript插入HTML页面后，可以被现代的浏览器执行
-
-### 2.简单使用
+* 定义
+  1. JavaScript是轻量级的编程语言
+  2. JavaScript是可插入的HTML页面的编程代码
+  3. JavaScript插入HTML页面后，可以被现代的浏览器执行
+* 简单使用
 
 1. HTML输出
 
@@ -201,7 +199,7 @@ JavaScript通常用来操作HTML元素
 
 2. 分号
 
-   1. 分好用来分割我们的JS语句
+   1. 分号用来分割我们的JS语句
    2. 但是在JS中使用分好来分割语句是可选的方案
 
 3. 所谓的JS代码
@@ -240,4 +238,326 @@ JavaScript通常用来操作HTML元素
    ("Hello World!");
    ```
 
-   ​
+
+## 5.JavaScript注释
+
+```javascript
+// 单行注释
+/* 多行注释 */
+```
+
+## 6.JavaScript变量
+
+1. 声明变量
+
+   ```javascript
+   var x = 2;
+   var y = 3;
+   var z = x + y;
+   var name = 'lantian';
+   var Name = "GMFTBY";
+
+   //一条语句多个变量
+   var a = 1 , b = 2 , c = 3;
+   ```
+
+2. 数据类型
+
+   JS是动态类型语言，一个变量可以拥有不同的类型
+
+   * 数字 : 数字可以带小数点也可以不带小数点，支持科学计数法
+
+     ```javascript
+     var x = 123e5;    // 12300000
+     ```
+
+   * 字符串 : 双引号或者单引号括起来的任意文本
+
+   * `undefined` : 
+
+     **变量不含有值，**无值的变量，没有值的变量默认都是`undefined`
+
+     ```javascript
+     var name;    //name是undefined
+     ```
+
+     可以设置` null `来清空变量的值
+
+     ```javascript
+     var name = 'lantian';
+     name = null;
+     ```
+
+     ​
+
+   * 布尔变量
+
+     * true
+     * false
+
+   * 数组
+
+     数组下标是基于0的
+
+     ```javascript
+     var cars = new Array();
+     cars[0] = 'lantian';
+     cars[1] = 'GMFTBY';
+
+     // OR
+     var cars_new = new Array('lantian' , 'GMFTBY');
+
+     // OR
+     var cars_newp = ['lantian' , 'GMFTBY'];
+     ```
+
+   * 对象
+
+     类似于Python的字典，用花括号区分，其间使用键值对的形式定义
+
+     1. 声明
+
+        ```javascript
+        var person = {firstname : "lantian" , lastname : 'GMFTBY' , id ： 5505};
+        ```
+
+     2. 元素引用
+
+        ```javascript
+        name = person.lastname;
+        name = person['lastname'];
+        ```
+
+   动态申请类型
+
+   **JS的所有的比那辆都是对象，声明变量就相当于是创建对象**
+
+   ```javascript
+   var carname = new String;
+   var x = new Number;
+   var y = new Boolean;
+   var cars = new Array;
+   var person = new Object;
+   ```
+
+## 7.JavaScript对象
+
+1. JS的对象是拥有属性和方法的数据
+
+   ```javascript
+   car.wheel = 'iron';
+   car.drive();
+   ```
+
+2. 简单的例子
+
+   字符串对象的使用
+
+   ```html
+   <html>
+     <head>
+     </head>
+     <body>
+       <p id = 'demo'></p>
+       <script>
+         var car = 'newcar';
+         x = document.getElementById('demo');
+         x.innerHTML = car.length;
+         <!-- length是car的属性 -->
+       </script>
+     </body>
+   </html>
+   ```
+
+3. 创建自己的对象
+
+   ```javascript
+   person = new Object();
+   // 不断的项存在的对象中添加属性和方法
+   person.firstname = 'bill';
+   person.lastname = 'gates';
+   person.age = 56;
+   person.eyecolor = 'blue';
+   ```
+
+4. 访问对象属性和方法
+
+   ```javascript
+   var message = 'Hello World!';
+   var x = message.toUpperCase();    //访问方法
+   var length = message.length;    //访问属性
+   ```
+
+## 8.JavaScript函数
+
+1. 函数是可以由**事件驱动**的或者**调用时执行的重用代码块**
+
+2. 语句体
+
+   ```javascript
+   function functionname(arg1 , arg2 , ...)
+   {
+     // the code ...
+     return ...;    // 返回值可以不存在，表示中断函数
+   }
+   ```
+
+3. 变量作用域
+
+   * 局部变量 : 
+     1. 在函数中声明的变量只在函数内部可见
+     2. 生存周期维持到函数结束
+   * 全局变量 : 
+     1. 在函数外声明的变量全局可见，网页所有的脚本和函数都可以进行访问
+     2. 生存周期维持到页面关闭
+
+## 9.JavaScript运算符
+
+1. 运算符
+
+   ```javascript
+   + , - , * , / , % , ++ , -- , = , += , -= , *= , /= , %=
+   ```
+
+2. 特例执行
+
+   ```javascript
+   text1 = "xiaozi";
+   text2 = "yuan";
+   text3 = text1 + text2;
+   ```
+
+   **数字和字符串相加，结果变成字符串**
+
+## 10.JavaScript逻辑运算符
+
+1. 测试使用true / false
+
+2. 条件运算符号
+
+   ```javascript
+   == (等于) , === (值和类型全等) ， ！= ， > , < , >= , <=
+   ```
+
+3. 逻辑运算符号
+
+   ```javascript
+   && , || , !
+   ```
+
+4. 三元运算符号
+
+   ```javascript
+   greeting = (visitor == 'pres')?"dear president":'dear';
+   ```
+
+## 11.JavaScript流程语句
+
+```javascript
+/*
+if / if...else... / if...else if...else... / switch 
+*/
+if(...)
+{
+    // ...     
+}
+
+// else
+if()
+{
+  // ...
+}
+else
+{
+  // ...
+}
+
+// else if
+if()
+{
+  // ...
+}
+else if()
+{
+  // ...
+}
+else
+{
+  // ...
+}
+
+// switch
+switch()
+{
+  case 1 : 
+    // ...
+    break;
+  case 2 :
+    // ...
+    break;
+  default:
+    // ...
+}
+
+/*
+for / while
+*/
+for(var i = 0 , len = cars.length;i < cars.length;i++)
+{
+  // ...
+  break;
+  continue;
+}
+
+var person = {fname:'lantian' , lname : 'GMFTBY'};
+for(x in person)
+  {
+    text = text + person[x];
+  }
+
+while()
+  {
+    // ...
+  }
+
+/*
+JavaScript的标签操作
+使用标签先定义组代码块，然后在其中我们的break语句可以从任何位置跳出
+*/
+labelname :
+{
+  // ...
+  // ...
+  // ...
+  // ...
+  break labelname;    //跳出labelname的代码块
+  // ...
+}
+```
+
+## 12.JavaScript错误
+
+1. JS代码执行的时候会出现各种各样的错误，我们需要错误机制来对不同的错误进行处理
+
+2. 当程序出现问题的时候，JS的引擎会停止并抛出一个异常
+
+3. 语法体
+
+   ```javascript
+   try
+   {
+     // ..这里可能会出现错误
+   }
+   catch(err)
+   {
+     // ..这里捕捉错误并处理,err是我们抛出的异常
+   }
+   ```
+
+4. `throw`
+
+   * 抛出异常
+
+   * 异常可以使任何的JavaScript的对象(String , Number , Boolean , Object)
+
+     err是我们抛出的异常，以便我们之后对接收的异常信息进行判断和分析处理
