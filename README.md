@@ -75,13 +75,13 @@
 
 * 组名:
 
-  English : Blog Pedestrain
+  English : Blog Runner
 
   Chinese : 博客行者
 
 * Logo:
 
-  ![BlogPedestrain](/home/lantian/File/Software-Engine/Sources/Photo/BlogPedestrain.png)
+  ![BlogRunner](/home/lantian/File/Software-Engine/Sources/Photo/BlogRunner.png)
 
 ### 4.Requirement analysis
 
