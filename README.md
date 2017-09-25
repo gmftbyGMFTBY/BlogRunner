@@ -48,15 +48,15 @@
 
 * 兰天     : Tian Lan
 
-  后端设计和开发,爬虫搭建,数据分析编码等
+  智能算法设计
 
 * 雷亚洲 : Yazhou Lei
 
-  前端设计和开发
+  爬取的文档解析和JSON文件格式生成
 
 * 李继领 : Jiling Li
 
-  前端设计和开发
+  爬虫搭建
 
 
 * 李智强 : Zhiqiang Li
@@ -80,6 +80,8 @@
   Chinese : 博客行者
 
 * Logo:
+
+  **P.S. : 如果照片查看失败，请参照当前目录下的`Sources/Photo`的图片`BlogRunner`**
 
   ![BlogRunner](/home/lantian/File/Software-Engine/Sources/Photo/BlogRunner.png)
 
