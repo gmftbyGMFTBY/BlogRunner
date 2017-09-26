@@ -216,8 +216,13 @@
 
 ### 1.Document Collection
 
-* 截止日期 : 2017.9.19 ~ 2017.9.25
-* 组员文档
+* 截止日期 : 2017.9.19 ~ 2017.9.26
+* 组员文档 : 
+  * 兰天 : JavaScript/notebook.md
+  * 李智强 : Ajax/AJAX学习资料
+  * 雷亚洲 : JSON/python中的JSON使用方法
+  * 郭莹婷 : elementUI/郭莹婷1120151826
+  * 李继领 : 
 
 **TO BE CONTINUED ...**
 

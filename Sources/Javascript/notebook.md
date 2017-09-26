@@ -662,6 +662,37 @@ labelname :
 
    * 网页加载
 
+     onload / onunload
+
+     - onload：在用户进入页面触发
+     - onunload：在用户离开页面触发
+
+     可以用来处理cookie
+
+     ```javascript
+     <!DOCTYPE html>
+     <html>
+     <body onload="checkCookies()">
+
+     <script>
+     function checkCookies()
+     {
+     if (navigator.cookieEnabled==true)
+     	{
+     	alert("已启用 cookie")
+     	}
+     else
+     	{
+     	alert("未启用 cookie")
+     	}
+     }
+     </script>
+
+     <p>提示框会告诉你，浏览器是否已启用 cookie。</p>
+     </body>
+     </html>
+     ```
+
    * 图像加载
 
    * 鼠标移动到元素上
@@ -706,51 +737,21 @@ labelname :
 
    * 触发按键
 
-   * onload / onunload
-
-     * onload：在用户进入页面触发
-     * onunload：在用户离开页面触发
-
-     可以用来处理cookie
-
      ```javascript
-     <!DOCTYPE html>
-     <html>
-     <body onload="checkCookies()">
-
-     <script>
-     function checkCookies()
+     //1 点击该元素执行对应的onclick指令
+     <h1 onclick="this.innerHTML='谢谢!'">请点击该文本</h1>
+     //2 函数化，this的妙用
+     <h1 onclick="changetext(this)">请点击该文本</h1>
+     function changetext(id)
      {
-     if (navigator.cookieEnabled==true)
-     	{
-     	alert("已启用 cookie")
-     	}
-     else
-     	{
-     	alert("未启用 cookie")
-     	}
+     	id.innerHTML="谢谢!";
      }
+     //3 分配事件,对onclick属性生成匿名函数
+     <script>
+     document.getElementById("myBtn").onclick=function(){displayDate()};
      </script>
-
-     <p>提示框会告诉你，浏览器是否已启用 cookie。</p>
-     </body>
-     </html>
      ```
 
-   ```javascript
-   //1 点击该元素执行对应的onclick指令
-   <h1 onclick="this.innerHTML='谢谢!'">请点击该文本</h1>
-   //2 函数化，this的妙用
-   <h1 onclick="changetext(this)">请点击该文本</h1>
-   function changetext(id)
-   {
-   id.innerHTML="谢谢!";
-   }
-   //3 分配事件,对onclick属性生成匿名函数
-   <script>
-   document.getElementById("myBtn").onclick=function(){displayDate()};
-   </script>
-   ```
 
 ## 3.DOM 节点
 
