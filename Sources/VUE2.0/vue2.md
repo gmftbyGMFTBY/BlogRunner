@@ -359,6 +359,8 @@ tree -L 1 .
 
 1. v-if / v-else / v-else-if
 
+   当表达式的计算结果是true执行否则不执行
+
    ```html
    <div id="app">
        <div v-if="Math.random() > 0.5">
