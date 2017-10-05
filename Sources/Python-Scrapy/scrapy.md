@@ -99,13 +99,10 @@
    * parse : 
 
      0. 默认的回调方法
-
-
      1. 处理解析下载的文件的数据，response参数保留爬取的页面的内容并提供访问这些内容的
-
-        方法
-
      2. 解析的结果要么保存，要么生成新的Request返回之后爬取
+
+
 
 ### 运行爬虫
 
@@ -172,26 +169,25 @@
 
    在我们在shell中测试完我们提取数据的方式之后，下一步就是将这些方式集成到parse函数中
 
-   ```python
-   import scrapy
 
 
-   class QuotesSpider(scrapy.Spider):
-       name = "quotes"
-       start_urls = [
-           'http://quotes.toscrape.com/page/1/',
-           'http://quotes.toscrape.com/page/2/',
-       ]
+```python
+import scrapy
+class QuotesSpider(scrapy.Spider):   
+   name = "quotes"
+   start_urls = [
+       'http://quotes.toscrape.com/page/1/',
+       'http://quotes.toscrape.com/page/2/',
+   ]
 
-       def parse(self, response):
-           for quote in response.css('div.quote'):
-               yield {
-                   'text': quote.css('span.text::text').extract_first(),
-                   'author': quote.css('span small::text').extract_first(),
-                   'tags': quote.css('div.tags a.tag::text').extract(),
-               }
-   ```
-
+   def parse(self, response):
+       for quote in response.css('div.quote'):
+           yield {
+               'text': quote.css('span.text::text').extract_first(),
+               'author': quote.css('span small::text').extract_first(),
+               'tags': quote.css('div.tags a.tag::text').extract(),
+           }
+```
 5. 存储爬取的数据
 
    1. 默认是将结果保存起来或者打印到标准输出
@@ -279,6 +275,94 @@
    scrapy crawl quotes -o quotes-humor.json -a tag=humor
    ```
 
-   ​
+## 基本操作
 
-   ​
+1. 创建新的Spider
+
+   ```bash
+   scrapy genspider spider_name domain_name
+   ```
+
+2. 创建项目
+
+   ```bash
+   scrapy startproject project_name
+   ```
+
+3. 运行爬虫
+
+   ```bash
+   scrapy crawl spider_name
+   ```
+
+4. 爬虫检查
+
+   ```bash
+   scrapy check 
+   ```
+
+5. 罗列可用爬虫
+
+   ```bash
+   scrapy list
+   ```
+
+6. 编辑爬虫
+
+   ```bash
+   scrapy edit spider_name
+   ```
+
+7. 调试模式
+
+   ```bash
+   scrapy shell "url"
+   ```
+
+## Spiders
+
+1. Spiders是定义如何抓取某个网站（或一组网站）的类，包括如何执行抓取（即跟踪链接）以及如何从其网页中提取结构化数据（即爬取项目）。换句话说，Spider是你定义用于为特定网站（或在某些情况下，一组网站）抓取和解析网页的自定义行为的地方
+
+2. 运行周期
+
+   1. 以生成抓取第一批URL的初始请求开始，并指定一个回调函数，用于对这些请求下载的响应进行调用。
+
+      第一批请求通过调用[`start_requests()`](http://www.usyiyi.cn/documents/scrapy_12/topics/spiders.html#scrapy.spiders.Spider.start_requests)方法（默认情况下）获得，这个方法为[`start_urls`](http://www.usyiyi.cn/documents/scrapy_12/topics/spiders.html#scrapy.spiders.Spider.start_urls)中指定的URL生成[`Request`](http://www.usyiyi.cn/documents/scrapy_12/topics/request-response.html#scrapy.http.Request)并为这些Request生成[`parse`](http://www.usyiyi.cn/documents/scrapy_12/topics/spiders.html#scrapy.spiders.Spider.parse)方法作为回调函数。
+
+   2.  在回调函数内分析返回的(网页)内容，返回 [`Item`](http://www.usyiyi.cn/documents/scrapy_12/topics/items.html#scrapy.item.Item) 对象或者 [`Request`](http://www.usyiyi.cn/documents/scrapy_12/topics/request-response.html#scrapy.http.Request) 或者一个包括二者的可迭代容器。  返回的Request对象之后会经过Scrapy处理，下载相应的内容，并调用设置的callback函数(函数可相同)。 
+
+   3.  在回调函数内，您可以使用 [选择器(Selectors)](http://www.usyiyi.cn/documents/scrapy_12/topics/selectors.html#topics-selectors) (您也可以使用BeautifulSoup, lxml 或者您想用的任何解析器) 来分析网页内容，并根据分析的数据生成item。 
+
+   4.  最后，由spider返回的item将被存到数据库(由某些 [Item Pipeline](http://www.usyiyi.cn/documents/scrapy_12/topics/item-pipeline.html#topics-item-pipeline) 处理)或使用 [Feed exports](http://www.usyiyi.cn/documents/scrapy_12/topics/feed-exports.html#topics-feed-exports) 存入到文件中。 
+
+3. 核心类 :
+
+   `scrapy.Spider`只提供默认的下载方式和送往parse函数解析
+
+   * name : 唯一的字符串(为了定位)
+   * allowed_domains: 爬取的域名的列表
+   * start_urls : 初始的URL列表
+   * start_request : 默认的爬取的函数
+   * parse : 提取数据和后续的Request , 返回Item / Request对象
+
+4. 通用爬虫类
+
+   1. Scrapy附带一些有用的通用spiders ，你可以使用它来子类化你的spiders。它们的目的是为几个常见的爬取案例提供方便的功能，例如根据某些规则查看网站上的所有链接，从[站点地图抓取](http://www.sitemaps.org)或解析XML/CSV Feed。
+
+   2. 常见
+
+      * `CrawlSpider`
+
+        除了从`Spider`中集成的属性，支持新的特性
+
+        ---
+
+        * 首先引入scrapy.spiders.Rule类
+
+          ​
+
+          ---
+
+          ​
+
+          ​
