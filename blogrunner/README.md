@@ -1,6 +1,6 @@
 # blogrunner
 
-> First trying for making the software for our own.
+> First trying for creating software
 
 ## Build Setup
 
