@@ -120,3 +120,186 @@ Vue.use(ElementUI, { locale })
 5. 导入自定义主题
 
    默认的主题保存在../theme文件夹下，在import中可以指定导入路径
+
+## 基本组件
+
+### 基础
+
+#### Layout
+
+使用基础的24分栏布局
+
+1. <el-row> :行布局，使用的行标签 
+
+   * gitter属性支持在列级分栏中插入间隔,默认间隔是0
+
+     ```html
+     <el-row :gutter='20'></el-row>
+     ```
+
+   * type属性赋值成`flex`可以启动flex布局，在flex布局中可以使用justify属性对我们的row中的列元素**整体**进行特定的布局分布排列
+
+     justify : 水平排列
+
+     * start : 左对齐
+     * end : 右对齐
+     * center : 居中
+     * space-between : 均分间隔，左右两边贴边界
+     * space-around : 均分间隔，左右两边不贴边界
+
+     align : 竖直排列
+
+     * top
+     * middle
+     * bottomsur
+
+     ```html
+     <el-row type='flex' justify="start"></el-row>
+     <el-row type='flex' justify="end"></el-row>
+     <el-row type='flex' justify="center"></el-row>
+     <el-row type='flex' justify="space-between"></el-row>
+     <el-row type='flex' justify="space-around"></el-row>
+     ```
+
+2. <el-col>:列布局，
+
+   * 支持使用span标签进行行内的分栏(24分,24,12,8,6,4,3,2,1)
+
+     ```html
+     <el-col :span = '24'></el-col>
+     <el-col :span = '12'></el-col>
+     <el-col :span = '6'></el-col>
+     <el-col :span = '3'></el-col>
+     <el-col :span = '8'></el-col>
+     <el-col :span = '2'></el-col>
+     <el-col :span = '4'></el-col>
+     <el-col :span = '1'></el-col>
+     ```
+
+   * offset属性支持进行偏移,使用24分栏定义偏移的栏数
+
+     ```html
+     <el-col :span='6' :offset="6"></el-col>
+     ```
+
+   * xs : < 768px像素的超小屏手机显示的时候的span
+
+   * sm : > 768px像素的平板显示span
+
+   * md : > 992px台式电脑
+
+   * lg : > 1200超大电脑显示的span
+
+#### Color
+
+http://element.eleme.io/#/zh-CN/component/color查看更多的色彩配方
+
+#### Typography
+
+```css
+font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+```
+
+#### Icon && Button
+
+1. <i>
+
+   * <i>标签可以应用已经定义的图标我们使用，名称一般是`el-icon-iconName`
+   * 更多的图标样式参照官网http://element.eleme.io/#/zh-CN/component/icon
+
+   ```html
+   <i class="el-icon-edit"></i>
+   <i class="el-icon-share"></i>
+   <i class="el-icon-delete"></i>
+   <el-button type="primary" icon="search">搜索</el-button>    <!-- 我们的button中也可以嵌入icon显示，更美观 -->
+   ```
+
+2. <el-button>
+
+   1. 在element中我们可以对button进行7中不同的定义
+
+      使用type属性
+
+      - 默认
+      - primary : 主要按钮
+      - text : 文字按钮
+      - success : 操作成功按钮
+      - warning : 操作警告按钮
+      - danger : 危险操作按钮
+      - info : 信息按钮
+
+      ```html
+      <el-button>默认按钮</el-button>
+      <el-button type="primary">主要按钮</el-button>
+      <el-button type="text">文字按钮</el-button>
+      ```
+
+   2. 禁用按钮
+
+      ```html
+      <el-button type="primary" icon="search" :disabled='true'>搜索</el-button>
+      ```
+
+   3. plain参数，忽视颜色，颜色在点击时加载
+
+      ```html
+      <el-button type="primary" icon="search" :plain="true">搜索</el-button>
+      ```
+
+   4. 图标按钮
+
+      设置对应的icon属性就可以在图标中插入图片
+
+      * 左边
+
+        ```html
+        <el-button type="primary" icon="search">搜索</el-button>
+        ```
+
+      * 右边
+
+        ```html
+        <el-button type="primary" icon="search" :disabled='true'>搜索<i class='el-icon-upload'></i></i></el-button>
+        ```
+
+   5. 按钮组合
+
+      一批按钮成队出现，我们可以将其组织在一起
+
+      使用<el-button-group>嵌套我们的<el-button>标签
+
+      ```html
+      <el-button-group>
+        <el-button type="primary" icon="arrow-left">上一页</el-button>
+        <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+      </el-button-group>
+      <el-button-group>
+        <el-button type="primary" icon="edit"></el-button>
+        <el-button type="primary" icon="share"></el-button>
+        <el-button type="primary" icon="delete"></el-button>
+      </el-button-group>
+      ```
+
+   6. 加载中动画
+
+      ```html
+      <el-button type="primary" :loading="true">加载中</el-button>
+      ```
+
+   7. 大小
+
+      使用size属性进行设置
+
+      * large
+      * small
+      * mini
+
+      ```html
+      <el-button type="primary" size="large">大型按钮</el-button>
+      <el-button type="primary">正常按钮</el-button>
+      <el-button type="primary" size="small">小型按钮</el-button>
+      <el-button type="primary" size="mini">超小按钮</el-button>
+      ```
+
+# TO BE CONTINUED ...  剩下的详见官方文档
+
