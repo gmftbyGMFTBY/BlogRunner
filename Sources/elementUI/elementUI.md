@@ -954,7 +954,143 @@ http://element.eleme.io/#/zh-CN/component/upload
 
 ### 提示
 
+用于在页面显示重要的提示信息
 
+1. <el-alert>
 
+   * title :  文字
+   * type : 种类，成功，错误等
+   * show-icon : 可以现实对应的type的icon
+   * description : 显示描述文字
 
+   ```html
+     <el-alert
+       title="成功提示的文案"
+       type="success"
+       show-icon
+       description>
+     </el-alert>
+   ```
 
+2. 加载
+
+   ```html
+   <template>
+     <el-button
+       type="primary"
+       @click="openFullScreen"
+       element-loading-text="拼命加载中"
+       v-loading.fullscreen.lock="fullscreenLoading">
+       显示整页加载，3 秒后消失
+     </el-button>
+   </template>
+
+   <script>
+     export default {
+       data() {
+         return {
+           fullscreenLoading: false
+         }
+       },
+       methods: {
+         openFullScreen() {
+           this.fullscreenLoading = true;
+           setTimeout(() => {
+             this.fullscreenLoading = false;
+           }, 3000);
+         }
+       }
+     }
+   </script>
+   ```
+
+3. 提示
+
+   ```html
+   <template>
+     <el-button :plain="true" @click="open5">消息</el-button>
+     <el-button :plain="true" @click="open6">成功</el-button>
+     <el-button :plain="true" @click="open7">警告</el-button>
+     <el-button :plain="true" @click="open8">错误</el-button>
+   </template>
+
+   <script>
+     export default {
+       methods: {
+         open5() {
+           this.$message({
+             showClose: true,
+             message: '这是一条消息提示'
+           });
+         },
+
+         open6() {
+           this.$message({
+             showClose: true,
+             message: '恭喜你，这是一条成功消息',
+             type: 'success'
+           });
+         },
+
+         open7() {
+           this.$message({
+             showClose: true,
+             message: '警告哦，这是一条警告消息',
+             type: 'warning'
+           });
+         },
+
+         open8() {
+           this.$message({
+             showClose: true,
+             message: '错了哦，这是一条错误消息',
+             type: 'error'
+           });
+         }
+       }
+     }
+   </script>
+   ```
+
+4. 弹框
+
+   调用`$alert`方法即可打开消息提示，它模拟了系统的 `alert`，无法通过按下 ESC 或点击框外关闭。此例中接收了两个参数，`message`和`title`。值得一提的是，窗口被关闭后，它默认会返回一个`Promise`对象便于进行后续操作的处理。若不确定浏览器是否支持`Promise`，可自行引入第三方 polyfill 或像本例一样使用回调进行后续处理。
+
+   ```html
+   <template>
+     <el-button type="text" @click="open">点击打开 Message Box</el-button>
+   </template>
+
+   <script>
+     export default {
+       methods: {
+         open() {
+           this.$alert('这是一段内容', '标题名称', {
+             confirmButtonText: '确定',
+             //之后点击确认后的返回结果
+             callback: action => {//action表示确认，下面用到了
+               this.$message({
+                 type: 'info',
+                 message: `action: ${ action }`
+               });
+             }
+           });
+         }
+       }
+     }
+   </script>
+
+   ```
+
+### 导航
+
+1. <el-menu>
+
+   * mode : 水平还是竖直
+   * collapse : 决定是否折叠
+
+2. <el-menu-item>
+
+3. <el-submenu>
+
+   生成二级菜单
