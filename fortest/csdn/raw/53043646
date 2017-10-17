@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/53043646"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '53043646';var commentscount = 1; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=1;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="1.大数模幂运算的缺陷：
+快速幂取模算法的引入是从大数的小数取模的朴素算法的局限性所提出的，在朴素的方法中我们计算一个数比如5^1003%31是非常消耗我们的计算资源的，在整个计算过程中最麻烦的就是我们的5^1003这个过程
+缺点1：在我们在之后计算指数的过程中，计算的数字不都拿得增大，非常的占用我们的计算资源（主要是时间，还有空间）
+缺点2：我们计算的中间过程数字大的恐怖，我们现有的计算机" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>快速幂取模算法详解 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">快速幂取模算法详解</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年11月05日 10:40:41</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">5952</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>1.大数模幂运算的缺陷：</h2>
+<div>快速幂取模算法的引入是从大数的小数取模的朴素算法的局限性所提出的，在朴素的方法中我们计算一个数比如5^1003%31是非常消耗我们的计算资源的，在整个计算过程中最麻烦的就是我们的5^1003这个过程</div>
+<div>缺点1：在我们在之后计算指数的过程中，计算的数字不都拿得增大，非常的占用我们的计算资源（主要是时间，还有空间）</div>
+<div>缺点2：我们计算的中间过程数字大的恐怖，我们现有的计算机是没有办法记录这么长的数据的，所以说我们必须要想一个更加高效的方法来解决这个问题</div>
+<h2>2.快速幂的引入：</h2>
+<div>我们首先从优化的过程开始一步一步优化我们的模幂算法</div>
+<h3>1.朴素模幂运算过程：</h3>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_1_7253370"  code_snippet_id="1967817" snippet_file_name="blog_20161105_1_7253370" name="code" class="cpp">#define ans=1
+for(int i=1;i&lt;=b;i++)
+{
+	ans*=a;
+}</pre>根据我们上面说的，这种算法是非常的无法容忍的，我们在计算的过程中出现的两个缺点在这里都有体现</div>
+<div>在这里我们如果要做优化的话，我肥就是每个过程中都加一次模运算，但是我们首先要记住模运算是非常的消耗内存资源的，在计算的次数非常的大的时候，我们是没有办法忍受这种时间耗费的</div>
+<h3>2.快速幂引入：</h3>
+<div>在讲解快速幂取模算法之前，我们先将几个必备的知识</div>
+<div>1.对于取模运算：</div>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_2_6349081"  code_snippet_id="1967817" snippet_file_name="blog_20161105_2_6349081" name="code" class="cpp">(a*b)%c=(a%c)*(b%c)%c</pre>这个是成立的：也是我们实现快速幂的基础</div>
+<div>之后我们来看看快速幂的核心本质</div>
+<div>我通过离散课上的学习，将快速幂的本质差不多理解了一下，感觉还是很深刻的</div>
+<div><br>
+</div>
+<div>在这里，我们对指数懂了一些手脚，核心思想在于</div>
+<div>将大数的幂运算拆解成了相对应的乘法运算，利用上面的式子，始终将我们的运算的数据量控制在c的范围以下，这样我们可以客服朴素的算法的缺点二，我们将计算的数据量压缩了很大一部分，当指数非常大的时候这个优化是更加显著的，我们用Python来做一个实验来看看就知道我们优化的效率有多高了</div>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_3_2902735"  code_snippet_id="1967817" snippet_file_name="blog_20161105_3_2902735" name="code" class="python">from time import *
+def orginal_algorithm(a,b,c):  #a^b%c
+    ans=1
+    a=a%c  #预处理，防止出现a比c大的情况
+    for i in range(b):
+        ans=(ans*a)%c
+    return ans
+
+def quick_algorithm(a,b,c):
+    a=a%c
+    ans=1
+    #这里我们不需要考虑b&lt;0，因为分数没有取模运算
+    while b!=0:
+        if b&amp;1:
+            ans=(ans*a)%c
+        b&gt;&gt;=1
+        a=(a*a)%c
+    return ans
+
+time=clock()
+a=eval(input(&quot;底数:&quot;))
+b=eval(input(&quot;指数:&quot;))
+c=eval(input(&quot;模:&quot;))
+print(&quot;朴素算法结果%d&quot;%(orginal_algorithm(a,b,c)))
+print(&quot;朴素算法耗时:%f&quot;%(clock()-time))
+time=clock()
+print(&quot;快速幂算法结果%d&quot;%(quick_algorithm(a,b,c)))
+print(&quot;快速幂算法耗时:%f&quot;%(clock()-time))
+</pre>实验结果：</div>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_4_5552693"  code_snippet_id="1967817" snippet_file_name="blog_20161105_4_5552693" name="code" class="cpp">底数:5
+指数:1003
+模:12
+朴素算法结果5
+朴素算法耗时:3.289952
+快速幂算法结果5
+快速幂算法耗时:0.006706</pre>我们现在知道了快速幂取模算法的强大了，我们现在来看核心原理：</div>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_5_6250805"  code_snippet_id="1967817" snippet_file_name="blog_20161105_5_6250805" name="code" class="cpp">对于任何一个整数的模幂运算
+a^b%c
+对于b我们可以拆成二进制的形式
+b=b0+b1*2+b2*2^2+...+bn*2^n
+这里我们的b0对应的是b二进制的第一位
+那么我们的a^b运算就可以拆解成
+a^b0*a^b1*2*...*a^(bn*2^n)
+对于b来说，二进制位不是0就是1，那么对于bx为0的项我们的计算结果是1就不用考虑了，我们真正想要的其实是b的非0二进制位
+
+那么假设除去了b的0的二进制位之后我们得到的式子是
+a^(bx*2^x)*...*a(bn*2^n)
+这里我们再应用我们一开始提到的公式，那么我们的a^b%c运算就可以转化为
+(a^(bx*2^x)%c）*...*(a^(bn*2^n)%c)
+这样的话，我们就很接近快速幂的本质了</pre>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_6_9424151"  code_snippet_id="1967817" snippet_file_name="blog_20161105_6_9424151" name="code" class="cpp">(a^(bx*2^x)%c)*...*(a^(bn*2^n)%c)
+我们会发现令
+A1=(a^(bx*2^x)%c)
+...
+An=(a^(bn*2^n)%c)
+这样的话，An始终是A(n-1)的平方倍（当然加进去了取模匀速那），依次递推</pre></div>
+现在，我们基本的内容都已经了解到了，现在我们来考虑实现它：</div>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_7_4233701"  code_snippet_id="1967817" snippet_file_name="blog_20161105_7_4233701" name="code" class="cpp">int quick(int a,int b,int c)
+{
+	int ans=1;   //记录结果
+	a=a%c;   //预处理，使得a处于c的数据范围之下
+	while(b!=0)
+	{
+		if(b&amp;1) ans=(ans*a)%c;   //如果b的二进制位不是0，那么我们的结果是要参与运算的
+		b&gt;&gt;=1;    //二进制的移位操作，相当于每次除以2，用二进制看，就是我们不断的遍历b的二进制位
+		a=(a*a)%c;   //不断的加倍
+	}
+	return ans;
+}</pre><br>
+现在，我们的快速幂已经讲完了</div>
+<div>我们来大致的推演一下快速幂取模算法的时间复杂度</div>
+<div>首先，我们会观察到，我们每次都是将b的规模缩小了2倍</div>
+<div>那么很显然，原本的朴素的时间复杂度是O(n)</div>
+<div>快速幂的时间复杂度就是O(logn)无限接近常熟的时间复杂度无疑&#36924;朴素的时间复杂度优秀很多，在数据量越大的时候，者中优化效果越明显</div>
+<div>
+<h2>3.OJ例题</h2>
+</div>
+<div>POJ1995</div>
+<div>题意：</div>
+<div>快速幂版题</div>
+<div><pre code_snippet_id="1967817" snippet_file_name="blog_20161105_8_4375405"  code_snippet_id="1967817" snippet_file_name="blog_20161105_8_4375405" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+
+using namespace std;
+
+int ans=0;
+int a,b;
+int c;
+
+int quick(int a,int b,int c)
+{
+	int ans=1;
+	a=a%c;
+	while(b!=0)
+	{
+		if(b&amp;1) ans=(ans*a)%c;
+		b&gt;&gt;=1;
+		a=(a*a)%c;
+	}
+	return ans;
+}
+
+int main()
+{
+	int for_;
+	int t;
+	scanf(&quot;%d&quot;,&amp;t);
+	while(t--)
+	{
+		ans=0;
+		scanf(&quot;%d%d&quot;,&amp;c,&amp;for_);
+		for(int i=1;i&lt;=for_;i++)
+		{
+			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+			ans=(ans+quick(a,b,c))%c;
+		}
+		printf(&quot;%d\n&quot;,ans);
+	}
+	return 0;
+}</pre><br>
+<br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+            <li><a href="http://blog.csdn.net/column/details/13628.html" target="_blank">POJ 专项题解</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>1</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=53043646" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/kangyan__/article/details/76151058"  target="_blank" strategy="BlogCommendFromBaidu_0">快速幂</a></h2>
+                    <div class="summary">
+                        集训进行了将近2个礼拜，这段时间以恢复性训练为主，我一直在密切关注大家的训练情况，目前为止，对大家的表现相当满意，首先是绝大部分队员的训练积极性很高，其次，都很遵守集训纪律，最后，老队员也起到了很好的...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/kangyan__" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/6/4/0/2_kangyan__.jpg" alt="kangyan__" title="kangyan__"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/kangyan__">kangyan__</a></li>
+                        <li class="time">2017-07-26 16:06</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>66</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/move_now/article/details/52764473"  target="_blank" strategy="BlogCommendFromBaidu_1">程序员技术练级攻略</a></h2>
+                    <div class="summary">
+                        原文链接http://coolshell.cn/articles/4990.html
+
+
+月光博客6月12日发表了《写给新手程序员的一封信》，翻译自《An
+ open letter to those ...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Move_now" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/F/C/D/2_move_now.jpg" alt="Move_now" title="Move_now"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Move_now">Move_now</a></li>
+                        <li class="time">2016-10-09 10:56</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>694</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/fandongbao/article/details/6401371"  target="_blank" strategy="BlogCommendFromBaidu_2">30部门有哪些职位</a></h2>
+                    <div class="summary">
+                        select distinct job from emp where deptno=30
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/fandongbao" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/B/2/A/2_fandongbao.jpg" alt="fandongbao" title="fandongbao"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/fandongbao">fandongbao</a></li>
+                        <li class="time">2011-05-07 10:13</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u011446177/article/details/42389363"  target="_blank" strategy="BlogCommendFromBaidu_3">数据结构Java实现——①栈--&gt;栈的应用一、大数相加</a></h2>
+                    <div class="summary">
+                        几个比较有意思的栈的应用的例子
+描述：
+两个比较大的数（几百位）相加，如何才能处理
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u011446177" target="_blank" strategy="BlogCommendFromBaidu_3"><img src="http://avatar.csdn.net/1/4/4/2_u011446177.jpg" alt="u011446177" title="u011446177"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u011446177">u011446177</a></li>
+                        <li class="time">2015-01-04 12:32</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>711</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u013486414/article/details/42318931"  target="_blank" strategy="BlogCommendFromBaidu_4">快速幂取模算法【模板】</a></h2>
+                    <div class="summary">
+                        快速幂取模其实是a^b%c，这就是著名的RSA公钥加密的方法，当a，b都很大的时候，直接求是不可取的，所以就用到了快速幂取模。
+首先你得明白他的原理，其实是用到了二分的思想，把b按照二进制展开
+b =...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u013486414" target="_blank" strategy="BlogCommendFromBaidu_4"><img src="http://avatar.csdn.net/3/E/B/2_u013486414.jpg" alt="u013486414" title="u013486414"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u013486414">u013486414</a></li>
+                        <li class="time">2015-01-01 14:24</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>3472</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/move_now/article/details/52764837"  target="_blank" strategy="BlogCommendFromBaidu_5">数据结构与算法学习-快速幂取模</a></h2>
+                    <div class="summary">
+                        当我们遇到类似于求a*b%c这样的问题的时候，如果是a^b%c，当a^b这个数特别大的时候，以至于int范围存不下该值，那最后取模得到的值当然也是错的，这个时候就运用到快速幂取模算法，这种算法的时间复...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Move_now" target="_blank" strategy="BlogCommendFromBaidu_5"><img src="http://avatar.csdn.net/F/C/D/2_move_now.jpg" alt="Move_now" title="Move_now"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Move_now">Move_now</a></li>
+                        <li class="time">2016-10-09 11:17</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>352</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/lsldd/article/details/5506933"  target="_blank" strategy="BlogCommendFromBaidu_7">快速幂取模算法</a></h2>
+                    <div class="summary">
+                        参考文章来源：Reait&#160; Home(http://www.reait.com/blog.html)
+ 转载请注明，谢谢合作。&#160;
+
+
+
+在Miller Rabbin测试素数，就用到了快速幂取...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/lsldd" target="_blank" strategy="BlogCommendFromBaidu_7"><img src="http://avatar.csdn.net/9/5/9/2_lsldd.jpg" alt="lsldd" title="lsldd"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/lsldd">lsldd</a></li>
+                        <li class="time">2010-04-20 14:46</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>33715</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/alps1992/article/details/42131581"  target="_blank" strategy="BlogCommendFromBaidu_8">算法学习 - 快速幂和矩阵快速幂（复杂度Olog(n)）C++实现</a></h2>
+                    <div class="summary">
+                        快速幂
+
+快速幂顾名思义，就是快速算某个数的多少次幂。其时间复杂度为 O(log₂N)， 与朴素的O(N)相比效率有了极大的提高。
+
+快速幂实现原理
+
+快速幂的原理比较好懂，就是说假如我们...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/chenfs1992" target="_blank" strategy="BlogCommendFromBaidu_8"><img src="http://avatar.csdn.net/D/5/2/2_chenfs1992.jpg" alt="chenfs1992" title="chenfs1992"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/chenfs1992">chenfs1992</a></li>
+                        <li class="time">2014-12-24 22:51</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6568</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/tina_yaoyao/article/details/50298675"  target="_blank" strategy="BlogCommendFromBaidu_9">LintCode_有效的括号序列</a></h2>
+                    <div class="summary">
+                        笔试面试算法题
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Tina_yaoyao" target="_blank" strategy="BlogCommendFromBaidu_9"><img src="http://avatar.csdn.net/B/3/7/2_tina_yaoyao.jpg" alt="Tina_yaoyao" title="Tina_yaoyao"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Tina_yaoyao">Tina_yaoyao</a></li>
+                        <li class="time">2015-12-14 18:03</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>973</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">11</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

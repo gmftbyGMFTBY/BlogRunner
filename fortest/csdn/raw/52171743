@@ -1,0 +1,1608 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52171743"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52171743';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="目前参考了大量的优秀的大牛的博文自己总计的超详细哈希表
+1.哈希表的简介
+2.哈希表的哈希函数构造
+3.冲突处理
+4.查找分析计算
+5.C++完整实现代码" />
+    <meta name="keywords" content="数据,算法" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>哈希表全解（简介+构造+冲突处理+查找分析计算+诸多要点） - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">哈希表全解（简介+构造+冲突处理+查找分析计算+诸多要点）</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年08月10日 22:09:42</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=数据&t=blog" target="_blank">数据</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=算法&t=blog" target="_blank">算法</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=数据结构&t=blog" target="_blank">数据结构</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=存储&t=blog" target="_blank">存储</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=c语言&t=blog" target="_blank">c语言</a> <span>/</span></li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">1229</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h1><span style="font-size:12px">整理网上大牛和课本教材，争取为所有想要初学散列表的少年们打造一篇绝对看得懂，看完就懂的知识型博客，也算是顺便当作我的复习材料吧</span></h1>
+<h1>1.哈希表（散列表）简介：</h1>
+<div><span style="font-size:12px">我们都知道在查找领域有三种主要的查找方式，线性表查找，树形查找（类&#20284;BST），还有一种就是我们这次要提及的散列表查找，首先我们来解释一下为什么散列表又叫哈希表（可呢个是因为哈希的意思是杂糅吧），这个其实不是重点</span></div>
+<div><br>
+</div>
+<div>先说内容吧：</div>
+<div>1.哈希函数</div>
+<div>2.哈希表</div>
+<div>3.数据记录</div>
+<div><br>
+</div>
+<div>我们一条一条来分析：</div>
+<div><strong>其实说实话，哈希表查找就相当于我们的函数，对于每一个输入的键&#20540;，唯一映射一个存储地址，地址终究存放着我们的数据</strong></div>
+<div>这么一说可能会让我们更好理解一点</div>
+<div>下面我们就开始讲解诸多术语了：（之后可能还会有更多术语，我们在江街道的时候会再次引出，这里现在没有必要全部都说出来）</div>
+<div>1）哈希函数是一个映射，因此我们的核心就是设计完美的哈希函数尽量减少冲突（下面就会讲解，现在没必要懂），只要是的任意关键字经过哈希函数的处理之后获得的哈希函数&#20540;都落在表长允许的范围内就好</div>
+<div>2）哈希函数：对任意的键&#20540;返回出相应的唯一的内存地址一共我们对数据的插入删除和存储</div>
+<div>3）冲突：就像函数中会出现周期函数一样，我们完全也是就对会碰见的一种情况就是，针对不同的关键字我们可能会获得相同的内存地址，这就是冲突，相应的这两个关键字我们也称作同义词</div>
+<div>4）哈希表：哈希表就是根据我们设定的哈希函数和我们设定的解决冲突的方法将一组关键字映射到一个连续的地址集（区间）上，并以关键字在地址中的像作为记录在表中的存储位置，这就叫做哈希表，这一映射过程我们也叫做建立哈希表或者散列，我们得到的存储位置叫做哈希地址或者散列地址</div>
+<div><br>
+</div>
+<div>综上我们会发现哈希表的两个核心了：</div>
+<div>1.建立哈希（构建哈希函数）根据哈希函数，建立映射</div>
+<div>2.处理冲突：我们很难设计出完全没有冲突的哈希函数，所以我恶魔你对冲突的处理是非常有必要的</div>
+<div><br>
+</div>
+<div><br>
+</div>
+<div><strong>我们首先需要明确，哈希表这种方法是典型的空间换时间的做法</strong></div>
+<h1>2哈希函数：</h1>
+<div>核心：简单&#43;均匀（简单好理解，生成的映射过程简单）</div>
+<div><br>
+</div>
+<div>首先我们对于哈希函数要有一个叫做 &nbsp; &nbsp; “均匀”<span style="white-space:pre"> </span>的认识，什么是均匀呢，我们知道如果我们设计的哈希函数如果在某些内存取&#20540;得时候会具有偏向性，那么我们会发现就算我们的哈希的内存开的非常的，冲突发生的概率还是很高，这就意味着我们的朝朝和插入的效率会变得越来越低下，所以说，均匀的意思是，对于每一个关键字我们都可以等概率的映射到内存地址上，从而使冲突最小化</div>
+<div><br>
+</div>
+<div>我们设计出好的哈希函数可以为我们减少冲突的机会，从而使得我们的朝朝和插入效率都大大的提升，接近于完美的O(1)</div>
+<div>哈希函数的构造的方法是非常多的，我们根据实际情况可以自己构造出不哦那个的哈希函数（并且因为哈希函数求解过程是不可逆的，所以说我们可以将其利用到加密公钥方面，好吧这是后话）</div>
+<div><br>
+</div>
+<h2>2.1直接定址法：</h2>
+<div>术语介绍：自身函数：我们通过直接定制的方法确定的哈希函数也叫做自身函数</div>
+<div>这种哈希函数非常的简单，但是我们不常用</div>
+<div>1.hashfunction(key)=key</div>
+<div>2.hashfunction(key)=a*key&#43;b（a，b是常数）</div>
+<div>这种情况下，我们我们所需要的内存地址的大小和关键字的集合大小基本是一致的，所以这种情况是基本不会发生冲突的，但是应用较少</div>
+<h2>2.2除留取余法：</h2>
+<div>这是我们最常用的方法，其他的有些方法也是该方法拓展的得到的：</div>
+<div>我们先来考虑如果关键字是正整数的情况下，这样好理解一点：</div>
+<div>我们设哈希表长为M，p为模数（p&lt;=M） （<strong>这里我们先知道一下，哈希表长一般都开的很大，并且是一个大素数，至于为什么素数，我不得其解</strong>）</div>
+<div>哈希函数：<strong>hashfunction(key)=key % p (p&lt;=M)</strong></div>
+<div>该哈希函数是我们最常用的也是应用最多的，我们不仅可以直接取模，还可以折叠取模或者平方取模，情况非常的多</div>
+<div><strong>这里我们要注意p的选择是非常重要的，p选的不好的话，可能已造成冲突的现象，影响我们的效率（p可以尽量的接近M，尽可能利用哈希表的大的存储空间，但是如果哈希表的存储空间开的太大，远远超过了关键字的范围则会造成空间浪费）</strong></div>
+<div>对于字符串的关键字，我们完全可以通过设计我们设计的哈希函数，将其每一位按照机器码来生成正整数然后我们在用除留取余的思路求解就好了</div>
+<div><br>
+</div>
+<h2>2.3目前为止不常用的方法：</h2>
+<div>数字分析法：我们通过分析关键字中的数位，发现如果数位中有几位的变化范围太小的话，那么这样我们生成的随机性就会下降，冲突的几率就会大大提高，所以我们根据对关键字数列的分析，找出随机性比较大的那几位数提取出来作为我们的新的关键字，然后设定我们的哈希函数</div>
+<div><br>
+</div>
+<div>平房取中法：我们将关键字编码平方然后选取中间纪委做为新的关键字，<span style="font-family:Arial; font-size:14px; line-height:26px">具体方法：先通过求关键字的平方&#20540;扩大相近数的差别，然后根据表长度取中间的几位数作为散列函数&#20540;。又因为一个乘积的中间几位数和乘数的每一位都相关，所以由此产生的散列地址较为均匀</span></div>
+<div><span style="font-family:Arial; font-size:14px; line-height:26px"><br>
+</span></div>
+<div><span style="font-family:Arial; font-size:14px; line-height:26px"><span style="font-family:Arial; font-size:14px; line-height:26px">相乘取整法</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp; &nbsp;　该方法包括两个步骤：首先用关键字key乘上某个常数A(0&lt;A&lt;1)，并抽取出key.A的小数部分；然后用m乘以该小数后取整。即：</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp; &nbsp;　该方法最大的优点是选取m不再像除余法那样关键。比如，完全可选择它是2的整数次幂。虽然该方法对任何A的&#20540;都适用，但对某些&#20540;效果会更好。Knuth建议选取</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp; &nbsp;　该函数的C代码为：</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">int Hash(int key){</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp;double d=key *A； //不妨设A和m已有定义</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp;return (int)(m*(d-(int)d))；//(int)表示强制转换后面的表达式为整数</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">}</span><br>
+</span></div>
+<div><span style="font-family:Arial; font-size:14px; line-height:26px"><span style="font-family:Arial; font-size:14px; line-height:26px"><br>
+</span></span></div>
+<div><span style="font-family:Arial; font-size:14px; line-height:26px"><span style="font-family:Arial; font-size:14px; line-height:26px">折叠法和随机数法：.........................</span></span></div>
+<h1>3.冲突处理：</h1>
+<div>我们对于冲突必须要有合适的处理方式：（先介绍一些不常用的，之后着重介绍常用的）</div>
+<h2>3.1建立公共溢出区：</h2>
+<div>我们哈希表长是m，先建立一个哈希表，然后再建立一个溢出表，如果我们每次插入记录的时候发现都是空，那我们就直接插入记录就好，凡是一旦我们发现冲突，同意都放进公共溢出区中</div>
+<div>在查找的时候，如果我们计算出来的内存地址上的关键字&#20540;不匹配，只能说明一点，当时这里发生了冲突，我们要查找的记录在公共溢出区中，这样子的话，我们就只需要再花费O(k)（k是公共溢出区的大小）来线性遍历一遍公共溢出区就好，如果发现关键字&#20540;是匹配的那么就只用O(1)就找到了要找的记录，这种情况在冲突较少，哈希函数设定均匀额时候，操作效率非常高</div>
+<div><br>
+</div>
+<h2>3.2再哈希法：</h2>
+<div>实际上看上去每年工资很高打上，其实很好理解，再哈希的方法实际上就是我们对缠身冲突的时候，再次调用另一个哈希函数生成关键字对应的映射，知道我们的冲突不再发生为止，但是这种情况只适用于冲突发生比较低的情况，如果哦冲突发生比较高的话，我们就压迫设计很多的再哈希函数，这样实际上非常的累，也无用，而且增加了计算时间</div>
+<div><br>
+</div>
+<h2>3.3链地址法（拉链法）</h2>
+<div>这里我们应用数组&#43;链表的形式，感觉这好像是线性表的知识点</div>
+<div>连续的数组用来保存指定的关键字对应的映射位置</div>
+<div>每个数组后面都是一个线性链表，我们处理冲突的方式就是，在发生冲突的时候，直接插入链表的新的节点就可以了，这个方法非常的常用</div>
+<div><br>
+</div>
+<h2>3.4开放定址法：(构建方法我们采用常用的除留取余法)</h2>
+<h3>3.4.1线性探测再散列：</h3>
+<div>名字非常的高大上，实际上我来解释一下是什么一个原理</div>
+<div>首先我们先介绍两个术语：</div>
+<div>1.m哈希表长</div>
+<div>2.d增量序列（我们每次要对d递增一次，马上就会讲到）</div>
+<div><br>
+</div>
+<div>hashfunction(key)=(hashfunction(key)&#43;d)%m</div>
+<div>公式很简单，但是这里我来解释一下原理，初始的时候d是0，没有增量，如果我们一次就求出了关键字地址，并且很开心的发现，这个地址是空的，那么我们可以放心的直接在这个地址上插入我们的节点了</div>
+<div>但是很不走运，如果我们关键字指定的地点非空（就是发生冲突），那么我们就回退到计算哈希&#20540;的过程上，出现一次冲突，增量序列&#43;1，知道我们找到了空的地方为止（这里我们必须要加入一个控制因子来记录已经带插入的元素记录的个数，当超过装载因子的时候我们重新弄分配哈希表的大小，这一回在后面我们会讲到，现在只是提一下）</div>
+<div>这个就是线性探测再散列的过程，可能有的同学会有疑问，那么我们下一次查找的时候怎么办呢，又不知道到底冲突了几次，根本没法找到啊（这里我下面在查找的时候会讲，其实是可以找到的，<strong>只要我们保证和BST 的性质一样，哈希表中不存在几点相同的节点</strong>）！！！这也引出来了我的问题</div>
+<h3>3.4.2二次探测再散列：</h3>
+<div>我们有的时候会发现，可能先行探测再散列太笨了，比若说不仅i号位置冲突了，i&#43;1，i&#43;2号位置都冲突了，我们就必须要让增量序列递增很多次才可以找到空位插入，但是如果这时候恰好i-1号位置是空的我们为什么就不能利用呢</div>
+<div><br>
+</div>
+<div>这里我先道个歉，因为本身的能力问题，我不知道为什么是平方探测再散列，但是我知道了政府好的作用，求解于大神，这是我的一个问题</div>
+<div><br>
+</div>
+<div>平方探测在三列种的增量序列d是这么变化的（d的变化都是有着固定的顺序的，所以查找的时候都是有规律的一定可以查找到）</div>
+<div>d=1*1，-1*1，2*2，-2*2，....k*k，-k*k（k&lt;=m/2<span style="font-size:12px">） &nbsp;这里为什么要小于一半，超表可以取余挽救，这个就看不懂了？</span></div>
+<div><span style="font-size:12px"><br>
+</span></div>
+<h3><span style="font-size:12px">3.4.3伪随机数序列法：不常用</span></h3>
+<div><span style="font-size:12px"><br>
+</span></div>
+<div><span style="font-size:12px">这里我们要介绍一个叫做二次聚集的术语：</span></div>
+<div><span style="font-size:12px">可以这么解释：上面的例子中i，i&#43;1,都已经占位了，我们这时候如果计算的哈希&#20540;是i，或者i&#43;1的话，都会导致冲突，我们在查找的时候（你可以看完查找回来再看这一句话）如果i&#43;2存储的是i的冲突之后的记录，那么我们i&#43;1冲突之后下一个查找位置也是i&#43;2，但是i&#43;2和i&#43;1的关键字没有任何关系，i&#43;2是i的关键字指定的记录，这时候我们又要继续向后探查，增加了哦我们的冲突个数，降低了我们的效率，但是实际上，线性探查是避免不了这个缺陷的，就像拉链法也有自己的缺陷一样，线性探查的方法是冲突会过多</span></div>
+<div><span style="font-size:12px"><br>
+</span></div>
+<div>按照上面的例子来看，开放寻址的法会造成我们的二次聚集现象</div>
+<h1>4.查找分析</h1>
+<div>这里我们通常认为哈希表的理想的查找速度是O(1),但是实际上，因为存在着哈希冲突现象和我们的不同的冲突处理的方法，我们大多数情况下的哈希查找速度是常数级的O(c),但是这已经是非常优秀的了，毕竟空间换时间还是已经付出了我们的内存的代价了的</div>
+<div>我们现在来分析一下我们的查找操作，我们按照主流的两个方式来讲解</div>
+<div>1.拉链法</div>
+<div>2.线形态测再散列（二测探测再散列）：两者本质上其实是一样的</div>
+<div><br>
+</div>
+<div><strong>这里我在插一句嘴，我们在选取先行探测和拉链法的时候要有个判断标准，如果我们的记录的内容非常的多，那么我们可以采用拉链法，指针的大小可以忽略不计了，如果我们的记录内容非常的小，那么指针的大小会影响我们的效率和空间，我们还不如拿出来这些空间用来扩展我们的哈希表并且选取线性探测再散列的方法</strong></div>
+<div><strong><br>
+</strong></div>
+<h2>4.1拉链法：</h2>
+<div>先附图：</div>
+<div><img src="http://images.cnitblog.com/blog/94031/201410/312300560817372.png" alt=""><br>
+</div>
+<div>左图就算是正常情况吧，右图是坏的哈希函数造就的哈希表退化成单链表</div>
+<div>查找策略：</div>
+<div>1.利用关键字计算哈希&#20540;，映射到对应的单链表上</div>
+<div>2.对单链表进行遍历查找</div>
+<div><span style="white-space:pre"></span>2.1遍历找到返回true / 指向该内存位置的指针</div>
+<div><span style="white-space:pre"></span>2.2遍历结束没有找到，返回false / NULL</div>
+<div>
+<div style="font-size:13.3333px"><strong><span style="font-family:Arial; font-size:14px; line-height:26px">与开放定址法相比，拉链法有如下几个优点：</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">　　(1)拉链法处理冲突简单，且无堆积现象，即非同义词决不会发生冲突，因此平均查找长度较短；</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">　　(2)由于拉链法中各链表上的结点空间是动态申请的，故它更适合于造表前无法确定表长的情况；</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">　　(3)开放定址法为减少冲突，要求装填因子α较小，故当结点规模较大时会浪费很多空间。而拉链法中可取α≥1，且结点较大时，拉链法中增加的指针域可忽略不计，因此节省空间；</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">　　(4)在用拉链法构造的散列表中，删除结点的操作易于实现。只要简单地删去链表上相应的结点即可。而对开放地址法构造的散列表，删除结点不能简单地将被删结点的空间置为空，否则将截断在它之后填人散列表的同义词结点的查找路径。这是因为各种开放地址法中，空地址单元(即开放地址)都是查找失败的条件。因此在用开放地址法处理冲突的散列表上执行删除操作，只能在被删结点上做删除标记，而不能真正删除结点。</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">（3）拉链法的缺点</span><br style="font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-family:Arial; font-size:14px; line-height:26px">&nbsp; &nbsp; &nbsp;　拉链法的缺点是：指针需要额外的空间，故当结点规模较小时，开放定址法较为节省空间，而若将节省的指针空间用来扩大散列表的规模，可使装填因子变小，这又减少了开放定址法中的冲突，从而提高平均查找速度。&nbsp;</span><br>
+</strong></div>
+<div><strong><span style="font-family:Arial; font-size:14px; line-height:26px"><br>
+</span></strong></div>
+<h2>4.2线性探查：（线性探查需要我们不断地动态控制大小，否则会死循环（下面就会讲到））</h2>
+</div>
+<div>附图好看：</div>
+<div><img src="http://img2.tuicool.com/UbAj2iQ.jpg!web" alt=""><br>
+</div>
+<div>线性探查的查找技术和我们插入技术是一样的</div>
+<div>1.如果哈希&#20540;和我们找到的低智商的记录是匹配的，那么我们用O(1)的时间找到了</div>
+<div>2.如果不匹配，那么我们增量序列&#43;1，继续探查</div>
+<div>3.如果我们发现找到的位置是空的话（说明该记录不存在于哈希表中），如果哈希表美满的话，改查找过程一定会终止（非常低效），但是如果满了的话会造成死循环，不断地便利我们的哈希表，导致程序崩溃</div>
+<div><br>
+</div>
+<div>所以 为了判断我们的装填程度，我们这里引入一个术语：</div>
+<div>装填因子=表中存在的记录数/哈希表大小（我们人为设定装填因子的大小，经验之谈是0.72，一旦超过了这个大小我们就要为线性探查技术的哈希表重新确定大小，这样我们要花费大量的时间，因为要遍历复制）</div>
+<div><br>
+</div>
+<div><strong>在这里我们要小心，线性探测再散列中我们删除节点的时候不能直接抹去节点，因为这个节点可能包含有冲突的信息，我们家是哪一个删除标记就好了，当然，正如你们所想的，这样子的话，会占用我们的空间，所以说一般涉及到删除操作多的时候我们都用拉链法</strong></div>
+<h2>4.3.ASL计算（平均查找长度和平均查找失败长度）</h2>
+<div>平均查找长度ASL是有计算公式的，ASL的大小可以反映出处理冲突选择的方法的效率</div>
+<div>ASL=(查找每个节点我们需要便利的节点的数目之和)/已经插入的节点的数目</div>
+<div><br>
+</div>
+<div>平均查找失败的长度：查找不成功的情况下我们发现这一代你要遍历的数目的平均&#20540;（这个还没有做过相应的题，求谅解，还真不熟）</div>
+<div>列举常见的方法的ASL和UNL：(都是≈,a代表装填因子<span style="font-size:12px">)</span></div>
+<div>线性探测再散列ASL≈(1&#43;1/(1-a))/2</div>
+<div>再哈希&#43;随即探测再散列&#43;二次探测再散列≈ -ln(1-a)/a</div>
+<div>拉链法≈1&#43;a/2</div>
+<div><br>
+</div>
+<div><br>
+</div>
+<h1>5.代码实现：（为了简单起见，哈希函数构造采用除留取余法）</h1>
+<div>talk is cheap，show you the code！</div>
+<div>C&#43;&#43;代码类封装，在代码中我还会讲解，还是没有看懂的，再看看代码吧：</div>
+<div>包含操作：</div>
+<div>1.建立哈希表</div>
+<div>2.删除哈希表</div>
+<div>3.重新构造哈希表（在查过装填因子的限制后，C&#43;&#43;代码实现中我们实现重载一个=就好了，或者写个复制函数，复制结束后，删除原来的拥挤的哈希表就可以了）</div>
+<div>4.插入节点</div>
+<div>5.删除节点</div>
+<div>6.查找结点</div>
+<div>动态控制大小</div>
+<div><span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">static int prime_array[] = {</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 17,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 0 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 37,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 1 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 79,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 2 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 163,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 3 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 331,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 4 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 673,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 5 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 1361,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 6 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 2729,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 7 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 5471,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 8 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 10949,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 9 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 21911,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 10 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 43853,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 11 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 87719,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 12 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 175447,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 13 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 350899,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 14 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 701819,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 15 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 1403641,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 16 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 2807303,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 17 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 5614657,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 18 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 11229331,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 19 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 22458671,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 20 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 44917381,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 21 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 89834777,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 22 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 179669557,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 23 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 359339171,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 24 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 718678369,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 25 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 1437356741,&nbsp;&nbsp;&nbsp;&nbsp; /* 26 */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">&nbsp;&nbsp;&nbsp; 2147483647&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* 27 (largest signed int prime) */</span><br style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">
+<span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">}; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br>
+</div>
+<div><span style="color:rgb(75,75,75); font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:13px; line-height:19.5px">这个是大小的素数集，每次我们挑选素数集大小，为什么是素数，我也不能讲清楚</span></div>
+<h2>5.1拉链法代码：</h2>
+<div><pre code_snippet_id="1822116" snippet_file_name="blog_20160810_1_4050904"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstdlib&quot;
+#include&quot;cstring&quot;
+
+using namespace std;
+
+static int primarray[] = {   //0-27 ，我们设计的装填因子是  0.7 
+    17,             /* 0 */
+    37,             /* 1 */
+    79,             /* 2 */
+    163,            /* 3 */
+    331,            /* 4 */
+    673,            /* 5 */
+    1361,           /* 6 */
+    2729,           /* 7 */
+    5471,           /* 8 */
+    10949,          /* 9 */
+    21911,          /* 10 */
+    43853,          /* 11 */
+    87719,          /* 12 */
+    175447,         /* 13 */
+    350899,         /* 14 */
+    701819,         /* 15 */
+    1403641,        /* 16 */
+    2807303,        /* 17 */
+    5614657,        /* 18 */
+    11229331,       /* 19 */
+    22458671,       /* 20 */
+    44917381,       /* 21 */
+    89834777,       /* 22 */
+    179669557,      /* 23 */
+    359339171,      /* 24 */
+    718678369,      /* 25 */
+    1437356741,     /* 26 */
+    2147483647      /* 27 (largest signed int prime) */
+};
+
+//记录信息的节点 
+typedef struct kkk
+{
+	int data;   //存储信息，也是关键字 
+	struct kkk* next;
+}point;
+
+//设计结构体 
+typedef struct node
+{
+	//在这里，哈希值就是数组的下标 
+	point* next;
+}pnode; 
+
+class hash
+{
+	public:
+		hash()   //相当于建立哈希表的操作 
+		{
+			size=0;
+			number=0;
+			for(int i=0;i&lt;primarray[size];i++) 
+			{
+				hashtable[i].next=NULL;
+			}
+		}
+		~hash()    //相当于删除清空哈希表的操作 
+		{
+			for(int i=0;i&lt;primarray[size];i++)
+			{
+				if(hashtable[i].next==NULL) continue;
+				point* head=hashtable[i].next;
+				while(hashtable[i].next!=NULL)
+				{
+					hashtable[i].next=hashtable[i].next-&gt;next;
+					free(head);
+					head=hashtable[i].next;
+				}
+			}
+		}
+		void operator==(hash&amp;);    //这里采用引用，就不会发生我们的函数传递值得时候发生的指针丢失的事件,该函数是重新分配哈希表大小的时候的复制函数 
+		int hashfunction(int);    //传入关键字，计算出哈希值
+		bool add(int);    //因为这里关键字就是记录内容，所以这里简化了，添加操作,超过装填容量，返回1，否则返回0 
+		bool del(int);    //删除操作，删除成功，返回1，否则返回0 
+		point* find(int);     //查找函数，成功返回指向性指针，否则返回NULL 
+		void visit()
+		{
+			for(int i=0;i&lt;primarray[size];i++)
+			{
+				point* head=hashtable[i].next;
+				while(head!=NULL)
+				{
+					cout&lt;&lt;head-&gt;data&lt;&lt;&#39; &#39;;
+					head=head-&gt;next;
+				}
+			}
+			cout&lt;&lt;endl;
+		}
+	private:
+		pnode hashtable[9999];  //哈希表 
+		int number;   //已经装填的记录的数目 
+		int size;    //记录size在primarray中的编号，初始化时0，如果还小的话，我们再复制函数中递加一次就好 
+};
+
+int hash::hashfunction(int key)
+{
+	return key%primarray[size];   //充分利用所有的空间 ，减少冲突 
+}
+
+bool hash::add(int p)
+{
+    int key=hashfunction(p);
+	point* head=new point;
+	head-&gt;data=p;
+	head-&gt;next=hashtable[key].next;
+	hashtable[key].next=head;   //采用头插法 
+	number++;
+	if(number&gt;=(int)primarray[size]*0.7) return 1;
+	else return 0;
+}
+
+bool hash::del(int p)
+{
+	int key=hashfunction(p);
+	point* head=hashtable[key].next;
+	point* help=NULL;
+	while(head!=NULL)
+	{
+		if(head-&gt;data==p&amp;&amp;help!=NULL)
+		{
+			help-&gt;next=head-&gt;next;
+			free(head);
+			return 1;
+		}
+		else
+		{
+			if(head-&gt;data==p&amp;&amp;help==NULL)
+			{
+				hashtable[key].next=hashtable[key].next-&gt;next;
+				free(head);
+				return 1;
+			}
+		}
+		help=head;
+		head=head-&gt;next;
+	}
+	if(head==NULL)
+	{
+		cout&lt;&lt;&quot;哈希表中没有该元素&quot;&lt;&lt;endl;
+		return 0;
+	}
+} 
+
+point* hash::find(int p)
+{
+	int key=hashfunction(p);
+	point* head=hashtable[key].next;
+	while(head!=NULL)
+	{
+		if(head-&gt;data==p) return head; 
+		head=head-&gt;next;
+	}
+	return NULL;
+}
+
+void hash::operator==(hash&amp; k)
+{
+	size=k.size+1;
+	for(int i=0;i&lt;primarray[k.size];i++)
+	{
+		point* head=k.hashtable[i].next;
+		while(head!=NULL)
+		{
+			this-&gt;add(head-&gt;data);
+			head=head-&gt;next;
+		}
+	}
+}
+
+int main()
+{
+	hash* my=new hash; 
+	hash my2;
+	for(int i=1;i&lt;=13;i++)   //17*0.7≈12 
+	{
+		int k;
+		cin&gt;&gt;k;
+		if(my-&gt;add(k)==1)
+		{
+			cout&lt;&lt;&quot;到达装填上限，请扩充哈希表！&quot;;
+			my2==*my;
+			cout&lt;&lt;my-&gt;find(2)-&gt;data&lt;&lt;endl;
+			my-&gt;del(2);
+			my-&gt;visit();
+			delete my;
+			break; 
+		}
+	}
+	cout&lt;&lt;&quot;开始测试删除函数&quot;&lt;&lt;endl;
+	int k;
+	my2.visit();
+	cin&gt;&gt;k;
+	cout&lt;&lt;my2.find(k)-&gt;data&lt;&lt;endl;
+	my2.del(k);
+	cout&lt;&lt;my2.find(k)-&gt;data&lt;&lt;endl;
+	return 0;
+} 
+</pre><br>
+<br>
+</div>
+<h2>5.2线性探测再散列代码：</h2>
+<div><pre code_snippet_id="1822116" snippet_file_name="blog_20160810_2_7496468"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstdlib&quot;
+#include&quot;cstring&quot;
+#define N 1000
+
+using namespace std;
+
+static int primarray[] = {
+    17,             /* 0 */
+    37,             /* 1 */
+    79,             /* 2 */
+    163,            /* 3 */
+    331,            /* 4 */
+    673,            /* 5 */
+    1361,           /* 6 */
+    2729,           /* 7 */
+    5471,           /* 8 */
+    10949,          /* 9 */
+    21911,          /* 10 */
+    43853,          /* 11 */
+    87719,          /* 12 */
+    175447,         /* 13 */
+    350899,         /* 14 */
+    701819,         /* 15 */
+    1403641,        /* 16 */
+    2807303,        /* 17 */
+    5614657,        /* 18 */
+    11229331,       /* 19 */
+    22458671,       /* 20 */
+    44917381,       /* 21 */
+    89834777,       /* 22 */
+    179669557,      /* 23 */
+    359339171,      /* 24 */
+    718678369,      /* 25 */
+    1437356741,     /* 26 */
+    2147483647      /* 27 (largest signed int prime) */
+};
+
+typedef struct node
+{
+	int data;   //保存信息 + 关键字 
+	bool del;   //删除标记,0代表存在，1代表已删除 
+}point;
+
+class hash
+{
+	public:
+		hash()
+		{
+			memset(hashtable,0,sizeof(hashtable));
+			number=size=0;
+		}
+		void operator=(hash&amp;);
+		bool add(int);
+		bool del(int);
+		int find(int);
+		int hashfunction(int);
+		void visit();    //用于检测的遍历函数 
+	private:
+		point hashtable[N];     //哈希表 
+		int number;   //目前已经插入的记录的数目
+		int size;   //primarray数组的标号，记录哈希表的容量 
+};
+
+void hash::operator=(hash&amp; k)
+{
+	size=k.size+1;
+	number=0;
+	memset(hashtable,0,sizeof(hashtable));
+	for(int i=0;i&lt;primarray[k.size];i++) hashtable[i]=k.hashtable[i];
+}
+
+int hash::hashfunction(int p)
+{
+	return p%primarray[size];
+}
+
+bool hash::add(int p)
+{
+	int key=hashfunction(p);
+	if(hashtable[key].data==0) hashtable[key].data=p;
+	else
+	{
+		int d=1;   //增量序列
+		while(hashtable[key].data!=0)
+		{
+			key=(hashfunction(p)+d)%primarray[size];
+			d++;
+		} 
+		hashtable[key].data=p;
+	}
+	number++;
+	if(number&gt;=(int)primarray[size]*0.7) return 1;
+	else return 0;
+}
+
+bool hash::del(int p)
+{
+	int key=hashfunction(p);
+	if(hashtable[key].data==p) hashtable[key].del=1;
+	else
+	{
+		int d=1;
+		while(hashtable[key].data!=0&amp;&amp;hashtable[key].data!=p)
+		{
+			key=(hashfunction(p)+d)%primarray[size];
+			d++;
+		} 
+		if(hashtable[key].data==p) 
+		{
+			hashtable[key].del=1;
+			return 1;
+		}
+		else
+		{
+			cout&lt;&lt;&quot;没有找到该节点&quot;&lt;&lt;endl;
+			return 0;
+		}
+	} 
+}
+
+int hash::find(int p)
+{
+	int d=1;
+	int key=hashfunction(p);
+	while(hashtable[key].data!=0&amp;&amp;hashtable[key].data!=p)
+	{
+		key=(hashfunction(p)+d)%primarray[size];
+		d++;
+	}
+	if(hashtable[key].data==0) return -1;
+	else
+	{
+		if(hashtable[key].del==1) 
+		{
+			cout&lt;&lt;&quot;该节点曾经存在，但目前已经删除&quot;&lt;&lt;endl;
+			return -1;
+		}
+		else return key;
+	}
+}
+
+void hash::visit()
+{
+	for(int i=0;i&lt;primarray[size];i++)
+	{
+		if(hashtable[i].del==0&amp;&amp;hashtable[i].data!=0) cout&lt;&lt;hashtable[i].data&lt;&lt;&#39; &#39;;
+	}
+	cout&lt;&lt;endl;
+}
+
+int main()
+{
+	hash* my1=new hash;
+	hash* my2=new hash;
+	for(int i=1;i&lt;=13;i++)
+	{
+		int k;
+		cin&gt;&gt;k;
+		if(my1-&gt;add(k)==1) 
+		{
+			cout&lt;&lt;&quot;目前装载的记录已经超过我们的装载上限，请扩充哈希表！&quot;&lt;&lt;endl;
+			*my2=*my1;
+			my2-&gt;visit();
+			break;
+		}
+	} 
+	cout&lt;&lt;my2-&gt;find(4)&lt;&lt;endl;
+	my2-&gt;del(4);
+	cout&lt;&lt;my2-&gt;find(4)&lt;&lt;endl;
+	return 0;
+} </pre><br>
+<br>
+</div>
+<h1>6.优缺点：</h1>
+<div>优点是查找快于树和线性表</div>
+<div>缺点是散乱，如果我们还要求按照某个顺序排列的话，我们最好不要用散列表，因为还要牵扯到排序算法，而树和线性表我们都有有序的类型来解决这个问题</div>
+<div><br>
+</div>
+<h1>7.遗留问题：</h1>
+<div>1.和BST一样，是不是散列表中也要求不能有数据相同</div>
+<div>2.还是不理解散列表的大小是素数的原因</div>
+<div>3.平均失败查找长度</div>
+<div>4.还可以如何优化重新构造散列表的操作</div>
+<div>5.为了减少冲突，构造时候的模数一定要接近表长大小吗</div>
+<div><br>
+</div>
+<div>以上问题欢迎有好思路和想法的大神在评论区告知我哦，感激不尽</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52171743" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/h1023417614/article/details/20291801"  target="_blank" strategy="BlogCommendFromBaidu_0">哈希的构造,处理冲突和查找</a></h2>
+                    <div class="summary">
+                        哈希函数的构造方法：
+
+　　若对于关键字集合中的任一个关键字，哈希函数映像到地址集合中任何一个地址的概率是相等的，则称此类哈希函数为均匀的哈希函数。换句话说，就是使关键字经过哈希函数得到一个“随机...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/h1023417614" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/9/A/2/2_h1023417614.jpg" alt="h1023417614" title="h1023417614"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/h1023417614">h1023417614</a></li>
+                        <li class="time">2014-03-02 15:37</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>980</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/zhaoxinfan/article/details/6594273"  target="_blank" strategy="BlogCommendFromBaidu_1">电话号码问题</a></h2>
+                    <div class="summary">
+                        15. 电话号码问题成绩: 10 / 折扣: 0.8商业单位需要容易记忆的电话号码，有一些方法可以让电话号码变得更容易记忆。譬如，可以把电话号码写成单词或短语，如 MON-GLOP 可以代表滑铁卢大学...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/jj12345jj198999" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/A/0/5/2_jj12345jj198999.jpg" alt="jj12345jj198999" title="jj12345jj198999"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/jj12345jj198999">jj12345jj198999</a></li>
+                        <li class="time">2011-07-09 10:09</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1778</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/silvester123/article/details/77917028"  target="_blank" strategy="BlogCommendFromBaidu_2">小学期 电话号码问题</a></h2>
+                    <div class="summary">
+                        商业单位需要容易记忆的电话号码，有一些方法可以让电话号码变得更容易记忆。譬如，可以把电话号码写成单词或短语，如 MON-GLOP 可以代表滑铁卢大学的电话。有时仅仅是把号码的一部分写成单词，如打 31...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Silvester123" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/F/8/F/2_silvester123.jpg" alt="Silvester123" title="Silvester123"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Silvester123">Silvester123</a></li>
+                        <li class="time">2017-09-09 18:46</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>130</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/kaiyang_shao/article/details/51317826"  target="_blank" strategy="BlogCommendFromBaidu_3">电话号码问题</a></h2>
+                    <div class="summary">
+                        问题描述
+
+
+
+
+
+&#160; &#160; &#160; 商业单位需要容易记忆的电话号码，有一些方法可以让电话号码变得更容易记忆。譬如，可以把电话号码写成单词或短语，如 MON-GLOP 可以代表滑铁卢大学的电话。...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Kaiyang_Shao" target="_blank" strategy="BlogCommendFromBaidu_3"><img src="http://avatar.csdn.net/0/9/A/2_kaiyang_shao.jpg" alt="Kaiyang_Shao" title="Kaiyang_Shao"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Kaiyang_Shao">Kaiyang_Shao</a></li>
+                        <li class="time">2016-05-04 20:23</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1995</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/ltyqljhwcm/article/details/52497853"  target="_blank" strategy="BlogCommendFromBaidu_4">2016BIT小学期——电话号码问题（哈希+位运算）</a></h2>
+                    <div class="summary">
+                        1.题目描述：
+
+
+
+
+
+
+
+
+
+商业单位需要容易记忆的电话号码，有一些方法可以让电话号码变得更容易记忆。譬如，可以把电话号码写成单词或短语，如 MON-GLOP 可以代表滑铁卢大...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" strategy="BlogCommendFromBaidu_4"><img src="http://avatar.csdn.net/A/7/0/2_ltyqljhwcm.jpg" alt="ltyqljhwcm" title="ltyqljhwcm"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/ltyqljhwcm">ltyqljhwcm</a></li>
+                        <li class="time">2016-09-10 23:17</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1925</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qq_38597315/article/details/73431972"  target="_blank" strategy="BlogCommendFromBaidu_5">20. 电话号码</a></h2>
+                    <div class="summary">
+                        商业单位需要容易记忆的电话号码，有一些方法可以让电话号码变得更容易记忆。譬如，可以把电话号码写成单词或短语，如 MON-GLOP 可以代表滑铁卢大学的电话。有时仅仅是把号码的一部分写成单词，如打 31...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qq_38597315" target="_blank" strategy="BlogCommendFromBaidu_5"><img src="http://avatar.csdn.net/F/A/1/2_qq_38597315.jpg" alt="qq_38597315" title="qq_38597315"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qq_38597315">qq_38597315</a></li>
+                        <li class="time">2017-06-18 15:24</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>304</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/cfhm_r/article/details/52691213"  target="_blank" strategy="BlogCommendFromBaidu_6">2016BITCS小学期程序设计简要题解</a></h2>
+                    <div class="summary">
+                        2016BITCS小学期程序设计简要题解球体问题 By CFhM_R设球缺的高为h，由于题目中说明d&gt;max(R1,R2)且d&lt;(R1+R2)，所以两个球“镶嵌”而损失的体积不会超过球体的1/21/2...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/CFhM_R" target="_blank" strategy="BlogCommendFromBaidu_6"><img src="http://avatar.csdn.net/0/F/7/2_cfhm_r.jpg" alt="CFhM_R" title="CFhM_R"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/CFhM_R">CFhM_R</a></li>
+                        <li class="time">2016-09-28 15:58</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>619</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/ilovejohnny/article/details/53353195"  target="_blank" strategy="BlogCommendFromBaidu_7">BITCS2016程序设计 | 16. 电话号码问题</a></h2>
+                    <div class="summary">
+                        题外话：
+
+&#160; &#160; 中断了很久的博客，今日重启。经历了十月份的高压期，到达十一月中旬的释然，到现在的稳步向前。所以，在一个悠闲（应该继续干活）的周末，我又重启博客啦！
+
+
+
+
+16. 电话号码问题
+
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/iLOVEJohnny" target="_blank" strategy="BlogCommendFromBaidu_7"><img src="http://avatar.csdn.net/8/C/6/2_ilovejohnny.jpg" alt="iLOVEJohnny" title="iLOVEJohnny"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/iLOVEJohnny">iLOVEJohnny</a></li>
+                        <li class="time">2016-11-26 17:24</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>552</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u010489389/article/details/11911801"  target="_blank" strategy="BlogCommendFromBaidu_8">位图法</a></h2>
+                    <div class="summary">
+                        电话号码问题
+
+
+
+
+商业单位需要容易记忆的电话号码，有一些方法可以让电话号码变得更容易记忆。譬如，可以把电话号码写成单词或短语，如 MON-GLOP 可以代表滑铁卢大学的电话。有时仅仅是把...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u010489389" target="_blank" strategy="BlogCommendFromBaidu_8"><img src="http://avatar.csdn.net/9/8/2/2_u010489389.jpg" alt="u010489389" title="u010489389"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u010489389">u010489389</a></li>
+                        <li class="time">2013-09-23 00:19</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1033</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/sophie_wise8/article/details/7593624"  target="_blank" strategy="BlogCommendFromBaidu_9">电话号码排序问题——位图排序</a></h2>
+                    <div class="summary">
+                        http://hi.baidu.com/ucoder/blog/item/a213f6a9601492f61e17a2f0.html
+
+电话号码排序问题描述：
+输入：一个文件，包含n个正整数，每...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/sophie_wise8" target="_blank" strategy="BlogCommendFromBaidu_9"><img src="http://avatar.csdn.net/7/A/5/2_sophie_wise8.jpg" alt="sophie_wise8" title="sophie_wise8"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/sophie_wise8">sophie_wise8</a></li>
+                        <li class="time">2012-05-23 10:18</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2291</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">1</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

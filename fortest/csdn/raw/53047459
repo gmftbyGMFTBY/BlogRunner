@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/53047459"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '53047459';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="1.欧几里得算法：
+我们从小学开始老师都会让我们求解一一种问题，叫做最大公约数，这里的最大公约数就叫做GCD
+当然求解最大公约数的算法也是非常的重要，我们在这里就引入欧几里得的算法，也就是著名的辗转相除法
+首先给出定义：
+GCD(a,b)=GCD(b,a%b)
+在这里有的人会问a，b到底哪个大才能使对的，其实在这里我们的a，b是没有大小之分的，要是硬说影响的话，是有那么一点影响，但是无关" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>GCD Extends_GCD 欧几里得算法+扩展欧几里得算法详解 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">GCD Extends_GCD 欧几里得算法+扩展欧几里得算法详解</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年11月05日 21:00:55</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">515</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>1.欧几里得算法：</h2>
+<div>我们从小学开始老师都会让我们求解一一种问题，叫做最大公约数，这里的最大公约数就叫做GCD</div>
+<div>当然求解最大公约数的算法也是非常的重要，我们在这里就引入欧几里得的算法，也就是著名的辗转相除法</div>
+<div>首先给出定义：</div>
+<div>GCD(a,b)=GCD(b,a%b)</div>
+<div>在这里有的人会问a，b到底哪个大才能使对的，其实在这里我们的a，b是没有大小之分的，要是硬说影响的话，是有那么一点影响，但是无关痛痒</div>
+<div>首先这里的生命是最好a&gt;b</div>
+<div>但是当a&lt;b的时候，我们会发现a%b=a，也就是说这个算法会自动调换会a&gt;b的状态，所以我们说这一点影响无关痛痒，不影响算法的本质</div>
+<div>证明这里我们就不在涉及</div>
+<div>但是在算法的实现方面我有一些要说的：</div>
+<div><pre code_snippet_id="1968600" snippet_file_name="blog_20161105_1_5691855"  code_snippet_id="1968600" snippet_file_name="blog_20161105_1_5691855" name="code" class="python">from time import *
+def gcd_1(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd_1(b,a%b)
+
+def gcd_2(a,b):    #一旦数据量差距过大无法应用，但是在数据量相差不多的情况下，还是很优秀的，总而言之不要用，因为不稳定
+    if a==b:
+        return a
+    elif a&gt;b:
+        return gcd_2(a-b,b)
+    else:
+        return gcd_2(b-a,a)
+
+def gcd_3(a,b):
+    if a==b:
+        return a
+    elif a&lt;b:
+        return gcd_3(b,a)
+    elif not(a&amp;1) and not(b&amp;1):
+        return gcd_3(a&gt;&gt;1,b&gt;&gt;1)&lt;&lt;1
+    elif not(a&amp;1) and b&amp;1:
+        return gcd_3(a&gt;&gt;1,b)
+    elif not(b&amp;1) and a&amp;1:
+        return gcd_3(a,b&gt;&gt;1)
+    else:
+        return gcd_3(a-b,b)
+
+time=clock()
+a=eval(input(&quot;a:&quot;))
+b=eval(input(&quot;b:&quot;))
+print(&quot;gcd_1:%d&quot;%gcd_1(a,b))
+print(&quot;time gcd_1:%lf&quot;%(clock()-time))
+#time=clock()
+#print(&quot;gcd_2:%d&quot;%gcd_2(a,b))
+#print(&quot;time gcd_2:%lf&quot;%(clock()-time))
+time=clock()
+print(&quot;gcd_3:%d&quot;%gcd_3(a,b))
+print(&quot;time gcd_3:%lf&quot;%(clock()-time))
+</pre>实验结果：</div>
+<div><pre code_snippet_id="1968600" snippet_file_name="blog_20161105_2_1297010"  code_snippet_id="1968600" snippet_file_name="blog_20161105_2_1297010" name="code" class="python">a:34567890
+b:1234567
+gcd_1:1
+time gcd_1:2.589272
+gcd_3:1
+time gcd_3:0.032302</pre>很显然，虽然朴素的GCD写的很简洁，但是毫无疑问，朴素的GCD因为取模运算的限制太过，我们的位运算&#43;更相孙减术（gcd_2）结合的优势最明显，在我们的工程项目中最好用gcd_3的写法<br>
+<br>
+<h2>2.Extends_gcd扩展欧几里得算法：</h2>
+<div>我们的欧几里得算法很优秀，但是只用来求解最大公约数好像屈才了，所以这里我们对欧几里得算法进行扩展，我们引入扩展欧几里得算法</div>
+<div>在讲解扩展欧几里得算法之前，我们先来讲解个很重要的知识：</div>
+<div>1.贝祖定理：</div>
+<div>对于任何一组不全是0的两个数x，y总是满足</div>
+<div>ax&#43;by=gcd(x,y)这是一定成立的（之后我们还要讲一下不成立的另一个中很相近的定理）</div>
+<div><strong>这个解是唯一的</strong></div>
+<div>但是想要求解出这个等式的整数解确实非常的麻烦，我们需要不断的尝试，这是没有办法忍受的异常繁琐的工作</div>
+<div>所以说，这时候，为了快速求解出这个唯一的解，我们就需要用到扩展欧几里得算法</div>
+<div>但是这里请注意，扩展欧几里得算法是基于欧几里得算法的，我们在这里只是引入了逆推 的过程</div>
+<div>逆推导：</div>
+<div><pre code_snippet_id="1968600" snippet_file_name="blog_20161105_3_2965450"  code_snippet_id="1968600" snippet_file_name="blog_20161105_3_2965450" name="code" class="cpp">aX0+bY0=gcd(a,b)=gcd(b,b%a)
+gcd(b,a%b)=bX1+(a%b)Y1
+....
+gcd(a,0)=aXn+0*Yn=a    上面已经提到过了，最后的状态一定是a&gt;b的
+这时候我们让Xn=1，Yn=0就可以
+逆推导开始：
+aX0+bY0=gcd(a,b)=gcd(b,a%b)
+gcd(b,a%b)=bX1+(a%b)Y1
+gcd(b,a%b)=bX1+(a-b*(a/b))Y1=aY1+b*(X1-a/bY1)=gcd(a,b)
+显然，我们可以得到
+X0=Y1
+Y0=X1-a/bY1</pre>这就是我们的逆推导关系，我们利用C&#43;&#43;的引用的手段，可以轻松的实现参数的时时改变，轻而易举实现这个算法</div>
+<div>但是小心一点，我们的逆推导的过程是建立在</div>
+<div>ax&#43;by=gcd(a,b)上的，也就是说扩展欧几里得算法求出来的解是在等号右边是gcd(a,b)的解，这就引出了我们下面的问题</div>
+<div><br>
+</div>
+<div>扩展欧几里得算法的应用：</div>
+<div><strong>1.求解不定方程：</strong></div>
+<div>ax&#43;by=c</div>
+<div>是不是看上去和我们上面的贝祖定理非常的相&#20284;？没错这时候我们利用扩展欧几里得求出来ax&#43;by=gcd(a,b)的话，如果这时候c是gcd(a,b)的整数倍的话，我们扩展欧几里得算法得到的解都乘上c/gcd(a,b)得到的就是这个不定方程的解，但是，如果c不是gcd(a,b)的整数倍，说明这个不定方程没有解</div>
+<div>为什么？</div>
+<div>因为我们的ax&#43;by=gcd(a,b)如果有解的条件就是gcd(a,b)是gcd(a,b)的1倍，但是如果没有说明我们没有办法分解出这个ax&#43;by=gcd(a,b)的式子，那么自然，gcd(a,b)的倍数依旧没有解</div>
+<div><br>
+</div>
+<div><strong>2.求解线性同余方程：</strong></div>
+<div>我们将ax=b(mod n)（ps:那个等号是三等号，代表同余）满足的解称之为a模b关于n同余，这时候我们根据同余的定义可以得到</div>
+<div>n|(ax-b)-&gt;ax-b=my-&gt;ax-my=b-&gt;ax&#43;my=b(m只是一个常数，正负无所谓)</div>
+<div>是不是又觉得这个方程&#30524;熟，没错还是扩展欧几里得的不定方程</div>
+<div>这时候我们就转化成了求不定方程的问题了，注意这里的同余的结果有很多个</div>
+<div>但是这些结果都有一个同性</div>
+<div><span style="white-space:pre"></span>1.结果总数有gcd(a,n)个</div>
+<div><span style="white-space:pre"></span>2.自通解以后，每个解相差b/gac(a,n) &nbsp; //这里我有一个问题，按照程序角度来说，我们会不会少元素的输出？</div>
+<div><br>
+</div>
+<strong>3.求解模逆元：</strong></div>
+<div>模拟元的定义，如果</div>
+<div>ax=1(mod n)称x是a的模逆元，这里的条件是a,n必须互素</div>
+<div>为什么，我们再转化一下：</div>
+<div>ax&#43;ny=1只有我们的gcd(a,n)=1的时候才有解，并且解唯一，gcd(a,n)=1的意思就是互素</div>
+<div>所以模逆元存在的条件是a，n必须互素</div>
+<div>性质是模逆元唯一</div>
+<div>转化一下，这时候我们还是要求一个不定方程</div>
+<div><br>
+</div>
+<div>综上，我们的利用欧几里得的问题始终就是求一个不定方程，只不过是不定方程的等号的右边的&#20540;不断的改变罢了，只有等号右边的&#20540;是gcd的整数倍才有解，有gcd个解，否则没有解</div>
+<h2>3.Code:</h2>
+<div><pre code_snippet_id="1968600" snippet_file_name="blog_20161105_4_5124257"  code_snippet_id="1968600" snippet_file_name="blog_20161105_4_5124257" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+
+using namespace std;
+
+int gcd(int a,int b)   //GCD
+{
+	return b?gcd(b,a%b):a;
+}
+
+int Extends_gcd(int a,int b,int&amp; x,int&amp; y)   //扩展欧几里得算法 
+{
+	if(b==0)
+	{
+		x=1;
+		y=0;
+		return a;
+	}
+	int g=Extends_gcd(b,a%b,x,y);
+	int t=x;
+	x=y;
+	y=t-(a/b)*y;
+	return g; 
+} 
+
+int main()
+{
+	int x;
+	int y;
+	int a,b,c;
+	scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
+	int g=Extends_gcd(a,b,x,y);
+	printf(&quot;GCD:%d\n&quot;,g);
+	//以下是求出解得，必须要乘倍数，是因为我们当时算的基础以gcd，但是实际上方程的右边是gcd的倍数（有解的话），所以我们要先乘上一个倍数 ，才是真正的解 
+	if(c%g) printf(&quot;No solution\n&quot;);
+	else printf(&quot;%d*%d+%d*%d=%d\n&quot;,a,x*(c/g),b,y*(c/g),c);
+	return 0;
+} </pre><br>
+<br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=53047459" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/ljsspace/article/details/6431575"  target="_blank" strategy="BlogCommendFromCsdn_0"> 经典算法（4）- 用欧几里得算法实现扩展的最大公约数(Extended GCD)</a></h2>
+                    <div class="summary">
+                        扩展的gcd算法即除了计算gcd(m,n)还要计算整数x和y，使之满足gcd(m,n) = m.x + n.y。 下面的算法中使用迭代方式。 extendedGCD2方法是extendedGCD的简化...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/ljsspace" target="_blank" strategy="BlogCommendFromCsdn_0"><img src="http://avatar.csdn.net/5/5/9/2_ljsspace.jpg" alt="ljsspace" title="ljsspace"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/ljsspace">ljsspace</a></li>
+                        <li class="time">2011-05-19 11:06</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2025</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u011493189/article/details/51979418"  target="_blank" strategy="BlogCommendFromCsdn_1">【算法】欧几里得——GCD引发的讨论</a></h2>
+                    <div class="summary">
+                        欧几里得算法及扩展欧几里得相关
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u011493189" target="_blank" strategy="BlogCommendFromCsdn_1"><img src="http://avatar.csdn.net/D/1/D/2_u011493189.jpg" alt="u011493189" title="u011493189"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u011493189">u011493189</a></li>
+                        <li class="time">2016-07-21 15:08</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>83</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/oskithebear/8879583" target="_blank" strategy="BlogCommendFromCsdn_2"><img class="maxwidth" src="http://download.csdn.net/images/minetype/zip.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/oskithebear/8879583" target="_blank" strategy="BlogCommendFromCsdn_2">使用扩展欧几里得算法求乘法逆元</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2015-07-08 12:19</li>
+					  <li class="visited_num fileSize">2.20MB</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/oskithebear/8879583">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/ysw5sdsh0/3526071" target="_blank" strategy="BlogCommendFromCsdn_3"><img class="maxwidth" src="http://download.csdn.net/images/minetype/unkonw.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/ysw5sdsh0/3526071" target="_blank" strategy="BlogCommendFromCsdn_3">利用扩展欧几里得算法快速计算组合数取模</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2011-08-17 12:44</li>
+					  <li class="visited_num fileSize">1KB</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/ysw5sdsh0/3526071">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/acvay/article/details/47397977"  target="_blank" strategy="BlogCommendFromCsdn_4">GCD&#183;我所理解的扩展欧几里得</a></h2>
+                    <div class="summary">
+                        题意 &#160;求不定方程&#160;ax + by + c = 0
+ &#160;满足 x1 的解的个数
+这里弱先来预习一下扩展欧几里得算法 ( O_O )&#160;
+
+
+欧几里得算法
+先来看看欧几里得算法 &#160;也就是辗转相除法 &#160;gc...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/acvay" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/F/F/6/2_acvay.jpg" alt="acvay" title="acvay"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/acvay">acvay</a></li>
+                        <li class="time">2015-08-10 15:19</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>754</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/zhiyuxuan/2820924" target="_blank" strategy="BlogCommendFromCsdn_5"><img class="maxwidth" src="http://download.csdn.net/images/minetype/unkonw.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/zhiyuxuan/2820924" target="_blank" strategy="BlogCommendFromCsdn_5">扩展的欧几里得算法（实现求乘法逆元）</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2010-11-10 08:32</li>
+					  <li class="visited_num fileSize">741B</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/zhiyuxuan/2820924">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/dengkuomin/article/details/76461341"  target="_blank" strategy="BlogCommendFromCsdn_6">扩展欧几里得算法详解</a></h2>
+                    <div class="summary">
+                        扩展欧几里德算法
+
+&#160; &#160; 谁是欧几里德？自己百度去
+
+&#160; &#160; 先介绍什么叫做欧几里德算法
+
+&#160; &#160; 有两个数 a b，现在，我们要求 a b 的最大公约数，怎么求？枚举他们的因子？不现实，当 a b...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/dengkuomin" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/3/4/D/2_dengkuomin.jpg" alt="dengkuomin" title="dengkuomin"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/dengkuomin">dengkuomin</a></li>
+                        <li class="time">2017-07-31 18:28</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>110</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/zhangmh93425/article/details/45509629"  target="_blank" strategy="BlogCommendFromCsdn_7">扩展欧几里得算法详解</a></h2>
+                    <div class="summary">
+                        对于不完全为 0
+的非负整数a，b，gcd(a,b)表示a，b的最大公约数，必然存在整数x和y
+，使得gcd(a,b)=ax+by。
+
+
+
+解析：
+
+设a、b不全为0，令a&gt;b，
+
+当b=0时，gcd...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/zhangmh93425" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/B/4/5/2_zhangmh93425.jpg" alt="zhangmh93425" title="zhangmh93425"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/zhangmh93425">zhangmh93425</a></li>
+                        <li class="time">2015-05-05 22:10</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>501</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/silent_strings/article/details/9241933"  target="_blank" strategy="BlogCommendFromCsdn_8">欧几里得扩展算法详解及POJ1061</a></h2>
+                    <div class="summary">
+                        最初是在PKU的acm上刷题，刚接触1061青蛙的约会这道题的时候写了个简单暴力的方法，在一定范围内感觉挺对的，但是提交后WA了，于是在一起K题的战友那里第一次听说了这个算法——欧几里得扩展算法。费了...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/silent_strings" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/1/4/9/2_silent_strings.jpg" alt="silent_strings" title="silent_strings"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/silent_strings">silent_strings</a></li>
+                        <li class="time">2013-07-04 13:37</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1652</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/bill_yang_2016/article/details/53862704"  target="_blank" strategy="BlogCommendFromCsdn_9">[模板] 扩展欧几里得算法详解</a></h2>
+                    <div class="summary">
+                        算法简介P.S.扩展欧几里得非常重要，本人在此纠结多时，将经验总结于此。 
+本算法由欧几里得辗转相除得出：int Gcd(int a,int b) {
+    if(b==0)return a;
+  ...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Bill_Yang_2016" target="_blank" strategy="BlogCommendFromCsdn_9"><img src="http://avatar.csdn.net/1/A/6/2_bill_yang_2016.jpg" alt="Bill_Yang_2016" title="Bill_Yang_2016"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Bill_Yang_2016">Bill_Yang_2016</a></li>
+                        <li class="time">2016-12-24 21:36</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>155</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">1</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

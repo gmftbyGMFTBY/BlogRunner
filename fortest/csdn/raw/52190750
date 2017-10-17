@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52190750"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52190750';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="如果你看不懂KMP算法，那就看一看这篇文章( 绝对原创，绝对通俗易懂)
+
+时间&#160;2014-03-09 20:32:21&#160;&#160;CSDN博客
+原文&#160;&#160;http://blog.csdn.net/u011564456/article/details/20862555
+主题&#160;算法
+
+
+
+
+如果你看不懂&#160;KMP&#160;算法，那就看一看这篇文章&#160;(&#160;绝对原创，绝对通俗易懂&#160;)
+
+KMP&#160;算法，俗称" />
+    <meta name="keywords" content="算法,kmp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>KMP算法总结（纯算法，为优化，没有学应用） - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">KMP算法总结（纯算法，为优化，没有学应用）</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">转载</span>
+                    <span class="time">2016年08月13日 14:12:47</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=算法&t=blog" target="_blank">算法</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=kmp&t=blog" target="_blank">kmp</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=博客&t=blog" target="_blank">博客</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=c语言&t=blog" target="_blank">c语言</a> <span>/</span></li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">492</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h1 style="margin:0px 0px 5px; font-family:'Helvetica Neue',Helvetica,Tahoma,Arial,STXihei,'Microsoft YaHei',微软雅黑,sans-serif; font-weight:normal; line-height:1.5em; color:rgb(51,51,51); font-size:24px">
+先引入大神通俗易懂的博客内容</h1>
+<div class="article_body" id="nei" style="padding:20px 5px 25px; margin-bottom:0px; overflow-x:hidden; word-wrap:break-word; word-break:break-all; min-height:340px; font-size:16px; line-height:1.7em; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Tahoma,Arial,STXihei,'Microsoft YaHei',微软雅黑,sans-serif">
+<div style="line-height:1.7em">
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">KMP</span>&nbsp;算法，俗称“看毛片”算法，是字符串匹配中的很强大的一个算法，不过，对于初学者来说，要弄懂它确实不易。整个寒假，因为家里没有网，为了理解这个算法，那可是花了九牛二虎之力！不过，现在我基本上对这个算法理解算是比较透彻了！特写此文与大家分享分享！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+我个人总结了，&nbsp;<span lang="EN-US">KMP</span>&nbsp;算法之所以难懂，很大一部分原因是很多实现的方法在一些细节的差异。怎么说呢，举我寒假学习的例子吧，我是看了一种方法后，&#20284;懂非懂，然后去看另外的方法，就全都乱了！体现在几个方面：&nbsp;<span lang="EN-US">next</span>&nbsp;数组，有的叫做“失配函数”，其实是一个东西；&nbsp;<span lang="EN-US">next</span>&nbsp;数组中，有的是以下标为&nbsp;<span lang="EN-US">0</span>&nbsp;开始的，有的是以&nbsp;<span lang="EN-US">1</span>&nbsp;开始的；<span lang="EN-US">KMP</span>&nbsp;主算法中，当发生失配时，取的&nbsp;<span lang="EN-US">next</span>&nbsp;数组的&#20540;也不一样！就这样，各说各的，乱的很！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+所以，在阐述我的理解之前，我有必要说明一下，我是用&nbsp;<span lang="EN-US">next</span>&nbsp;数组的，&nbsp;<span lang="EN-US">next</span>&nbsp;数组是以下标&nbsp;<span lang="EN-US">0</span>&nbsp;开始的！还有，我不会在一些基础的概念上浪费太多，所以你在看这篇文章时必须要懂得一些基本的概念，例如&nbsp;<span lang="EN-US">“</span>&nbsp;朴素字符串匹配&nbsp;<span lang="EN-US">”“</span>&nbsp;前缀&nbsp;<span lang="EN-US">”</span>&nbsp;，&nbsp;<span lang="EN-US">“</span>&nbsp;后缀&nbsp;<span lang="EN-US">”</span>&nbsp;等！还有就是，这篇文章的每一个字都是我辛辛苦苦码出来的，图也是我自己画的！如果要转载，请注明出处！好了，开始吧！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+假设在我们的匹配过程中出现了这一种情况：<span lang="EN-US"><img src="http://img0.tuicool.com/qymeyu.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+根据&nbsp;<span lang="EN-US">KMP</span>&nbsp;算法，在该失配位会调用该位的&nbsp;<span lang="EN-US">next</span>&nbsp;数组的&#20540;！在这里有必要来说一下&nbsp;<span lang="EN-US">next</span>&nbsp;数组的作用！说的太繁琐怕你听不懂，让我用一句话来说明：</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span style="text-indent:0px">返回失配位之前的最长公共前后缀！</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span style="text-indent:0px">什么是最长公共前后缀：</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span style="text-indent:0px"><img src="http://image.beekka.com/blog/201305/bg2013050114.png" alt=""><br>
+</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+好，不管你懂不懂这句话，我下面的文字和图应该会让你懂这句话的意思以及作用的！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+首先，我们取之前已经匹配的部分（即蓝色的那部分！）</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US"><img src="http://img0.tuicool.com/3IvIJj.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+我们在上面说到&nbsp;<span lang="EN-US">next</span>&nbsp;数组的作用时，说到&nbsp;<span lang="EN-US">“</span>&nbsp;最长公共前后缀&nbsp;<span lang="EN-US">”</span>&nbsp;，体现到图中就是这个样子！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US"><img src="http://img2.tuicool.com/qqaMfaQ.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+接下来，就是最重要的了！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US"><img src="http://img2.tuicool.com/yMzAzi.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+没错，这个就是&nbsp;<span lang="EN-US">next</span>&nbsp;数组的作用了&nbsp;<span lang="EN-US">:</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+返回当前的最长公共前后缀长度，假设为&nbsp;<span lang="EN-US">len</span>&nbsp;。因为数组是由&nbsp;<span lang="EN-US">0</span>&nbsp;开始的，所以&nbsp;<span lang="EN-US">next</span>数组让第&nbsp;<span lang="EN-US">len</span>&nbsp;位与主串匹配就是拿最长前缀之后的第&nbsp;<span lang="EN-US">1</span>&nbsp;位与失配位重新匹配，避免匹配串从头开始！如下图所示！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US"><img src="http://img0.tuicool.com/6BJFZz.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+（重新匹配刚才的失配位！）</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+如果都说成这样你都不明白，那么你真的得重新理解什么是&nbsp;<span lang="EN-US">KMP</span>&nbsp;算法了！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+接下来最重要的，也是&nbsp;<span lang="EN-US">KMP</span>&nbsp;算法的核心所在，就是&nbsp;<span lang="EN-US">next</span>&nbsp;数组的求解！不过，在这里我找到了一个全新的理解方法！如果你懂的上面我写的的，那么下面的内容你只需稍微思考一下就行了！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+跟刚才一样，我用一句话来阐述一下&nbsp;<span lang="EN-US">next</span>&nbsp;数组的求解方法，其实也就是两个字：</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+继承</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">a</span>&nbsp;、当前面字符的前一个字符的对称程度为&nbsp;<span lang="EN-US">0</span>&nbsp;的时候，只要将当前字符与子串第一个字符进行比较。这个很好理解啊，前面都是&nbsp;<span lang="EN-US">0</span>&nbsp;，说明都不对称了，如果多加了一个字符，要对称的话最多是当前的和第一个对称。比如&nbsp;<span lang="EN-US">agcta</span>&nbsp;这个里面&nbsp;<span lang="EN-US">t</span>&nbsp;的是&nbsp;<span lang="EN-US">0</span>&nbsp;，那么后面的&nbsp;<span lang="EN-US">a</span>&nbsp;的对称程度只需要看它是不是等于第一个字符&nbsp;<span lang="EN-US">a</span>&nbsp;了。</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">b</span>&nbsp;、按照这个推理，我们就可以总结一个规律，不仅前面是&nbsp;<span lang="EN-US">0</span>&nbsp;呀，如果前面一个字符的&nbsp;<span lang="EN-US">next</span>&nbsp;&#20540;是&nbsp;<span lang="EN-US">1</span>&nbsp;，那么我们就把当前字符与子串第二个字符进行比较，因为前面的是&nbsp;<span lang="EN-US">1</span>，说明前面的字符已经和第一个相等了，如果这个又与第二个相等了，说明对称程度就是&nbsp;<span lang="EN-US">2</span>&nbsp;了。有两个字符对称了。比如上面&nbsp;<span lang="EN-US">agctag</span>&nbsp;，倒数第二个&nbsp;<span lang="EN-US">a</span>&nbsp;的&nbsp;<span lang="EN-US">next</span>&nbsp;是&nbsp;<span lang="EN-US">1</span>&nbsp;，说明它和第一个&nbsp;<span lang="EN-US">a</span>&nbsp;对称了，接着我们就把最后一个&nbsp;<span lang="EN-US">g</span>&nbsp;与第二个&nbsp;<span lang="EN-US">g</span>&nbsp;比较，又相等，自然对称成都就累加了，就是&nbsp;<span lang="EN-US">2</span>&nbsp;了。&nbsp;<span lang="EN-US">&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">c</span>&nbsp;、按照上面的推理，如果一直相等，就一直累加，可以一直推啊，推到这里应该一点难度都没有吧，如果你觉得有难度说明我写的太失败了。</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+当然不可能会那么顺利让我们一直对称下去，如果遇到下一个不相等了，那么说明不能继承前面的对称性了，这种情况只能说明没有那么多对称了，但是不能说明一点对称性都没有，所以遇到这种情况就要重新来考虑，这个也是难点所在。</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US"><img src="http://img1.tuicool.com/umuea2.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+如果蓝色的部分相同，则当前&nbsp;<span lang="EN-US">next</span>&nbsp;数组的&#20540;为上一个&nbsp;<span lang="EN-US">next</span>&nbsp;的&#20540;加一，如果不相同，就是我们下面要说的！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+如果不相同，用一句话来说，就是：</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span style="text-indent:0px">从前面来找子前后缀</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">1</span>&nbsp;、如果要存在对称性，那么对称程度肯定比前面这个的对称程度小，所以要找个更小的对称，这个不用解释了吧，如果大那么就继承前面的对称性了。</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span style="text-indent:0px"><span lang="EN-US">2</span>&nbsp;、要找更小的对称，必然在对称内部还存在子对称，而且这个必须紧接着在子对称之后。</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US">&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+如果看不懂，那么看一下图吧！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<span lang="EN-US"><img src="http://img1.tuicool.com/zEVzm2.jpg!web" alt="" style="max-width:96%; height:auto; vertical-align:middle; border:0px none; margin:0px auto; text-align:center; display:block"></span></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+好了，我已经把该说的尽可能以最浅显的话和最直接的图展示出来了，如果还是不懂，那我真的没有办法了！</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+<br>
+</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+针对KMP算法我在添加一下我自己人为非常重要的认识</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+1.KMP的核心在于移位代替回溯，我们通过查找出最长的公共前后缀，从而确定了可以最大效率简化我们的时间复杂度的移位的最大长度</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+先附图在附代码（求next数组的）解释：</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+</p>
+<pre code_snippet_id="1827672" snippet_file_name="blog_20160813_1_7243560"  name="code" class="cpp">void makeNext(const char P[],int next[])
+{
+    int q,k;//q:模版字符串下标；k:最大前后缀长度
+    int m = strlen(P);//模版字符串长度
+    next[0] = 0;//模版字符串的第一个字符的最大前后缀长度为0
+    for (q = 1,k = 0; q &lt; m; ++q)//for循环，从第二个字符开始，依次计算每一个字符对应的next值
+    {
+        while(k &gt; 0 &amp;&amp; P[q] != P[k])//递归的求出P[0]&#183;&#183;&#183;P[q]的最大的相同的前后缀长度k
+            k = next[k-1];          //不理解没关系看下面的分析，这个while循环是整段代码的精髓所在，确实不好理解  
+        if (P[q] == P[k])//如果相等，那么最大相同前后缀长度加1
+        {
+            k++;
+        }
+        next[q] = k;
+    }
+}</pre><br>
+<br>
+<p></p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+下面我们再来讲解一下利用next数组的KMP算法部分：</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+先上代码：</p>
+<p style="margin-top:0px; margin-bottom:0.75em; line-height:1.7em; text-indent:1em">
+</p>
+<pre code_snippet_id="1827672" snippet_file_name="blog_20160813_2_5880357"  name="code" class="cpp">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+void makeNext(const char P[],int next[])
+{
+    int q,k;
+    int m = strlen(P);
+    next[0] = 0;
+    for (q = 1,k = 0; q &lt; m; ++q)
+    {
+        while(k &gt; 0 &amp;&amp; P[q] != P[k])
+            k = next[k-1];
+        if (P[q] == P[k])
+        {
+            k++;
+        }
+        next[q] = k;
+    }
+}
+
+int kmp(const char T[],const char P[],int next[])
+{
+    int n,m;
+    int i,q;
+    n = strlen(T);
+    m = strlen(P);
+    makeNext(P,next);
+    for (i = 0,q = 0; i &lt; n; ++i)
+    {
+        while(q &gt; 0 &amp;&amp; P[q] != T[i])    //这里我们采取的是移动模式串的策略，可能看不出来，这需要我们画图来看
+            q = next[q-1];
+        if (P[q] == T[i])
+        {
+            q++;
+        }
+        if (q == m)
+        {
+            printf(&quot;Pattern occurs with shift:%d\n&quot;,(i-m+1));
+        }
+    }    
+}
+
+int main()
+{
+    int i;
+    int next[20]={0};
+    char T[] = &quot;ababxbababcadfdsss&quot;;
+    char P[] = &quot;abcdabd&quot;;
+    printf(&quot;%s\n&quot;,T);
+    printf(&quot;%s\n&quot;,P );
+    // makeNext(P,next);
+    kmp(T,P,next);
+    for (i = 0; i &lt; strlen(P); ++i)
+    {
+        printf(&quot;%d &quot;,next[i]);
+    }
+    printf(&quot;\n&quot;);
+
+    return 0;
+}</pre><img src="http://a1.qpic.cn/psb?/V145d4wY2ao7bg/s1tJiyxy4wkG93RtVjyKHmkW67RBx.QspbY.1PA3Jrw!/c/dKgAAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=gAJxBAAAAAAFANQ!&amp;sce=60-2-2&amp;rf=0-0" alt=""><br>
+<br>
+<p>以上就是我对KMP算法核心的了解</p>
+<p>附上自己封装的KMP算法的代码如下：</p>
+<p><pre code_snippet_id="1827672" snippet_file_name="blog_20160813_3_722144"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstdlib&quot;
+#include&quot;cstring&quot;
+#define N 100
+
+using namespace std;
+
+template&lt;typename T&gt; class kmp;
+template&lt;typename T&gt; istream&amp; operator&gt;&gt;(istream&amp;,kmp&lt;T&gt;&amp;);
+template&lt;typename T&gt; ostream&amp; operator&lt;&lt;(ostream&amp;,kmp&lt;T&gt;&amp;);
+
+template&lt;typename T&gt;
+class kmp
+{
+	public:
+		kmp()
+		{
+			memset(next,0,sizeof(next));
+			memset(pattern,0,sizeof(pattern));
+			memset(mother,0,sizeof(mother));
+			num=plength=mlength=fpos=0;
+		} 
+		friend istream&amp; operator&gt;&gt;&lt;&gt;(istream&amp;,kmp&lt;T&gt;&amp;);
+		friend ostream&amp; operator&lt;&lt;&lt;&gt;(ostream&amp;,kmp&lt;T&gt;&amp;);
+		void getnextone();   //未优化的
+		void find();
+		void count();
+	private:
+		T pattern[N];
+		int plength; 
+		T mother[N];
+		int mlength;
+		int next[N];
+		int num;   //母串中包含的个数 
+		int fpos;
+};
+
+template&lt;typename T&gt;
+istream&amp; operator&gt;&gt;(istream&amp; in,kmp&lt;T&gt;&amp; k)
+{
+	cout&lt;&lt;&quot;请输入母串的长度&quot;&lt;&lt;endl;
+	cin&gt;&gt;k.mlength;
+	cout&lt;&lt;&quot;请输入母串&quot;&lt;&lt;endl;
+	for(int i=0;i&lt;k.mlength;i++) cin&gt;&gt;k.mother[i];
+	
+	cout&lt;&lt;&quot;请输入模式串的长度&quot;&lt;&lt;endl;
+	cin&gt;&gt;k.plength;
+	cout&lt;&lt;&quot;请输入模式串&quot;&lt;&lt;endl;
+	for(int i=0;i&lt;k.plength;i++) cin&gt;&gt;k.pattern[i];
+	return in;
+}
+
+template&lt;typename T&gt;
+ostream&amp; operator&lt;&lt;(ostream&amp; out,kmp&lt;T&gt;&amp; k)
+{
+	cout&lt;&lt;&quot;next数组的内容如下，以供查错&quot;&lt;&lt;endl;
+	for(int i=0;i&lt;k.plength;i++) cout&lt;&lt;k.next[i]&lt;&lt;&#39; &#39;;
+	cout&lt;&lt;endl; 
+	cout&lt;&lt;&quot;母串中包含的传的个数是&quot;&lt;&lt;k.num&lt;&lt;endl;
+    cout&lt;&lt;&quot;第一次出现模式串的位置是&quot;&lt;&lt;k.fpos&lt;&lt;endl;
+	return out;
+}
+
+template&lt;typename T&gt;
+void kmp&lt;T&gt;::getnextone()
+{
+	//next[0]=0,因为0号位置没有前缀和后缀 
+	int k=0;   //目前最长公共前后缀的长度
+	int q=1;   //q记录目前扫描的的位置 
+	for(;q&lt;plength;q++)   //永远记住，k代表的是长度，实际上的区间位置是0--k-1适合和额前缀 
+	{
+		while(k&gt;0&amp;&amp;pattern[k]!=pattern[q]) k=next[k-1];   //算法中描述的部分 
+		if(pattern[k]==pattern[q]) k++;    //再次匹配，我们扩充最长公共前后缀 
+		next[q]=k; 
+	}
+}
+
+template&lt;typename T&gt;
+void kmp&lt;T&gt;::find()
+{
+	int i=0;
+	int j=0;
+	getnexttwo();
+	for(;i&lt;mlength;i++)
+	{
+		while(j&gt;0&amp;&amp;pattern[j]!=mother[i]) j=next[j-1];
+		if(pattern[j]==mother[i]) j++;
+		if(j==plength)
+		{
+			fpos=i-plength+1;   //j-fpos+1=k.plength
+			cout&lt;&lt;&quot;我们找到了匹配的模式串，第一次出现的位置在&quot;&lt;&lt;fpos&lt;&lt;endl; 
+			return ;
+		}
+	}
+	cout&lt;&lt;&quot;母串中不存在匹配的模式串&quot;&lt;&lt;endl;
+	return ;
+}
+
+int main()
+{
+	kmp&lt;int&gt; my;
+	cin&gt;&gt;my;
+	my.find();
+	cout&lt;&lt;my;
+	return 0;
+} </pre><br>
+<br>
+</p>
+</div>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52190750" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/u012560647/6449339" target="_blank" strategy="BlogCommendFromCsdn_0"><img class="maxwidth" src="http://download.csdn.net/images/minetype/doc.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/u012560647/6449339" target="_blank" strategy="BlogCommendFromCsdn_0">KMP算法学习&amp;amp;总结</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2013-10-24 19:15</li>
+					  <li class="visited_num fileSize">156KB</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/u012560647/6449339">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/zhujunwsk/article/details/7189895"  target="_blank" strategy="BlogCommendFromCsdn_1">【串和序列处理 5】总结---自动机，KMP算法，Extend-KMP，后缀树，后缀数组，trie树，trie图及其应用</a></h2>
+                    <div class="summary">
+                        涉及到字符串的问题，无外乎这样一些算法和数据结构：自动机，KMP算法，Extend-KMP，后缀树，后缀数组，trie树，trie图及其应用。当然这些都是比较高级的数据结构和算法，而这里面最常用和最熟...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/zhujunwsk" target="_blank" strategy="BlogCommendFromCsdn_1"><img src="http://avatar.csdn.net/D/2/0/2_zhujunwsk.jpg" alt="zhujunwsk" title="zhujunwsk"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/zhujunwsk">zhujunwsk</a></li>
+                        <li class="time">2012-01-10 09:42</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1280</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/kflcg/article/details/47340629"  target="_blank" strategy="BlogCommendFromCsdn_2">KMP算法 —— next 数组的应用 --- 前缀中最小循环节，最大重复次数</a></h2>
+                    <div class="summary">
+                        在KMP算法的使用中，首要任务就是获取一个字符串的next数组，所以我们得明白next数组的含义（最好的方法是自己弄个例子，在草稿纸上模拟一下），在这里，通俗一点讲，next[k] 表示，在模式串的 ...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/kflcg" target="_blank" strategy="BlogCommendFromCsdn_2"><img src="http://avatar.csdn.net/F/8/4/2_kflcg.jpg" alt="kflcg" title="kflcg"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/kflcg">kflcg</a></li>
+                        <li class="time">2015-08-07 15:55</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>154</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/blessingxry/article/details/54897239"  target="_blank" strategy="BlogCommendFromCsdn_3">KMP算法的初级扩展应用</a></h2>
+                    <div class="summary">
+                        sdut原题链接 
+bLue的文件查找器 
+Time Limit: 1000MS Memory Limit: 65536KBProblem Description 
+bLue 的电脑里存了各种各样的文...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/BlessingXRY" target="_blank" strategy="BlogCommendFromCsdn_3"><img src="http://avatar.csdn.net/B/D/C/2_blessingxry.jpg" alt="BlessingXRY" title="BlessingXRY"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/BlessingXRY">BlessingXRY</a></li>
+                        <li class="time">2017-02-06 21:36</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>127</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/m_gsir/article/details/52259378"  target="_blank" strategy="BlogCommendFromCsdn_4">kmp算法（字符串匹配 next应用 hdu题目集合）</a></h2>
+                    <div class="summary">
+                        关于kmp算法的有关解释百度中有很多，可以自己查询更详细部分，其实最主要的就是next数组（以下题目我用的是on，因为hdu中直接用next变量或编译出错），当无法匹配时匹配字串跳转到前串中类似的位置...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/M_GSir" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/2/5/1/2_m_gsir.jpg" alt="M_GSir" title="M_GSir"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/M_GSir">M_GSir</a></li>
+                        <li class="time">2016-08-20 08:43</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>226</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/wmn_wmn/article/details/6954034"  target="_blank" strategy="BlogCommendFromCsdn_5">poj  1961  KMP算法的应用</a></h2>
+                    <div class="summary">
+                        多久了，，，多久了，，，，两天了，，，，终于ac了一道题，，还是一道水题。。。。。。悲剧，，，，杭电上的一道题，，，一直看不懂题意，看不懂，，纠结，，，，就这样一直看了两天，，还是不懂，，，受打击了，...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/wmn_wmn" target="_blank" strategy="BlogCommendFromCsdn_5"><img src="http://avatar.csdn.net/A/F/B/2_wmn_wmn.jpg" alt="wmn_wmn" title="wmn_wmn"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/wmn_wmn">wmn_wmn</a></li>
+                        <li class="time">2011-11-09 21:47</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>773</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/berrykanry/article/details/76368663"  target="_blank" strategy="BlogCommendFromCsdn_6">BZOJ 3670 浅谈KMP算法的拓展应用</a></h2>
+                    <div class="summary">
+                        世界真的很大 
+KMP处理字符串的匹配问题是非常熟悉的 
+KMP算法很独特的地方在于其失配指针，nxt数组，这个在其他字符串处理算法中也有应用 
+深刻理解nxt数组的实际意义对题目有时会有很大帮助 
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/BerryKanry" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/B/9/5/2_berrykanry.jpg" alt="BerryKanry" title="BerryKanry"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/BerryKanry">BerryKanry</a></li>
+                        <li class="time">2017-07-30 09:42</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>116</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/hackbuteer1/article/details/7319115"  target="_blank" strategy="BlogCommendFromCsdn_7">KMP算法详解及各种应用</a></h2>
+                    <div class="summary">
+                        KMP算法详解：
+KMP算法之所以叫做KMP算法是因为这个算法是由三个人共同提出来的，就取三个人名字的首字母作为该算法的名字。其实KMP算法与BF算法的区别就在于KMP算法巧妙的消除了指针i的回溯问...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Hackbuteer1" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/2/C/B/2_hackbuteer1.jpg" alt="Hackbuteer1" title="Hackbuteer1"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Hackbuteer1">Hackbuteer1</a></li>
+                        <li class="time">2012-03-04 22:42</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>11157</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/sinceseto/article/details/50911090"  target="_blank" strategy="BlogCommendFromCsdn_8">[kmp算法next数组的应用][poj1961]Period</a></h2>
+                    <div class="summary">
+                        [kmp算法next数组的应用][poj1961]Period原题传送门DescriptionFor each prefix of a given string S with N characters...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/sinceseto" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/8/4/1/2_sinceseto.jpg" alt="sinceseto" title="sinceseto"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/sinceseto">sinceseto</a></li>
+                        <li class="time">2016-03-17 09:59</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>160</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/willinux20130812/article/details/47133425"  target="_blank" strategy="BlogCommendFromCsdn_9">KMP算法应用</a></h2>
+                    <div class="summary">
+                        KMP算法应用题目描述： 
+给定一个字符串，求其中出现重复的任意一个字符？再求其中最长的重复子串？题目分析： 
+如果明白KMP原理，明白next数组next[j]=k的具体含义，这样的题目可以用nex...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/zxc995293774" target="_blank" strategy="BlogCommendFromCsdn_9"><img src="http://avatar.csdn.net/4/D/D/2_zxc995293774.jpg" alt="zxc995293774" title="zxc995293774"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/zxc995293774">zxc995293774</a></li>
+                        <li class="time">2015-07-29 20:38</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>438</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">2</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

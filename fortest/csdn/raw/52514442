@@ -1,0 +1,1317 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52514442"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52514442';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="Copy from others:
+
+
+我们都知道&#160;int类型占32bit&#160;可表示范围：&#160;[-2147483648，2147483647]&#160;long&#160;long类型&#160;64bit可表示范围：[-9223372036854775808，9223372036854775807]
+
+int可以完整表达9位数字，long&#160;long可以完整表达18位。（完整表达的意思是能表示到该位的任意数字）" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>高精度总结 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">高精度总结</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年09月12日 16:13:27</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">217</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>Copy from others:</h2>
+<div>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">我们都知道&nbsp;<span style="font-family:Arial">int</span><span style="font-family:宋体">类型占</span><span style="font-family:Arial">32bit&nbsp;</span><span style="font-family:宋体">可表示范围：&nbsp;</span><span style="font-family:Arial">[-2147483648</span><span style="font-family:宋体">，</span><span style="font-family:Arial">2147483647]&nbsp;long&nbsp;long</span><span style="font-family:宋体">类型&nbsp;</span><span style="font-family:Arial">64bit</span><span style="font-family:宋体">可表示范围：</span><span style="font-family:Arial">[-9223372036854775808</span><span style="font-family:宋体">，</span><span style="font-family:Arial">9223372036854775807]</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span>int</span><span style="font-size:14px; font-family:宋体">可以</span><span style="font-size:14px">完整表达</span><span style="font-size:14px; font-family:Arial">9</span><span style="font-size:14px; font-family:宋体">位数字，</span><span style="font-size:14px; font-family:Arial">long&nbsp;long</span><span style="font-size:14px; font-family:宋体">可以</span><span style="font-size:14px">完整表达</span><span style="font-size:14px; font-family:Arial">18</span><span style="font-size:14px; font-family:宋体">位。（</span><span style="font-size:14px">完整表达的意思是能表示到该位的任意数字）</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span>当我们想表达到成千上万位的数时，<span style="font-family:Arial">int</span><span style="font-family:宋体">、</span><span style="font-family:Arial">long&nbsp;long</span><span style="font-family:宋体">都不再适合。所以我们便引入高精度的概念。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span><strong><span style="white-space:pre"></span>所谓高精度就是用数组来充当数字的容器。开辟若干个空间，每个单元内存放固定数目的数据。</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span><span style="white-space:pre"></span>高精度常用的方法主要有：不压缩法、压缩<span style="font-family:Arial">4</span><span style="font-family:宋体">位法、和压缩</span><span style="font-family:Arial">9</span><span style="font-family:宋体">位的方法。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><strong>不压缩法：</strong>主要是用<span style="font-family:Arial">char</span><span style="font-family:宋体">类型开辟的数组，每个元素内存放一位数字。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<strong><span style="font-size:14px">例如：</span></strong></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span><span style="white-space:pre"></span>2156897546</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">用普通不压缩方法存储，其数据结构为：</span></p>
+<table border="1" width="200" cellspacing="1" cellpadding="1" align="center" style="color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<tbody>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<br>
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><strong>注意：</strong>此时数组中存放的是数&#20540;并不是ASCll对应的字符！之所以倒序存放是为了便于以后进行运算时溢位的情况。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><strong>压缩4位法：</strong>用int类型开辟的数组，每个元素内存放四位数字。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">ps：为什么是四位呢？因为int类型能完整表达9位以内的任何数字。而存储四位数字是因为在进行乘法运算时，很可能会存在四位×四位的情况，而其结果不会超过八位。int类型完全可以存储。如果存放四位以上的数字的时候，int不能完整的存放其结果，因而无法正确计算。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">例如：</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span><span style="white-space:pre"></span>2156897546</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">用压缩4方法存储，其数据结构为：</span></p>
+<table border="1" width="200" cellspacing="1" cellpadding="1" align="center" style="color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<tbody>
+<tr>
+<td style="text-align:center">7546</td>
+<td style="text-align:center">5689</td>
+<td style="text-align:center">21</td>
+</tr>
+</tbody>
+</table>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<br>
+&nbsp;<span style="font-size:14px"><strong>特点：</strong>自右向左每选取4位存放至数组一个单元内。最后不够的单独放一个空间。（四位内部还是正序的，总体是逆序的）</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><strong>压缩9位法：</strong>与压缩4位法大致相同，区别在于存放的数组是用long&nbsp;long类型开辟的，每个元素内存放9位数字。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">例如：</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px"><span style="white-space:pre"></span><span style="white-space:pre"></span>2156897546</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<span style="font-size:14px">用压缩9方法存储，其数据结构为：</span></p>
+<table border="1" width="200" cellspacing="1" cellpadding="1" align="center" style="color:rgb(85,85,85); font-family:'microsoft yahei'; font-size:15px; line-height:35px">
+<tbody>
+<tr>
+<td style="text-align:center">156897546</td>
+<td style="text-align:center">21</td>
+</tr>
+</tbody>
+</table>
+<br>
+</div>
+<h2>My C&#43;&#43; Code for the Big Number Class:(ready for fix it)</h2>
+<div><pre name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#include&quot;math.h&quot;
+
+using namespace std;
+
+/*
+常用的压缩系数是4位压缩：4*4位数不会爆过int型的范围
+还有9*9位数压缩使用long long来进行压缩存储的，因为9*9位数不会爆过long long的18位 
+
+这里有个知识点就是，我们压缩存储的时候虽然整体上是逆序的，但是在每个元素块内我们正序表示
+该位上的数字 
+*/
+
+class errorfull{};
+
+void reverse(char des[])   //功能函数，反转字符串
+{
+	int i=0;
+	int j=strlen(des)-1;
+	while(i&lt;j)
+	{
+		char t=des[i];
+		des[i]=des[j];
+		des[j]=t;
+		i++;
+		j--;
+	} 
+} 
+
+class Big_Number   //类采用4位压缩的方式进行存储，所以是int型，本例通过，修改为模板类，任意控制压缩类型 
+{
+	public:
+    	Big_Number()
+    	{
+	    	memset(data,0,sizeof(data));
+		    length=0;
+    	} 
+    	Big_Number(char[]);   //重载构造函数，用字符串构造大数 
+    	Big_Number(int);      //重载大整形构造大数 
+    	void clear()
+    	{
+    		memset(data,0,sizeof(data));
+		    length=0;
+    	}
+    	friend ostream&amp; operator&lt;&lt;(ostream&amp;,Big_Number&amp;);   //重载流输出，大数的输出
+    	bool operator &gt; (Big_Number&amp;);
+		bool operator &lt; (Big_Number&amp;);
+        bool operator == (Big_Number&amp;);
+        Big_Number operator = (Big_Number&amp;);
+		Big_Number Big_Add(Big_Number&amp;,Big_Number&amp;);     //大数相加，这里没有用const修饰，封装性被破坏 
+		Big_Number Big_Del(Big_Number&amp;,Big_Number&amp;);     //大数相减，默认大数在前小数在后
+		Big_Number Big_Mul(Big_Number&amp;,Big_Number&amp;);     //大数想乘
+		//大数乘以小整数可以转化为重新构造大数进行上面的大数想乘的操作
+		Big_Number Big_Power(int,int);    //快速幂实现数据量的的幂次的加速计算 
+		//Big_Number Big_
+	private:
+		static const int max_volume = 100;   //设置最大容量，可以调节 
+		static const int power = 4;   //压缩系数
+		static const int base = 10000;   //进制，随压缩系数 
+		int data[max_volume];    //这里设置大数的容量是100*4=400位，可以调节 
+		int length;   //大数的长度，因为涉及到压缩存储，所以长度在不同的压缩系数下是不一样的
+};
+
+ostream&amp; operator&lt;&lt;(ostream&amp; out,Big_Number&amp; des)
+{
+	cout&lt;&lt;&quot;该大数数据结构有如下描述:&quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;大数的存储位数&quot;&lt;&lt;des.length&lt;&lt;endl;
+	cout&lt;&lt;&quot;该大数如下:&quot;&lt;&lt;endl;
+	for(int i=des.length-1;i&gt;=0;i--) 
+	{
+		if(i!=des.length-1)
+		{
+			for(int k=10;k&lt;=pow(10,des.power);k*=10)
+			{
+				if(des.data[i]&lt;k) 
+				{
+					for(int j=pow(10,des.power-1);j&gt;=k;j/=10) cout&lt;&lt;&quot;0&quot;;
+					cout&lt;&lt;des.data[i];
+					break;
+				}
+			}
+		} 
+		else cout&lt;&lt;des.data[i];
+	}
+	cout&lt;&lt;endl;
+	return out;
+} 
+
+Big_Number::Big_Number(char des[])   //这里有个知识点，C++的流输出支持反转之后的识别正确，strlen函数也支持 
+{
+	memset(data,0,sizeof(data));
+	length=0;
+	reverse(des);
+	int length=strlen(des);
+	
+	int forpower=1;
+	for(int i=0;i&lt;strlen(des);i++)
+	{
+		if(forpower%base==0) this-&gt;length++,forpower=1;   //按照压缩的位数进行相应的存储，和初始化操作 
+		this-&gt;data[this-&gt;length]+=(des[i]-&#39;0&#39;)*forpower;
+		forpower*=10;
+	}
+	this-&gt;length++;
+}
+
+Big_Number::Big_Number(int des)
+{
+	memset(data,0,sizeof(data));
+	length=0;
+	int forpower=1;    //和上面的思路是差不多一致的 
+	while(des!=0)
+	{
+		int x=des%10;
+		if(forpower%base==0) this-&gt;length++,forpower=1;
+		this-&gt;data[this-&gt;length]+=forpower*x;
+		forpower*=10;
+		des/=10;
+	}
+	this-&gt;length++;   //位数和长度是不一样的 
+} 
+
+Big_Number 	Big_Number::Big_Add(Big_Number&amp; x,Big_Number&amp; y)
+{
+	Big_Number result;
+	int max_len = x.length &gt; y.length ? x.length : y.length;
+	for(int i=0;i &lt; max_len;i++)
+	{
+		result.data[i]+=x.data[i]+y.data[i];
+		try
+		{
+			int k=result.data[i]/base;
+			int w=result.data[i]%base;
+			if(k!=0 &amp;&amp; i==max_volume) throw errorfull();
+			else result.data[i+1] = k,result.data[i] = w;
+		}
+		catch(errorfull p)
+		{
+			cout&lt;&lt;&quot;加和结果上界溢出，请修改最大容量max_volume&quot;&lt;&lt;endl; 
+			result.clear();
+			return result;
+		}
+	}
+	if(result.data[max_len] !=0 ) result.length=max_len+1;    //判断最终的假发是否进位 
+	else result.length=max_len;
+	return result; 
+}
+
+Big_Number Big_Number::Big_Del(Big_Number&amp; x,Big_Number&amp; y)    //默认x比y大来进行计算 ,如果不够了，我们向前借位，最终我们整体判断一下有没有附属的情况出现，如果出现了我们修正就好 
+{
+    Big_Number result;
+	for(int i=0;i &lt; x.length;i++) result.data[i]=x.data[i]-y.data[i];
+	for(int i=0;i &lt; x.length;i++)
+	{
+		if(result.data[i] &lt; 0)
+		{
+			result.data[i+1]--;
+			result.data[i]+=base;   //加上进制弥补复负差 
+		} 
+	}
+	int k=x.length-1;
+	while(result.data[k]==0 &amp;&amp; k &gt;= 0) k--;    //从头开始查找，防止出现减位的情况 
+	if(k &lt; 0) result.length=0;
+	else result.length=k+1;   //长度和位长不是等价的，这一点要小心 
+	
+	return result;
+}
+
+Big_Number Big_Number::Big_Mul(Big_Number&amp; x,Big_Number&amp; y)
+{
+	Big_Number result;
+	for(int i=0;i&lt;x.length;i++)
+	{
+		for(int j=0;j &lt; y.length;j++)
+		{
+			result.data[i+j] += x.data[i] * y.data[j];   //important 
+			result.data[i+j+1] += result.data[i+j] / base;
+			result.data[i+j] = result.data[i+j] % base;
+		}
+	}
+	result.length=x.length+y.length-1;
+	if(result.data[result.length]) result.length++;
+	return result;
+}
+
+Big_Number Big_Number::Big_Power(int x,int y)   //x为底数，y是指数 
+{
+	Big_Number result;
+	Big_Number a(x);
+	Big_Number b(y);
+	Big_Number ans(1);
+	while(y != 0) 
+	{
+		if( y &amp; 1 ) ans = Big_Mul(ans,a);   //n是奇数，此时按照快速幂的定义先乘上 
+		a = Big_Mul(a,a);
+		y = y &gt;&gt; 1;
+	}
+	return ans; 
+}
+
+bool Big_Number::operator &gt; (Big_Number&amp; x)
+{
+	if(length&gt;x.length) return true;
+	else if(length&lt;x.length) return false;
+	else 
+	{
+		for(int i=length-1;i&gt;=0;i--)
+		{
+			if(data[i]&gt;x.data[i]) return true;
+			else if(data[i]&lt;x.data[i]) return false;
+			else continue;
+		}
+	}
+	return false;
+}
+
+bool Big_Number::operator &lt; (Big_Number&amp; x)
+{
+	if(length&gt;x.length) return false;
+	else if(length&lt;x.length) return true;
+	else 
+	{
+		for(int i=length-1;i&gt;=0;i--)
+		{
+			if(data[i]&gt;x.data[i]) return false;
+			else if(data[i]&lt;x.data[i]) return true;
+			else continue;
+		}
+	}
+	return false;
+}
+
+bool Big_Number::operator == (Big_Number&amp; x)
+{
+	if(length&gt;x.length) return false;
+	else if(length&lt;x.length) return false;
+	else 
+	{
+		for(int i=length-1;i&gt;=0;i--)
+		{
+			if(data[i]&gt;x.data[i]) return false;
+			else if(data[i]&lt;x.data[i]) return false;
+			else continue;
+		}
+	}
+	return true;
+}
+
+Big_Number Big_Number::operator = (Big_Number&amp; x)
+{
+	Big_Number a;
+	for(int i=0;i&lt;x.length;i++) a.data[i]=x.data[i];
+	a.length=x.length;
+	return a;
+}
+
+int main()
+{
+	char dadamrx[1005];
+	scanf(&quot;%s&quot;,dadamrx);
+	Big_Number lantian(dadamrx);
+	Big_Number wanggeyuan(2376347);
+	Big_Number guojianan;
+	
+	cout&lt;&lt;guojianan&lt;&lt;endl;
+	guojianan = guojianan.Big_Add(lantian,wanggeyuan);
+	//guojianan = guojianan.Big_Mul(lantian,wanggeyuan);
+	//guojianan=guojianan.Big_Power(9,15);
+	bool xuhengda=lantian&gt;wanggeyuan;
+	cout&lt;&lt;xuhengda&lt;&lt;endl;
+	return 0;
+} </pre><br>
+<br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52514442" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/xuzengqiang/article/details/7313335"  target="_blank" strategy="BlogCommendFromCsdn_0">java高精度、大数运算总结</a></h2>
+                    <div class="summary">
+                        转载自：http://blog.himdd.com/，同样是一个比较好的博客，推荐~~~~
+/****************************************************...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/xuzengqiang" target="_blank" strategy="BlogCommendFromCsdn_0"><img src="http://avatar.csdn.net/7/A/A/2_xuzengqiang.jpg" alt="xuzengqiang" title="xuzengqiang"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/xuzengqiang">xuzengqiang</a></li>
+                        <li class="time">2012-03-02 18:23</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>559</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/cxiaokai/article/details/7326218"  target="_blank" strategy="BlogCommendFromCsdn_1">用Java中的高精度的一点小总结</a></h2>
+                    <div class="summary">
+                        Scanner cin = new Scanner(new BufferedReader(
+				new InputStreamReader(System.in)));  //创建流对象
+
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Cxiaokai" target="_blank" strategy="BlogCommendFromCsdn_1"><img src="http://avatar.csdn.net/F/5/4/2_cxiaokai.jpg" alt="Cxiaokai" title="Cxiaokai"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Cxiaokai">Cxiaokai</a></li>
+                        <li class="time">2012-03-06 20:26</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>479</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/l04205613/article/details/6873991"  target="_blank" strategy="BlogCommendFromCsdn_2">HDU高精度总结（java大数类）</a></h2>
+                    <div class="summary">
+                        HDU1002&#160;
+http://acm.hdu.edu.cn/showproblem.php?pid=1002
+
+代码：
+
+import java.math.BigInteger;
+impo...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/l04205613" target="_blank" strategy="BlogCommendFromCsdn_2"><img src="http://avatar.csdn.net/8/8/1/2_l04205613.jpg" alt="l04205613" title="l04205613"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/l04205613">l04205613</a></li>
+                        <li class="time">2011-10-14 16:41</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4311</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/linhuanmars/article/details/39046243"  target="_blank" strategy="BlogCommendFromCsdn_3">LeetCode总结 -- 高精度篇</a></h2>
+                    <div class="summary">
+                        我们常见的一些基本的数据结构比如整型int或者浮点型float由于位数过多无法用内置类型存储，这时候我们就需要自己实现高精度的数据类型来进行存储和运算。这种问题在实际产品中还是比较实用的，所以相对来说...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/linhuanmars" target="_blank" strategy="BlogCommendFromCsdn_3"><img src="http://avatar.csdn.net/4/F/8/2_linhuanmars.jpg" alt="linhuanmars" title="linhuanmars"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/linhuanmars">linhuanmars</a></li>
+                        <li class="time">2014-09-04 05:38</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6807</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/whoo/article/details/7416995"  target="_blank" strategy="BlogCommendFromCsdn_4">[xenclient] 使用总结 ---centos 下使用高精度的console控制台</a></h2>
+                    <div class="summary">
+                        在centos里运行了几个服务。因为主要是服务的目的，就没装X-Window。只在console控制台下操作。
+
+
+不过centos默认的console控制台仅仅支持 80x25的文本模式，太粗...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/whoo" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/0/6/C/2_whoo.jpg" alt="whoo" title="whoo"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/whoo">whoo</a></li>
+                        <li class="time">2012-03-31 20:12</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>3812</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/piaocoder/article/details/47071935"  target="_blank" strategy="BlogCommendFromCsdn_5">ACM常见高精度总结（java用法）</a></h2>
+                    <div class="summary">
+                        在用C或者C++处理大数时感觉非常麻烦，但是在JAVA中有两个类BigInteger和BigDecimal分别表示大整数类和大浮点数类，至于两个类的对象能表示最大范围不清楚，理论上能够表示无线大的数，...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/piaocoder" target="_blank" strategy="BlogCommendFromCsdn_5"><img src="http://avatar.csdn.net/D/B/D/2_piaocoder.jpg" alt="piaocoder" title="piaocoder"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/piaocoder">piaocoder</a></li>
+                        <li class="time">2015-07-26 21:47</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>953</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/salahelx/article/details/46706315"  target="_blank" strategy="BlogCommendFromCsdn_6">java中进行高精度、大数运算总结BigInteger BigDecimal</a></h2>
+                    <div class="summary">
+                        为了解决Java基本数据类型在运算时会出现的溢出和计算不精确的问题。
+* Java 提供了两个类BigInteger和BigDecimal，专门用于进行高精度运算
+* 凡是能用int 或float...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/salahelx" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/A/6/4/2_salahelx.jpg" alt="salahelx" title="salahelx"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/salahelx">salahelx</a></li>
+                        <li class="time">2015-07-01 09:19</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>318</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/chenyujing1234/article/details/7545658"  target="_blank" strategy="BlogCommendFromCsdn_7">高精度24bit 模数转化 AD7767芯片 使用总结</a></h2>
+                    <div class="summary">
+                        转载请标明是引用于 http://blog.csdn.net/chenyujing1234
+&#160;
+欢迎大家提出意见,一起讨论!
+&#160;
+PDF资料请大家网上搜索。
+环境：
+上位机&#160; MIPS+W...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/chenyujing1234" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/E/1/2/2_chenyujing1234.jpg" alt="chenyujing1234" title="chenyujing1234"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/chenyujing1234">chenyujing1234</a></li>
+                        <li class="time">2012-05-08 13:02</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>8667</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/shengtao96/article/details/44246247"  target="_blank" strategy="BlogCommendFromCsdn_8">高精度模板总结</a></h2>
+                    <div class="summary">
+                        #include#include#include#includeusing namespace std;//compare比较函数：相等返回0，大于返回1，小于返回-1int compare(stri...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/shengtao96" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/1/7/D/2_shengtao96.jpg" alt="shengtao96" title="shengtao96"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/shengtao96">shengtao96</a></li>
+                        <li class="time">2015-03-13 21:42</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>369</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/forever0wind/article/details/6437296"  target="_blank" strategy="BlogCommendFromCsdn_9">高精度算法总结及应用实例</a></h2>
+                    <div class="summary">
+                        #include #include #include #include int an,bn,fa=1,fb=1; &#160; &#160; &#160; &#160; /* 把an,bn,k设为全局变量,an纪录第一个高精度数组的位数,b...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/forever0wind" target="_blank" strategy="BlogCommendFromCsdn_9"><img src="http://avatar.csdn.net/7/3/A/2_forever0wind.jpg" alt="forever0wind" title="forever0wind"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/forever0wind">forever0wind</a></li>
+                        <li class="time">2011-05-22 00:35</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>193</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">1</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

@@ -1,0 +1,1113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52203578"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52203578';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="1.问题描述：
+学过象棋的朋友一定不会陌生，中国象棋中规定了，将帅不能碰面，也就是说，将帅是不可能出现在相同的一列上的
+通过二重循环的遍历操作我们可以通过枚举的方法简单的求出将帅所有合适的位置组合，但是，现在的问题是，如何只利用一个字节的存储空间，将将帅所有的合适的位置信息都描述出来
+2.解析：（解法1）
+2.1
+本问题中，我们的核心问题在于如何利用一个字节来表示不同的位置信息
+首先我" />
+    <meta name="keywords" content="编程之美,位运算" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>编程之美1.2——将帅问题 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">编程之美1.2——将帅问题</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年08月14日 12:03:52</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=编程之美&t=blog" target="_blank">编程之美</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=位运算&t=blog" target="_blank">位运算</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=二进制&t=blog" target="_blank">二进制</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=算法&t=blog" target="_blank">算法</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=遍历&t=blog" target="_blank">遍历</a> <span>/</span></li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">319</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>1.问题描述：</h2>
+<div>学过象棋的朋友一定不会陌生，中国象棋中规定了，将帅不能碰面，也就是说，将帅是不可能出现在相同的一列上的</div>
+<div>通过二重循环的遍历操作我们可以通过枚举的方法简单的求出将帅所有合适的位置组合，但是，现在的问题是，如何只利用一个字节的存储空间，将将帅所有的合适的位置信息都描述出来</div>
+<h2>2.解析：（解法1）</h2>
+<h3>2.1</h3>
+<div>本问题中，我们的核心问题在于如何利用一个字节来表示不同的位置信息</div>
+<div>首先我们先要想到，对于将帅的位置信息，我们可以采用如下的排列方式来进行存储的优化</div>
+<div>1<span style="white-space:pre"> </span>2<span style="white-space:pre"> </span>
+3</div>
+<div>4<span style="white-space:pre"> </span>5<span style="white-space:pre"> </span>
+6</div>
+<div>7<span style="white-space:pre"> </span>8<span style="white-space:pre"> </span>
+9</div>
+<div>将帅的位置都可以这么描述，这样的话，我们只需要一种存储空间就可以表示我们的列信息（我们只要对3取模就可以了）</div>
+<div><br>
+</div>
+<div>那么现在问题来了，我们如何只用一个字节来完成这个工作呢</div>
+<h3>2.2</h3>
+<div>我们需要了解到我们的位置空间只有9种情况，9的二进制只有4位，刚好，一个字节的二进制有8位，那么之歌问题就变得迎刃而解了，我们可以将一个字节的分成左右两半分别存储将和帅的位置信息，取模之后如果出现了相同，说明在一列，这种情况continue就好，然后输出所有的情况就好了</div>
+<h3>2.3</h3>
+<div>该算法的核心在于位运算和定义宏：</div>
+<div>首先我们讲解一下本问题中我们需要涉及到的位运算有哪些：（位运算之后的内容我会再开一篇博客全面讲解）</div>
+<div>1.<strong>&amp;：按位与操作：</strong></div>
+<div>按位与操作的内容是两个数字的二进制对应位比较，同为1则为1，否则为0</div>
+<div>2.<strong>|：按位或操作：（操作完返回的内容必须要接收，因为是二元运算符）</strong></div>
+<div>按位或操作的内容是两个数字的二进制对应位比较，存在1则为1，否则为0</div>
+<div>3.<strong>&gt;&gt;/&lt;&lt;:右移和左移操作：（操作完返回的是本身，是一元运算符）</strong></div>
+<div>按位右移和左移操作的内容是我们将数字对应的二进制整体向右或者向左移动，空位用0补齐</div>
+<div><br>
+</div>
+<div>下面我们讲解必要的定义宏的操作：</div>
+<div>我们定义宏的时候，相当于我们将定义的部分在代码中全部强制替换掉，所以说可能会带来由县级的问题，这里我们加上括号可以很好的解决</div>
+<h3>2.4代码实现：（对必要的步骤有详细的讲解）</h3>
+<div><pre code_snippet_id="1828966" snippet_file_name="blog_20160814_1_4676494"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+
+//开始定义运算宏    n&lt;=9 n只会用到四个存储单元，就是半个字节 
+#define halfbitlength 4   //一个bit单元长度，我们一次用一半 
+#define fullmask 255   //11111111八个1
+#define lmask (fullmask&lt;&lt;halfbitlength)   //左移半个字节，左边当做一个存储单元，结果为11110000
+#define rmask (fullmask&gt;&gt;halfbitlength)   //右移半个字节，右边当做一个存储单元，结果为00001111
+#define rset(b,n) (b=((b &amp; lmask) | (n)))   //将b的右边半个字节设置成n   （b&amp;lmask的作用是将右边半个字节先全部置空，再用或运算复制） 
+#define lset(b,n) (b=((b &amp; rmask) | (n&lt;&lt;halfbitlength)))   //思路同上
+#define lget(b) (b&gt;&gt; halfbitlength)
+#define rget(b) (rmask &amp; b)
+
+using namespace std;
+
+unsigned char b;
+
+int main()
+{
+	for(lset(b,1);lget(b)&lt;=9;lset(b,(lget(b)+1)))
+	{
+		for(rset(b,1);rget(b)&lt;=9;rset(b,(rget(b)+1)))
+		{
+			if(lget(b)%3==rget(b)%3) continue;
+			else printf(&quot;A=%d,B=%d\n&quot;,lget(b),rget(b));
+		}
+	}
+	return 0;
+}</pre><br>
+<h2>3.解法：（本人觉得最神奇的代码，优化二重循环）</h2>
+</div>
+<div>在这里我们先援引一位大神的讲解：<a target="_blank" href="http://blog.csdn.net/kabini/article/details/2256421">博客专家对解法2的讲解</a></div>
+<div>在这里，我们优化的核心就是一段代码： &nbsp;<span style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px"><strong>var=(var/9)*9&#43;var%9</strong></span></div>
+<div><span style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px"><strong>没错，上面的就是我们的优化的核心</strong></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>我们先附上代码：</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong></strong></span></span><pre code_snippet_id="1828966" snippet_file_name="blog_20160814_2_5265138"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+
+using namespace std;
+
+unsigned char i=81;
+
+int main()
+{
+	while(i--)
+	{
+                if(i/9%3==i%9%3) continue;
+		else printf(&quot;A=%d,B=%d\n&quot;,i/9+1,i%9+1);
+	}
+	return 0;
+}</pre><br>
+在这里我们可能会看不懂这么一句话：if(i/9%3==i%9%3) &nbsp;continue;</div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>在这里就隐含着我们对多重循环的处理的一个超级神奇的优化操作</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>i=81的由来是9*9有81种将帅站位方式（我们以后再做相同的处理优化的时候，这相当于是所有的情况的总数目）</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>然后，i/9相当于是外层循环，i%9相当于是内层循环</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>因为我们已经知道了上面的一个公式：var=(var/9)*9&#43;var%9;当然这里的9可以随意的替换，我们懂原理就好</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>这里我们巧妙的利用了i/9在没有9的进位下的时候&#20540;是不变的，但是i%9是相对会改变的，这样子我们就将一个二重循环巧妙的抓化成一个一重循环，虽然复杂度没有优化，但是我们还是可以看出一些精妙之处的</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong><br>
+</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong>对于解法三我们进行一下拓展：利用钢材的原理性质，来做几道枚举的小题目<br>
+</strong></span></span><pre code_snippet_id="1828966" snippet_file_name="blog_20160814_3_106925"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#include&quot;cmath&quot;
+
+//求x^2+y^2=2000的正整数解
+//45*45&gt;2000,所以说按照之前的
+ 
+using namespace std;
+
+int main()
+{
+	int i=45*45;    //情况总数
+	while(i--)
+	{
+		if(pow(i/45,2)+pow(i%45,2)==2000) 
+		{
+			printf(&quot;%d^2+%d^2==2000\n&quot;,i/45,i%45); 
+			break;
+		}
+	} 
+	return 0;
+}</pre><br>
+对于2*3*4的三重循环来说，我们可以这么来分类看待循环过程：</div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong><span style="white-space:pre"></span>i/2<span style="white-space:pre">
+</span>|||<span style="white-space:pre"> </span>i%2(最后一层只有2种情况的循环)</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong><span style="white-space:pre"></span>i/2/3<span style="white-space:pre">
+</span>i/2%3(第二层循环)</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong><span style="white-space:pre"></span>i/2/3/4<span style="white-space:pre">
+</span>i/2/3%4(第三重循环)</strong></span></span></div>
+<div><span style="font-family:Arial; color:#333333"><span style="font-size:14px; line-height:26px"><strong><br>
+</strong></span></span></div>
+<h2>4.总结：</h2>
+<div>编程世界如此广阔，此刻不再停留</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12932.html" target="_blank">读书笔记</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52203578" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/pandafxp/article/details/46414495"  target="_blank" strategy="BlogCommendFromCsdn_0">编程之美1.2中国象棋将帅问题——转载+自己的一点理解</a></h2>
+                    <div class="summary">
+                        分享这个链接：http://book.douban.com/annotation/13753057/
+
+
+
+引子问题：中国象棋将帅问题：
+在一把象棋的残局中，象棋双方的将帅不可以相见，即不可以...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/pandafxp" target="_blank" strategy="BlogCommendFromCsdn_0"><img src="http://avatar.csdn.net/4/2/5/2_pandafxp.jpg" alt="pandafxp" title="pandafxp"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/pandafxp">pandafxp</a></li>
+                        <li class="time">2015-06-08 16:31</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>339</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/pipisorry/article/details/36380669"  target="_blank" strategy="BlogCommendFromCsdn_1">编程之美读书笔记1.2——中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        问题：题目：下过中国象棋的朋友都知道，双方的“将”和“帅”相隔遥远，并且它们不能照面。在象棋残局中，许多高手能利用这一规则走出精妙的杀招。假设棋盘上只有“将”和“帅”二子（如图1-3所示）（为了下面叙...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/pipisorry" target="_blank" strategy="BlogCommendFromCsdn_1"><img src="http://avatar.csdn.net/5/5/8/2_pipisorry.jpg" alt="pipisorry" title="pipisorry"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/pipisorry">pipisorry</a></li>
+                        <li class="time">2014-07-02 10:16</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1132</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u014110320/article/details/53292784"  target="_blank" strategy="BlogCommendFromCsdn_2">编程之美读书笔记： 1.2 中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        中国象棋将帅问题： 
+在一把象棋的残局中，象棋双方的将帅不可以相见，即不可以在中间没有其他棋子的情况下在同一列出现。而将、帅各被限制在己方的3*3的格子中运动。相信大家都非常熟悉象棋的玩法吧，这里就不...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u014110320" target="_blank" strategy="BlogCommendFromCsdn_2"><img src="http://avatar.csdn.net/8/1/2/2_u014110320.jpg" alt="u014110320" title="u014110320"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u014110320">u014110320</a></li>
+                        <li class="time">2016-11-22 22:27</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>85</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/lierjin312158950/article/details/48440835"  target="_blank" strategy="BlogCommendFromCsdn_3">编程之美1.2中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        今天认真把中国象棋将帅问题看了一遍，确实如其它同学所说—不难，只要自己理解了其中的思想，其他的只是实现方法不一样而已。下面，我也捋一捋自己的想法。
+其实分析到用九个数字表示格点位置是关键，这样只需要用...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/lierjin312158950" target="_blank" strategy="BlogCommendFromCsdn_3"><img src="http://avatar.csdn.net/1/A/3/2_lierjin312158950.jpg" alt="lierjin312158950" title="lierjin312158950"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/lierjin312158950">lierjin312158950</a></li>
+                        <li class="time">2015-09-14 16:28</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>212</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/caroline_wendy/article/details/20149075"  target="_blank" strategy="BlogCommendFromCsdn_4">编程之美 1.2 中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        编程之美 1.2 中国象棋将帅问题
+
+
+版权所有, 禁止转载, 如有需要, 请站内联系.
+本文地址:&#160;http://blog.csdn.net/caroline_wendy
+
+
+题目: A表示“将”,...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u012515223" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/7/3/E/2_u012515223.jpg" alt="u012515223" title="u012515223"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u012515223">u012515223</a></li>
+                        <li class="time">2014-02-28 18:31</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2900</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/iam_lain/article/details/46662515"  target="_blank" strategy="BlogCommendFromCsdn_5">《编程之美》1.2 中国象棋将帅问题 学习笔记</a></h2>
+                    <div class="summary">
+                        《编程之美》1.2 中国象棋将帅问题  学习笔记
+书中给出了三种解法分别进行知识点整理
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/iam_lain" target="_blank" strategy="BlogCommendFromCsdn_5"><img src="http://avatar.csdn.net/D/B/1/2_iam_lain.jpg" alt="iam_lain" title="iam_lain"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/iam_lain">iam_lain</a></li>
+                        <li class="time">2015-06-27 16:52</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>243</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u012605629/article/details/41291219"  target="_blank" strategy="BlogCommendFromCsdn_6">编程之美 1.2 中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        中国象棋将帅问题
+问题描述：
+在中国象棋规则中，将和帅规定只能在田字格中移动，且将和帅是不能碰面的，
+请求解出所有可能的符合规则的将帅位置。
+
+
+限制条件：
+只能使用一个字节的变量
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u012605629" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/F/C/0/2_u012605629.jpg" alt="u012605629" title="u012605629"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u012605629">u012605629</a></li>
+                        <li class="time">2014-11-19 22:31</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>337</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/cugfjp/article/details/13569177"  target="_blank" strategy="BlogCommendFromCsdn_7">编程之美 1.2 中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        /*
+编程之美1.2 
+中国象棋将帅问题：利用1个字节来输出将帅的合法位置
+*/
+/*
+	方法一：位运算
+*/
+
+#include 
+ 
+using namespace std;
+
+#define ...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/cugfjp" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/1/D/2/2_cugfjp.jpg" alt="cugfjp" title="cugfjp"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/cugfjp">cugfjp</a></li>
+                        <li class="time">2013-10-29 20:06</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>398</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/congduan/article/details/7058835"  target="_blank" strategy="BlogCommendFromCsdn_8">《编程之美》学习笔记——中国象棋将帅问题</a></h2>
+                    <div class="summary">
+                        应该说这是一个很简单的问题，但是想巧妙解答还是得费点周折，以下是原书提供的三种方法：
+
+======================================================...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/xiangshimoni" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/E/8/9/2_xiangshimoni.jpg" alt="xiangshimoni" title="xiangshimoni"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/xiangshimoni">xiangshimoni</a></li>
+                        <li class="time">2011-12-10 01:07</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2234</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/SixSix66/733400" target="_blank" strategy="BlogCommendFromCsdn_9"><img class="maxwidth" src="http://download.csdn.net/images/minetype/pdf.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/SixSix66/733400" target="_blank" strategy="BlogCommendFromCsdn_9">《编程之美》中国象棋将帅问题</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2008-10-29 23:59</li>
+					  <li class="visited_num fileSize">319KB</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/SixSix66/733400">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">1</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

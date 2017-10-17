@@ -1,0 +1,1296 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/53010800"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '53010800';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="1.前言:
+看到这篇标题，没有学过快排的人自然是不知道Partition函数的意思和作用，这里附上学习的连接Lantian的快排总结
+我们现在都是被快排蒙蔽了双眼，没有意识到快最核心的划分函数Partition,当然Partition函数也就不止于快排这里，本文就从多方面来为展示Partition函数的本质和扩展作用
+2.快排中的Partition及其优化：
+在算法导论中我们对Partit" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>快排光芒下被忽视的Partition函数 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">快排光芒下被忽视的Partition函数</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年11月02日 19:33:53</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">1184</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>1.前言:</h2>
+<div>看到这篇标题，没有学过快排的人自然是不知道Partition函数的意思和作用，这里附上学习的连接<a target="_blank" href="http://blog.csdn.net/ltyqljhwcm/article/details/52145746?locationNum=3&amp;fps=1">Lantian的快排总结</a></div>
+<div>我们现在都是被快排蒙蔽了双&#30524;，没有意识到快最核心的划分函数Partition,当然Partition函数也就不止于快排这里，本文就从多方面来为展示Partition函数的本质和扩展作用</div>
+<h2>2.快排中的Partition及其优化：</h2>
+<div>在算法导论中我们对Partition函数的定义是这样的：</div>
+<div>
+<p style="margin:0in 0in 10pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:18px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">PARTITION(A, p, r)</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">x&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">=&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">A[r]</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">选择最后一个元素作为比较元素</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">i&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">=
+ p&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">–</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">&nbsp;1</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">这个慢速移动下标必须设定为比最小下表</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">p</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">小</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">1</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">，否则两个元素的序列比如</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">2</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">，</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">1</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">无法交换</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Microsoft YaHei'; border:0px; outline:0px; font-size:13.3333px; vertical-align:baseline; background:transparent"><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">for&nbsp;</span></span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">j&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">=&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">p&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Microsoft YaHei'; border:0px; outline:0px; font-size:13.3333px; vertical-align:baseline; background:transparent"><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">to&nbsp;</span></span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">r-1</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">遍历每个元素</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">{</span></p>
+<p style="margin:0in 0in 0pt 0.5in; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Microsoft YaHei'; border:0px; outline:0px; font-size:13.3333px; vertical-align:baseline; background:transparent"><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">if
+ (</span></span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">A[j] &lt;=</span>&nbsp;<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">x)</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">比较</span></p>
+<p style="margin:0in 0in 0pt 0.5in; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Microsoft YaHei'; border:0px; outline:0px; font-size:13.3333px; vertical-align:baseline; background:transparent"><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">{</span></span></p>
+<p style="margin:0in 0in 0pt 1in; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">i&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">=&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">i&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">&#43;&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">1</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">移动慢速下标</span></p>
+<p style="margin:0in 0in 0pt 1in; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">Exchange&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">A[i]&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">with&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">A[j
+ ]</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">交换</span></p>
+<p style="margin:0in 0in 0pt 0.5in; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">}</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">}</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">Exchange&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">A[i&#43;1]&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">with&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">A[r]</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">交换</span></p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+&nbsp;</p>
+<p style="margin:0in 0in 0pt; padding-top:0px; padding-bottom:0px; font-family:Verdana,Arial,Helvetica,sans-serif; border:0px; outline:0px; font-size:12px; vertical-align:baseline; color:rgb(102,102,102); line-height:26px; background:rgb(245,250,254)">
+<span style="margin:0px; padding:0px; font-family:'Microsoft YaHei'; border:0px; outline:0px; font-size:13.3333px; vertical-align:baseline; background:transparent"><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">return&nbsp;</span></span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">i&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">&#43;&nbsp;</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">1</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">//</span><span style="margin:0px; padding:0px; font-family:'Comic Sans MS'; border:0px; outline:0px; font-size:14pt; vertical-align:baseline; line-height:1.5; background:transparent">返回分割点</span></p>
+这里我就不再过多的赘述算法的具体细节，我在这里强调的是对快排中的Partition的优化</div>
+<div>首先，在原本的算法中，假如我们已经选定了一个枢纽元，那么对于所有的比枢纽元小的元素我们都执行了swap操作</div>
+<div>这是非常的低效的</div>
+<div>在这里我们引入双向的Partition算法，在双向的算法中，我们对于比枢纽院小的元素并不是都执行了swap操作，只有数组右边的一部分的比枢纽元小的元素我们才执行了swap操作，大大减少了swap操作的次数从而降低时间复杂度</div>
+<div><pre code_snippet_id="1963331" snippet_file_name="blog_20161102_1_3164489"  name="code" class="cpp">含有Partition函数的快速排序，标准算法导论上的描述实现 
+#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#define N 1005
+
+using namespace std;
+
+int data[N];
+int number;
+
+void init_data()
+{
+	scanf(&quot;%d&quot;,&amp;number); 
+	for(int i=0;i&lt;number;i++) scanf(&quot;%d&quot;,&amp;data[i]);
+}
+
+void partition(int left,int&amp; mid,int right)
+{
+	int i=left-1;
+	int j=left;
+	int var=data[right];
+	while(j&lt;right)
+	{
+		if(data[j]&lt;var)
+		{
+			i++;
+			int temp=data[i];
+			data[i]=data[j];
+			data[j]=temp;
+		}
+		j++;
+	}
+	i++;
+	int temp=data[i];
+	data[i]=var;
+	data[right]=temp;
+	mid=i;
+	return ;
+}
+
+void quicksort(int left,int right)
+{
+	if(left&gt;=right) return ;
+	else
+	{
+		int mid;
+		partition(left,mid,right);
+		quicksort(left,mid-1);
+		quicksort(mid+1,right); 
+		return ;
+	} 
+}
+
+void print()
+{
+	for(int i=0;i&lt;number;i++) printf(&quot;%d &quot;,data[i]);
+	printf(&quot;\n&quot;);
+}
+
+int main()
+{
+	init_data();
+	quicksort(0,number-1);
+	print();
+	return 0;
+}</pre>双向的Partition我在我的连接中已经写明了</div>
+<div>你们可能对这一点还是有所怀疑，我们来做一做实验：</div>
+<div>注意，一下的代码是Python编写的，为了方便实验<br>
+<pre code_snippet_id="1963331" snippet_file_name="blog_20161102_2_2750569"  name="code" class="python">import random
+from time import *
+global data
+data=[]
+def partition_1():
+    global data
+    i=-1
+    j=0
+    var=data[len(data)-1]
+    while j&lt;len(data)-1:
+        if data[j]&lt;var:
+            i+=1
+            temp=data[i]
+            data[i]=data[j]
+            data[j]=temp
+        j+=1
+    i+=1
+    temp=data[i]
+    data[i]=var
+    data[len(data)-1]=temp
+
+def partition_2():
+    global data
+    i=0
+    j=len(data)-1
+    temp=data[0]
+    while i!=j:
+        while i&lt;j and data[j]&gt;=temp:
+            j-=1
+        while i&lt;j and data[i]&lt;=temp:
+            i+=1
+        if i!=j:
+            t=data[i]
+            data[i]=data[j]
+            data[j]=t
+    data[0]=data[i]
+    data[i]=temp
+
+def test_init():
+    global data
+    data=eval(input())
+
+def init_data():
+    global data
+    for i in range(1000000):
+        data.append(random.randint(-100000,100000))
+
+init_data()
+time1=clock()
+partition_1()
+print(&quot;单向partition耗时:%f&quot;%(clock()-time1))
+time1=clock()
+partition_2()
+print(&quot;双向partition耗时:%f&quot;%(clock()-time1))
+#test_init()
+#partition_2()
+</pre>实验结果：</div>
+<div>单向partition耗时:0.833947<br>
+双向partition耗时:0.277176<br>
+很显然，在数据量越来越大的时候，我们的双向Partition与单向的Partition比是非常的高效的</div>
+<h2>3.Top-k Question:</h2>
+<div>对于Top-k问题已经被问烂了，解法也是很多的</div>
+<div>当然我们优秀的解法有：</div>
+<div>O(n*logk)的堆排序实现</div>
+<div>BST/SBT二叉查找树，自平衡二叉查找树实现:忽略建树时间的话，我们的而时间复杂度是O(logn)</div>
+<div>现在我们完全可以利用Partition函数来进行实现：</div>
+<div>对于Partition函数的该操作的实现，很多人又叫这种方法快速选择算法（注意选择之后得到的不是有序的数组只是一个有了划分的数组）</div>
+<div>算法的本质是通过每次遍历Partition分组操作之后确定Tok-k的位置所在，然后递归查找所在的那一边区域（相当于是BST或者二分查找的思路）</div>
+<div>时间复杂度是O(n)</div>
+<div>时间复杂度的推导：</div>
+<div><pre code_snippet_id="1963331" snippet_file_name="blog_20161102_3_384018"  name="code" class="cpp">T(n)=O(n)+T(n/2)
+...log2n=k次迭代
+T(n)=O(n)+O(n/2)...O(1)
+T(n)=O(n*(1+1/2+...1/n))=O(2*n-2)</pre><br>
+</div>
+<div><pre code_snippet_id="1963331" snippet_file_name="blog_20161102_4_4113771"  name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#define N 1005
+
+using namespace std;
+
+int data[N];
+int number;
+int k;
+int pos=-1;   //最终确定的地址 
+
+void print()
+{
+	for(int i=0;i&lt;=pos;i++) printf(&quot;%d &quot;,data[i]);
+	printf(&quot;\n&quot;);
+}
+
+void init_data()
+{
+	scanf(&quot;%d%d&quot;,&amp;number,&amp;k);
+	for(int i=0;i&lt;number;i++) scanf(&quot;%d&quot;,&amp;data[i]);
+}
+
+void quickfind(int left,int right,int n)
+{
+	if(left&gt;=right) return ;
+	else
+	{
+		int i=left-1;
+		int j=left;
+		int var=data[right];
+		while(j&lt;right)
+		{
+			if(data[j]&lt;var)
+			{
+				i++;
+				int temp=data[i];
+				data[i]=data[j];
+				data[j]=temp;
+			}
+			j++;
+		}
+		int temp=data[i+1];
+		data[i+1]=data[j];
+		data[right]=temp;
+		if(i+1-left+1==n)
+		{
+			pos=i+1;
+			return ;
+		} 
+		else if(i+1-left+1&lt;n) quickfind(i+2,right,n-(i+1-left+1));
+		else quickfind(left,i,n);
+	}
+}
+</pre><br>
+<h2>4.Dutch national flag problem</h2>
+</div>
+<div>荷兰三色旗问题，这种问题是用Partition的典型例子</div>
+<div>定义一个数组序列有红白蓝三种颜色，我们要求尽可能快的对数组进行排序，是的相同颜色的元素相邻，并且整体存在红白蓝额顺序</div>
+<div>本题是Partition函数的扩展应用，时间复杂度和空间复杂度处理的非常的优秀</div>
+<div>算法详见：<a target="_blank" href="http://blog.csdn.net/ltyqljhwcm/article/details/53010521">Leetcode-75</a></div>
+<div><pre code_snippet_id="1963331" snippet_file_name="blog_20161102_5_2620055"  name="code" class="cpp">/*
+Partiton函数的作用 
+简易模拟 Dutch national flag problem */ 
+#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#define N 1005
+
+using namespace std;
+
+//0&lt;1&lt;2为例 
+int data[N];
+int number;
+
+void init_data()
+{
+	scanf(&quot;%d&quot;,&amp;number);
+	for(int i=0;i&lt;number;i++) scanf(&quot;%d&quot;,&amp;data[i]);
+}
+
+void print()
+{
+	for(int i=0;i&lt;number;i++) printf(&quot;%d &quot;,data[i]);
+	printf(&quot;\n&quot;);
+}
+
+void swap(int x,int y,int atom)
+{
+	int temp;
+	if(atom==0)
+	{
+		temp=data[x];
+		data[x]=data[y];
+		data[y]=temp;
+	}
+	else
+	{
+		temp=data[x];
+		data[x]=data[y];
+		data[y]=temp;
+	}
+}
+
+void sortColors() {
+    int i=-1;
+    int j=0;
+    int k=number;
+    while(j&lt;k)
+    {
+        if(data[j]==0)
+        {
+            i++;
+            int temp=data[i];
+            data[i]=data[j];
+            data[j]=temp;
+        }
+        else if(data[j]==2)
+        {
+            k--;
+            while(j&lt;k&amp;&amp;data[k]==2) k--;
+            int temp=data[j];
+            data[j]=data[k];
+            data[k]=temp;
+            if(data[j]==0)
+            {
+                i++;
+                int temp=data[i];
+                data[i]=data[j];
+                data[j]=temp;
+            }
+        }
+        j++;
+    }
+}
+
+int main()
+{
+	init_data();
+	print();
+	sortColors();
+	print();
+	return 0;
+}</pre>
+<h2>5总结：</h2>
+<div>Partition函数真的是非常的强大，我们如果只是了解快排的话真的是没有学透Partition函数的精髓，也没有学到快排的算法的本质</div>
+<br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=53010800" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/jason_ranger/article/details/52615109"  target="_blank" strategy="BlogCommendFromBaidu_0">主成分个数 - 快排中partition的深入理解</a></h2>
+                    <div class="summary">
+                        算法课课后习题对深化理解某一算法确实很有帮助.. 这一次课程学习了快速排序，每一次排序都涉及一个partition操作，也就是把数组分为比pivot大的部分，和比pivot小的部分。
+这个题目是在线...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Jason_Ranger" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/8/7/D/2_jason_ranger.jpg" alt="Jason_Ranger" title="Jason_Ranger"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Jason_Ranger">Jason_Ranger</a></li>
+                        <li class="time">2016-09-22 00:21</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>605</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/songshimvp1/article/details/51605262"  target="_blank" strategy="BlogCommendFromBaidu_1">快速排序算法(Partition函数)分析与拓展</a></h2>
+                    <div class="summary">
+                        零、前言——二分查找 &#160;&#160;&#160;&#160;&#160;&#160; 
+
+条件：如果数组是有序数组、部分有序数组、或者局部有序数组，在这类数组中进行查找时，二分查找较为常用。时间复杂度O(logN)。二分查找的主要思路：设定两个指针s...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/songshiMVP1" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/6/D/C/2_songshimvp1.jpg" alt="songshiMVP1" title="songshiMVP1"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/songshiMVP1">songshiMVP1</a></li>
+                        <li class="time">2016-06-08 10:33</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2017</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/gaopu12345/article/details/50849360"  target="_blank" strategy="BlogCommendFromBaidu_2">快排中的partition函数</a></h2>
+                    <div class="summary">
+                        //p，r分别是这个要排序的区段的下标
+int partion(int *arElem, int p, int r)
+{
+  int x = arElem[r];
+  int i = p,j = p;...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/gaopu12345" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/7/3/0/2_gaopu12345.jpg" alt="gaopu12345" title="gaopu12345"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/gaopu12345">gaopu12345</a></li>
+                        <li class="time">2016-03-10 19:16</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1883</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/johnlee175/article/details/45561855"  target="_blank" strategy="BlogCommendFromCsdn_3">快排中partition函数-java</a></h2>
+                    <div class="summary">
+                        快排中partition函数非常有用, 其两种实现很难在java这种有jvm干预的情况下测出哪个更优秀, 不知道是不是测试手段比较low? 总的来说, partition2交换的次数少一下. 对算法的...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/kslinabc" target="_blank" strategy="BlogCommendFromCsdn_3"><img src="http://avatar.csdn.net/E/2/B/2_kslinabc.jpg" alt="kslinabc" title="kslinabc"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/kslinabc">kslinabc</a></li>
+                        <li class="time">2015-05-07 15:30</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>394</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qing0706/article/details/50559660"  target="_blank" strategy="BlogCommendFromCsdn_4">排序-快速排序-最终优化(插入排序、中位数、三向partition)-以后快排就用这个了</a></h2>
+                    <div class="summary">
+                        package xwq.sort;import xwq.util.In;
+import xwq.util.StdOut;/**
+ * 使用
+ * 1、插入排序
+ * 2、三取样获取基准值
+ * 3、三...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qing0706" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/5/6/7/2_qing0706.jpg" alt="qing0706" title="qing0706"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qing0706">qing0706</a></li>
+                        <li class="time">2016-01-22 09:19</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>155</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qq_21034239/article/details/53926195"  target="_blank" strategy="BlogCommendFromCsdn_5">基于快排的算法面试题partition</a></h2>
+                    <div class="summary">
+                        常见算法找到无序数组的第k个，采用的方法： 
+ 利用快排的思想，每个找到下标index，比较 
+ 基本思想： 
+ 首先选取数组第一个元素temp，然后经过一次循环，找到index下标，使得前面的值比该...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qq_21034239" target="_blank" strategy="BlogCommendFromCsdn_5"><img src="http://avatar.csdn.net/D/6/3/2_qq_21034239.jpg" alt="qq_21034239" title="qq_21034239"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qq_21034239">qq_21034239</a></li>
+                        <li class="time">2016-12-29 12:17</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>89</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/joson793847469/article/details/52738983"  target="_blank" strategy="BlogCommendFromCsdn_6">快速排序过程、partition应用、三种快排四种优化、Java实现</a></h2>
+                    <div class="summary">
+                        快速排序过程基本思想是分治的思想,说到分治，就应该想到和递归是分不开的。有些书上会使用关键字比较的表述，有些书上会直接使用记录比较表述，这两种说法是两个维度上的说法。这里序列元素的关键字属于记录的一部...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/joson793847469" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/4/B/B/2_joson793847469.jpg" alt="joson793847469" title="joson793847469"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/joson793847469">joson793847469</a></li>
+                        <li class="time">2016-10-05 15:32</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2083</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qdujunjie/article/details/43795575"  target="_blank" strategy="BlogCommendFromCsdn_7">一些被忽视的 PHP 函数（整理）</a></h2>
+                    <div class="summary">
+                        来自：http://www.gracecode.com/posts/3013.html
+
+
+
+
+
+
+
+真的是不用不知道，其实我们熟悉的 PHP 还有很多好东西没有发掘。&#160;看到这篇文章&#160;...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qdujunjie" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/E/D/0/2_qdujunjie.jpg" alt="qdujunjie" title="qdujunjie"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qdujunjie">qdujunjie</a></li>
+                        <li class="time">2015-02-13 16:34</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>306</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/zhumengstyle/article/details/73527946"  target="_blank" strategy="BlogCommendFromCsdn_8">php那些容易被忽视的有用函数</a></h2>
+                    <div class="summary">
+                        用get_defined_contstants(),可以获得所有已定义的常量列表;
+phpinfo()，显示php服务器的配置信息及扩展的开启情况。
+glob(),返回一个包含有匹配文件／目录的数组。...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/zhumengstyle" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/A/4/2/2_zhumengstyle.jpg" alt="zhumengstyle" title="zhumengstyle"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/zhumengstyle">zhumengstyle</a></li>
+                        <li class="time">2017-06-21 11:32</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1387</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/ripyueeq/2368092" target="_blank" strategy="BlogCommendFromCsdn_9"><img class="maxwidth" src="http://download.csdn.net/images/minetype/unkonw.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/ripyueeq/2368092" target="_blank" strategy="BlogCommendFromCsdn_9">快排c语言代码，有测试函数。。。</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2010-05-18 22:09</li>
+					  <li class="visited_num fileSize">718B</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/ripyueeq/2368092">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">4</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

@@ -1,0 +1,864 @@
+<html><head><meta charset="utf8"></head><body><article>
+ <h1 class="csdn_top">
+  从BST到SBT（田劲峰老师论文读后感）6.
+ </h1>
+ <div class="article_content csdn-tracking-statistics" data-dsm="post" data-mod="popu_307" id="article_content">
+  <h2>
+   1.致歉：
+  </h2>
+  <div>
+   最近事务过于繁多，更新的次数变得缓慢了不少，但是我至少在继续，继续努力
+  </div>
+  <div>
+   之后，由于田劲峰老师的论文的证明非常严谨，我看了很长时间仍然是不得精华，只能是将作为初学者该掌握的都掌握了，至于证明正确性和复杂度，实在是难以参透，日后等学习算法导论的时候，有能力再回来看证明，并且，终于可以开始步入正轨了
+  </div>
+  <h2>
+   2.什么是BST：
+  </h2>
+  <div>
+   BST全称是二叉查找树，字面意思很显而易见，这是我们为了查找而开发的一种优秀的查找数据结构
+  </div>
+  <div>
+   如果还没有理解过二叉查找树，
+   <a href="http://blog.csdn.net/ltyqljhwcm/article/details/52081538" target="_blank">
+    欢迎点击这里
+   </a>
+   来进行初步学习
+  </div>
+  <div>
+   <br/>
+  </div>
+  <div>
+   在这里我们先进行二叉查找树的一些简要的解析，进而引出我们的主要内容——自平衡二叉树之一的SBT
+  </div>
+  <div>
+   <br/>
+  </div>
+  <div>
+   性质：
+  </div>
+  <div>
+   1.是一颗空树
+  </div>
+  <div>
+   2.非空树并且左子树所有的节点的数据都小于根节点
+  </div>
+  <div>
+   非空树并且右子树所有的节点的数据都大于根节点
+  </div>
+  <div>
+   3.BST内不存在相同键值的恋歌节点
+  </div>
+  <div>
+   4.根节点的左右子树都是BST
+  </div>
+  <div>
+   <br/>
+  </div>
+  <div>
+   优劣：
+  </div>
+  <div>
+   优点：查找的时间复杂度：O(logn)非常高效的查找速度
+  </div>
+  <div>
+   缺点：对于存在部分有序的输入序列，会导致BST偏向于偏树，进而使得树的深度逐渐变大，导致查找速度不断退化，最坏的退化情况是退化成双向链表
+  </div>
+  <div>
+   <br/>
+  </div>
+  <div>
+   引出：
+  </div>
+  <div>
+   对于BST的缺点，我们需要克服，我们最终需要的而是一种技能高效的查找数据又可以避免特殊的输入序列而导致的BST 的退化，所以这时候，我们引入了一种新的数据结构——自平衡二叉树，通过不同的操作，是的，这种进化过得BST可以拥有自动调节树高的能力，是的我们查找的时间复杂度稳定在O(logn)附近，避免特殊的序列而差生的退化
+  </div>
+  <div>
+   <br/>
+  </div>
+  <div>
+   在众多的自平衡二叉树中——相对于好实现的，在算法竞赛中常用的要数我国大神陈启峰发明的SBT（size balance tree），相对于treap，红黑树，splay，AVL等一些自平衡二叉树来说，SBT好实现，并且其中的核心操作只有Maintain操作，Maintain操作的高效和灵活性成为SBT流行的原因
+  </div>
+  <h2>
+   3.SBT的ADT
+  </h2>
+  <div>
+   性质：
+  </div>
+  <div>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_1_5485322">1.size[left[p]]&gt;=size[left[right[p]]]/size[right[right[p]]]
+2.size[right[p]]&gt;=size[left[left[p]]]/size[right[left[p]]]</pre>
+  </div>
+  <h3>
+   1.数据结构的选择：
+  </h3>
+  <div>
+   <span style="font-size:13.3333px">
+    SBT的实现来说，经过本博主的长时间的考虑，私以为，SBT用数组来实现是非常容易并且好考虑的，通过自己亲自实现链式的SBT发现，非常困难，而且对于算法的理解有所影响，所以说，我们这里采用数组来实现，在这里我们在C++代码中采用了引用来进行传址，这一点是非常的核心的，我们是必须要这么做的，在下面的代码中我会讲解这一点的必要性
+   </span>
+   <br/>
+  </div>
+  <h3>
+   <span style="font-size:13.3333px">
+    2.ADT
+   </span>
+  </h3>
+  <div>
+   成员变量：
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    //首先我们虽然不列举出来，但是实际上，在我们思考的时候我们要注意，我们要抽象出一段假想的空间，这一段空间是顺序的1-N，代表我们的输入的顺序
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    left[i]
+    <span style="white-space:pre">
+    </span>
+    第i次输入的节点的左节点的输入的次序（注意联系上面的那段假想的数据空间）
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    right[i]
+    <span style="white-space:pre">
+    </span>
+    第i次输入的节点的右节点的输入的次序
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    size[i]
+    <span style="white-space:pre">
+    </span>
+    第i次输入的节点为根的子树的节点的总数目，这个size域是SBT非常重要的核心数据
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    key[i]
+    <span style="white-space:pre">
+    </span>
+    第i次输入的节点的键值
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    num
+    <span style="white-space:pre">
+    </span>
+    该SBT的节点总数
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    root
+    <span style="white-space:pre">
+    </span>
+    该SBT的根节点的输入的次序
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    //我们根据不同的操作获得的输入次序为自变量，可以轻松的得到该输入次序的输入元素的键值和size域
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    <br/>
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    函数：
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    最核心的两个：(根节点子树左右旋操作)
+   </span>
+  </div>
+  <div>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_2_959963">left_rotation(int&amp;)
+right_rotation(int&amp;)</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_3_9465464">Maintain(int&amp;,bool) //O(1)均摊时间复杂度</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_4_4831421">insert(int&amp;,int);</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_5_7448360">delete_(int&amp;,int,bool);</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_6_2257910">find(int&amp;,int)</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_7_2399613">select(int&amp;,int)</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_8_2541317">after(int&amp;,int)</pre>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_9_9826101">pre(int&amp;,int)</pre>
+   <h3>
+    3.核心旋转操作解析：
+   </h3>
+   <div>
+    <img alt="" src="http://img.blog.csdn.net/20131129201336156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXVybXVyZWQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+    <br/>
+   </div>
+   <div>
+    1.左旋：
+   </div>
+   <div>
+    <br/>
+   </div>
+   先来看看左旋操作，顾名思义，左旋我们相当于是把y提高，把x压下去，目的是可能y的size域过大，将y的比较对象降低（之后哦我们呢会看到，现在不理解这句话没关系）
+  </div>
+  <div>
+   其实这里的旋转操作就相当于是一系列的指针的操作
+  </div>
+  <div>
+   代码如下：
+  </div>
+  <div>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_10_8015958">void SBT::left_rotation(int&amp; p)  //我们已经指定了x指针，要进行操作还需要指向y的指针
+{
+	int k=right[p];   //确定指向y的指针k
+	right[p]=left[k];    //x右儿子指向b
+	left[k]=p;    //y的左儿子指向x
+	size[k]=size[p];      //因为k这里操作完之后，相当于是y取代了x的位置，所以说，size域也应该是没变之前的x的size域
+	size[p]=size[left[p]]+size[right[p]]+1;    //理所应当
+	p=k;     //这里的转换牵扯到引用
+}</pre>
+   ps：在这里，我对引用的必要性做一下解释，如果没有用引用，p在这里只是一个随机变量，p的任何改变是不会影响到上一层调用函数的形参表中的值得，所以我们之后需要将上一层的形参表中的指针的指向同步修改，就必须采用引用
+  </div>
+  <div>
+   <br/>
+  </div>
+  <div>
+   2.右旋：
+  </div>
+  <div>
+   原理同左旋：
+  </div>
+  <div>
+   代码如下：
+  </div>
+  <div>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_11_9237457">void SBT::right_rotation(int&amp; p)
+{
+	int k=left[p];
+	left[p]=right[k];
+	right[k]=p;
+	size[k]=size[p];
+	size[p]=size[left[p]]+size[right[p]]+1;
+	p=k;
+}</pre>
+   <h3>
+    4.最具活力的Maintain操作
+   </h3>
+   <div>
+    maintain操作就是根据不同的不平衡情况从而采取不同的一系列的旋转操作
+   </div>
+   <div>
+    首先明确一点，在不平衡以前，始终是一颗SBT
+   </div>
+   <div>
+    1.Case1：
+   </div>
+   <div>
+    <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_12_1015364">size[left[left[p]]]&gt;size[right[p]]</pre>
+    <div>
+     <img alt="" src="http://img.blog.csdn.net/20131129202211734?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXVybXVyZWQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+     <br/>
+    </div>
+   </div>
+   <div>
+    <br/>
+    这里就是size[A]&gt;size[R]
+   </div>
+   <div>
+    首先这里A与R比较，我们为了保持平衡，通过右旋操作把A拉高
+   </div>
+   <div>
+    <img alt="" src="http://img.blog.csdn.net/20131129203355843?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXVybXVyZWQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+    <br/>
+   </div>
+   这时候A是与B和R比较，因为size[A]&gt;size[R]，所以说只有两种情况不平衡
+  </div>
+  <div>
+   1.size[A]&lt;size[B]
+  </div>
+  <div>
+   2.size[B]&lt;size[C]或者size[B]&lt;size[D]
+   <br/>
+  </div>
+  <div>
+   有人这里可能会问，有没有可能
+   <span style="font-size:13.3333px">
+    size[B]&gt;=size[C]，size[B]&gt;=size[D]同时不成立，在这里通过反证法证明是不会的
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    证明如下：
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+   </span>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_13_2760251">条件：
+size[A]&gt;size[R]
+size[B]&lt;size[C]
+size[B]&lt;size[D]
+size[B]&gt;size[left[A]]   //这两点的原因是，在不平衡之前，原树是一颗SBT
+size[B]&gt;size[right[A]]
+
+结论：
+size[left[A]]+size[right[A]]+1&lt;size[C]+size[D]+1=size[R]
+=&gt;size[A]&lt;size[R]
+与条件相违背，说明两种情况不能同时成立</pre>
+   之后我们再次进行递归定义维护Maintain(T)，因为Maintain(T)维护之后，L树的右儿子的左右子树就变得不可预料了，我们不知道其和A的size关系，所以说，还要再次用Maintain(L)维护以T为根的子树，之后维护停止，所有的操作都是常数时间的
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    <br/>
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+    2.Case2:
+   </span>
+  </div>
+  <div>
+   <span style="font-size:13.3333px">
+   </span>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_14_2901955">size[right[left[p]]]&gt;size[right[p]]</pre>
+   <img alt="" src="http://img.blog.csdn.net/20131129203745125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXVybXVyZWQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+   <br/>
+   <br/>
+   在这里就是size[B]&gt;size[R]
+  </div>
+  <div>
+   首先我们左旋，将不平衡性转化到Case1的情况
+  </div>
+  <div>
+   <img alt="" src="http://img.blog.csdn.net/20131129203857906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXVybXVyZWQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+   <br/>
+  </div>
+  <div>
+   之后同Case1,先右旋：
+  </div>
+  <div>
+   <img alt="" src="http://img.blog.csdn.net/20131129203924718?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXVybXVyZWQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"/>
+   <br/>
+  </div>
+  <div>
+   因为多次操作之后边的情况过于复杂，我们直接先Maintain(L),再Maintain(T),然后Maintain(B)
+  </div>
+  <div>
+   3.Case3,Case4和Case1,2是镜像对称，这里操作原理都是一样的，就不过多赘述了
+  </div>
+  <h3>
+   5.其他有用的操作：
+  </h3>
+  <div>
+   在之后附上的代码中解析
+  </div>
+  <div>
+   <br/>
+  </div>
+  <h2>
+   4.代码：
+  </h2>
+  <div>
+   <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160818_15_3251402">#include"iostream"
+#include"cstdio"
+#include"cstring"
+#include"cstdlib"
+#define N 1000
+
+using namespace std;
+
+class SBT
+{
+	public:
+		SBT()
+		{
+			memset(size,0,sizeof(size));
+			memset(left,0,sizeof(left));
+			memset(right,0,sizeof(right));
+			memset(key,0,sizeof(key));
+			num=root=0;
+		}
+		void left_rotation(int&amp;);
+		void right_rotation(int&amp;);
+		void insert(int&amp;,int);
+		int delete_(int&amp;,int,bool);   //没有找到要烧出的元素，返回-1，否则返回被删除的点的 
+		void preorder(int);
+		void midorder(int);
+		void maintain(int&amp;,bool);
+		int&amp; returnroot()
+		{
+			return root;
+		}
+		int find(int&amp;,int);   //返回查找到的点的输入的序号，根据序号可以得到该点的size以及key信息 
+		int select(int&amp;,int);
+		int after(int&amp;,int);
+		int pre(int&amp;,int);
+	private:
+		int size[N];
+		int left[N];
+		int right[N];
+		int key[N];
+		int num;
+		int root;
+};
+
+void SBT::left_rotation(int&amp; p)
+{
+	int k=right[p];
+	right[p]=left[k];
+	left[k]=p;
+	size[k]=size[p];
+	size[p]=size[left[p]]+size[right[p]]+1;
+	p=k;
+}
+
+void SBT::right_rotation(int&amp; p)
+{
+	int k=left[p];
+	left[p]=right[k];
+	right[k]=p;
+	size[k]=size[p];
+	size[p]=size[left[p]]+size[right[p]]+1;
+	p=k;
+}
+
+void SBT::maintain(int&amp; p,bool judge)
+{
+	if(judge==false)
+	{
+		if(size[left[left[p]]]&gt;size[right[p]]) right_rotation(p);
+		else
+		{
+			if(size[right[left[p]]]&gt;size[right[p]]) 
+			{
+				left_rotation(left[p]);
+				right_rotation(p);
+			}
+			else return ;
+		}
+	}
+	else
+	{
+		if(size[right[right[p]]]&gt;size[left[p]]) right_rotation(p);
+		else
+		{
+			if(size[left[right[p]]]&gt;size[left[p]])
+			{
+				right_rotation(right[p]);
+				left_rotation(p);
+			}
+			else return ;
+		}
+	}
+	maintain(left[p],false);
+	maintain(right[p],true);
+	maintain(p,false);
+	maintain(p,true);
+}
+
+void SBT::insert(int&amp; p,int k)
+{
+	if(p==0)
+	{
+		key[p=++num]=k;
+		size[num]=1;
+	}
+	else
+	{
+		size[p]++;
+		if(k&lt;key[p]) insert(left[p],k);
+		else insert(right[p],k);
+	}
+	if(p!=0) maintain(p,k&gt;=key[p]);
+}
+
+int SBT::delete_(int&amp; p,int k,bool judge)
+{
+	if(key[p]==k) judge=1;
+	if(key[p]==k||(left[p]==0&amp;&amp;k&lt;key[p])||(right[p]==0&amp;&amp;k&gt;key[p])) 
+	{
+		if(((left[p]==0&amp;&amp;k&lt;key[p])||(right[p]==0&amp;&amp;k&gt;key[p]))&amp;&amp;judge==0)   
+		{
+			return -1;  //直接返回给主调函数为-1，代表查找失败 
+		}
+		else   //剩下的情况就是KEY[P]=K&amp;&amp;judge=1(代表之前已经找到过)
+		{
+			int r=key[p];
+			if(left[p]==0||right[p]==0) p=left[p]+right[p];
+			else key[p]=delete_(left[p],k+1,judge);
+			return r;
+		} 
+	}
+	else
+	{
+		if(key[p]&gt;k) return delete_(left[p],k,judge);
+		else return delete_(right[p],k,judge);
+	}
+}
+
+int SBT::find(int&amp; p,int k)
+{
+	if(p==0||key[p]==k) return p;
+	else
+	{
+		if(k&lt;key[p]) return find(left[p],k);
+		else return find(right[p],k);
+	} 
+}
+
+void SBT::preorder(int p)
+{
+	if(p==0) return ;
+	else
+	{
+		cout&lt;&lt;key[p]&lt;&lt;' ';
+		preorder(left[p]);
+		preorder(right[p]);
+	}
+}
+
+void SBT::midorder(int p)
+{
+	if(p==0) return ;
+	else
+	{
+		midorder(left[p]);
+		cout&lt;&lt;key[p]&lt;&lt;' ';
+		midorder(right[p]);
+	}
+}
+
+int SBT::select(int&amp; p,int k)  //选择第k大的元素 
+{
+	if(size[left[p]]+1==k) return p;
+	else
+	{
+		if(size[left[p]]+1&lt;k) return select(right[p],k-size[left[p]]-1);
+		else return select(left[p],k);
+	}
+}
+
+int SBT::after(int&amp; p,int k)
+{
+	if(p==0) return -1;  //-1代表查找失败的标记
+	else
+	{
+		if(key[p]==k) return key[right[p]];
+		else
+		{
+			if(k&lt;key[p]) return after(left[p],k);
+			else return after(right[p],k);
+		}
+	}
+}
+
+int SBT::pre(int&amp; p,int k)
+{
+	if(p==0) return -1;
+	else
+	{
+		if(key[p]==k) return key[left[p]];
+		else
+		{
+			if(k&lt;key[p]) return pre(left[p],k);
+			else return pre(right[p],k);
+		} 
+	}
+}
+
+int main()
+{
+	SBT my;   //这里对left，right，size，key的含义可能不清楚，我来解释一下，每次输入一批数据的时候，我们嘉定对输入的数据进行编号，left[i]存储的是i次输入的数据的左儿子的输入的顺序编号   
+    my.insert(my.returnroot(),5);  
+    my.insert(my.returnroot(),2);  
+    my.insert(my.returnroot(),9);  
+    my.insert(my.returnroot(),4);  
+    my.insert(my.returnroot(),6);  
+    my.insert(my.returnroot(),8);  
+    my.preorder(my.returnroot());  
+    cout&lt;&lt;endl;   
+    my.insert(my.returnroot(),7);  
+    my.preorder(my.returnroot());  
+    cout&lt;&lt;endl;  
+    my.delete_(my.returnroot(),5,0);  
+    my.preorder(my.returnroot());  
+    cout&lt;&lt;endl;   
+    cout&lt;&lt;my.after(my.returnroot(),8)&lt;&lt;endl;
+	return 0;
+} </pre>
+   <h2>
+    6.模板化SBT
+   </h2>
+   <div>
+    <pre class="cpp" code_snippet_id="1837882" name="code" snippet_file_name="blog_20160820_16_3054820">#include"iostream"
+#include"cstdio"
+#include"cstring"
+#include"cstdlib"
+#define N 1000
+
+using namespace std;
+
+template&lt;typename T&gt; 
+class SBT
+{
+	public:
+		SBT()
+		{
+			memset(size,0,sizeof(size));
+			memset(key,0,sizeof(key));
+			memset(left,0,sizeof(left));
+			memset(right,0,sizeof(right));
+			num=root=0;
+		}
+		void left_rotation(int&amp;);
+		void right_rotation(int&amp;);
+		void maintain(int&amp;,bool);
+		void insert(int&amp;,T); 
+		T delete_(int&amp;,T,bool);
+		void preorder(int);
+		void midorder(int);
+		T select(int&amp;,int);
+		T after(int&amp;,T);
+		T pre(int&amp;,T);
+		int find(int&amp;,T);
+		void afterdelete_();
+		int&amp; returnroot()
+		{
+			return root;
+		} 
+	private:
+		T key[N];
+		int left[N];
+		int right[N];
+		int size[N];
+		int num;
+		int root;
+};
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::left_rotation(int&amp; p)
+{
+	int k=right[p];
+	right[p]=left[k];
+	left[k]=p;
+	size[k]=size[p];
+	size[p]=size[left[p]]+size[right[p]]+1;
+	p=k;
+}
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::right_rotation(int&amp; p)
+{
+	int k=left[p];
+	left[p]=right[k];
+	right[k]=p;
+	size[k]=size[p];
+	size[p]=size[left[p]]+size[right[p]]+1;
+	p=k;
+}
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::maintain(int&amp; p,bool judge)
+{
+	if(judge==false)
+	{
+		if(size[left[left[p]]]&gt;size[right[p]]) right_rotation(p);
+		else
+		{
+			if(size[right[left[p]]]&gt;size[right[p]])
+			{
+				left_rotation(left[p]);
+				right_rotation(p);
+			}
+			else return ;
+		}
+	}
+	else
+	{
+		if(size[right[right[p]]]&gt;size[left[p]]) left_rotation(p);
+		else 
+		{
+			if(size[left[right[p]]]&gt;size[left[p]])
+			{
+				right_rotation(right[p]);
+				left_rotation(p);
+			}
+			else return ;
+		}
+	}
+	maintain(left[p],false);
+	maintain(right[p],true);
+	maintain(p,true);
+	maintain(p,false);
+}
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::insert(int&amp; p,T k)
+{
+	if(p==0) 
+	{
+		key[p=++num]=k;
+		size[p]=1;
+	}
+	else
+	{
+		size[p]++; 
+		if(key[p]&gt;k) insert(left[p],k);
+		else insert(right[p],k);
+		maintain(p,k&gt;=key[p]);
+	}
+} 
+
+template&lt;typename T&gt;
+T SBT&lt;T&gt;::delete_(int&amp; p,T k,bool judge)
+{
+	if(key[p]==k) judge=1;
+	if(key[p]==k||(left[p]==0&amp;&amp;k&lt;key[p])||(right[p]==0&amp;&amp;k&gt;key[p]))
+	{
+		if(((left[p]==0&amp;&amp;k&lt;key[p])||(right[p]==0&amp;&amp;k&gt;key[p]))&amp;&amp;judge==0) return key[0];
+		else
+		{
+			T r=key[p];
+			if(left[p]==0||right[p]==0) p=left[p]+right[p];
+			else key[p]=delete_(left[p],k,1);
+			return r;
+		}
+	}
+	else
+	{
+		size[p]--;
+		if(key[p]&gt;k) return delet_(left[p],k,judge);
+		else return delet_(right[p],k,judge);
+	}
+}
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::afterdelete_()
+{
+	T r;
+	cout&lt;&lt;"输入你要删除的节点的关键字"&lt;&lt;endl;
+	cin&gt;&gt;r; 
+	delete_(root,r,0);
+	num--;
+}
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::preorder(int p)
+{
+	if(p==0) return ;
+	else
+	{
+		cout&lt;&lt;key[p]&lt;&lt;' ';
+		preorder(left[p]);
+		preorder(right[p]); 
+	}
+}
+
+template&lt;typename T&gt;
+void SBT&lt;T&gt;::midorder(int p)
+{
+	if(p==0) return ;
+	else
+	{
+		midorder(left[p]);
+		cout&lt;&lt;key[p]&lt;&lt;' ';
+		midorder(right[p]); 
+	}
+}
+
+template&lt;typename T&gt;
+T SBT&lt;T&gt;::select(int&amp; p,int k)
+{
+	if(size[left[p]]+1==k) return key[p];
+	else
+	{
+		if(size[left[p]]+1&gt;k) return select(left[p],k);
+		else return select(right[p],k-size[left[p]]-1);
+	}
+}
+
+template&lt;typename T&gt;
+int SBT&lt;T&gt;::find(int&amp; p,T k)
+{
+	if(p==0||key[p]==k) return p;
+	else
+	{
+		if(key[p]&gt;k) return find(left[p],k);
+		else return find(right[p],k);
+	}
+} 
+
+template&lt;typename T&gt;
+T SBT&lt;T&gt;::pre(int&amp; p,T k)
+{
+	if(p==0) return key[0];
+	if(key[p]==k) return key[left[p]];
+	else
+	{
+		if(key[p]&gt;k) return pre(left[p],k);
+		else return pre(right[p],k); 
+	}
+}
+
+template&lt;typename T&gt;
+T SBT&lt;T&gt;::after(int&amp; p,T k)
+{
+	if(p==0) return key[0];
+	if(key[p]==k) return key[right[p]];
+	else
+	{
+		if(key[p]&gt;k) return after(left[p],k);
+		else return after(right[p],k);
+	}
+}
+
+int main()
+{
+	SBT&lt;double&gt; my;
+	my.insert(my.returnroot(),5);
+	my.insert(my.returnroot(),2);
+	my.insert(my.returnroot(),9);
+	my.insert(my.returnroot(),4);
+	my.insert(my.returnroot(),6);
+	my.insert(my.returnroot(),8);
+	my.insert(my.returnroot(),7);
+	my.insert(my.returnroot(),7.5);
+	my.preorder(my.returnroot());
+	return 0;
+} </pre>
+    <br/>
+    <br/>
+   </div>
+   <br/>
+   <h2>
+    7.应用：
+   </h2>
+  </div>
+  <div>
+   1.SBT的select函数可以求最大最小，第k大的元素，相对于我们用对来实现的话可能在建完树之后，操作会更快一点，我之后会出一个这个专题
+  </div>
+  <div>
+   2.SBT优化LCS问题的动态规划
+  </div>
+  <h2>
+   6.鸣谢：
+  </h2>
+  <div>
+   长时间没有读懂SBT
+  </div>
+  <div>
+   感谢：
+  </div>
+  <div>
+   田劲峰老师2011年的论文
+  </div>
+  <div>
+   感谢NOI百度贴吧的大牛的详解
+  </div>
+  <link href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" rel="stylesheet"/>
+ </div>
+</article>
+</body></html>

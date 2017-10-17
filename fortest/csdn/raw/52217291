@@ -1,0 +1,1522 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52217291"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52217291';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="编程之美迄今为止最为详细的讲解，包含连连看游戏的C++所有代码片段
+伪哈希+BFS+动态规划
+绝对值得收藏，绝对值得浏览
+我是不是该开个竖屏的专栏了
+其余的扩展问题还在思索，会不定期的更新" />
+    <meta name="keywords" content="编程之美,dfs" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>编程之美1.14——连连看工程（含全部代码，伪哈希+BFS） - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">编程之美1.14——连连看工程（含全部代码，伪哈希+BFS）</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年08月16日 10:20:57</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=编程之美&t=blog" target="_blank">编程之美</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=dfs&t=blog" target="_blank">dfs</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=函数&t=blog" target="_blank">函数</a> <span>/</span></li>
+					
+					<li><a href="http://so.csdn.net/so/search/s.do?q=class&t=blog" target="_blank">class</a> <span>/</span></li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">562</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>1.连连看问题描述：</h2>
+<div>1.用计算机模型模拟这个问题</div>
+<div>2.怎样判断两个图形可以相消（核心）</div>
+<div>3.怎样求出相同图形之间的最短路径（转弯次数最少，路径经过的&#26684;子最少，后置是在前者的制约下的）动态规划的思想在队列中的实现</div>
+<div>4.怎么确定死锁状态（本人的一点小创新，为了优化查找的时间复杂度，开辟了一个伪哈希表）</div>
+<div><br>
+</div>
+<h2>2.算法思想：</h2>
+<div>1.如何判断相消：</div>
+<div>在本文章中，BFS的思路无疑是最好象，也是最出色，效率最搞得一种方法，网上的一些人说可以之间分类判断贵啊点的数目来判断，那是他们没有仔细思考多种特殊情况就没有是想，光凭想象说的，这里的BFS的思路是最合适的</div>
+<div>首先我们以我们第一次选中的节点作为扩展的父节点，然后十字开辟空余的&#26684;子，然后分别以这些空余的&#26684;子作为父节点再次开辟（当然开辟的次数不能超过三次），还有，这里面我们为了下面好计算最短路径，我们将开始的转弯次数赋&#20540;为-1</div>
+<div>本读者在这里其实对于搜索最短路径其实有一个自己的想法，我们从完成游戏的角度来看的话，完全没必要非求出最短路径，求出可行路径就可以，但是实际上的连连看游戏电脑是可以输出最短路径的，但是如果采用BFS来做的话，我们只要搜索到就可以从队列中出来，不用继续扩展队列了，除非如果用心的方法的话，那么的确有必要（可能更快）求出满足条件的最短路径</div>
+<div><br>
+</div>
+<div>2.如何确定死锁：</div>
+<div>在本问题中，我们通过遍历图中所有的剩余的&#26684;子，对美个剩余的&#26684;子，在图中查找所有的与之图案相同的&#26684;子都进行BFS判断一次，成功就返回非死锁</div>
+<div>知道所有的空余的&#26684;子都被扫描完还是没有发现可行的解，那么就是死锁状态，提前返回失败，游戏结束</div>
+<div>本人为了加快查找的效率，利用空间换时间，采用装填因子为200%的拉链法，虽然这已经超过了哈希表可以容忍的范围，但是我们不得不说，这样子的查找效率相对于对图的遍历来说，已经将O(n*n)降到O(C)常熟时间，已经是非常大的优化了，当惹按读者有什么更好的方法，欢迎在评论区联系我，骂我哦</div>
+<div><br>
+</div>
+<h2>3.扩展问题：</h2>
+<div>本人目前还在研究如何实现这两个扩展问题，但是思路和想法还是有的</div>
+<div>1.优缺点：</div>
+<div>我们如果每次都要求出图中任意两点之间的最短路径来求解的话，对于一个高手来说，这要非常的耗时，但是对于一个敌手来说，这要非常的高效</div>
+<div>2.不会。。。。。</div>
+<div><br>
+</div>
+<h2>3.代码实现：</h2>
+<div><pre code_snippet_id="1832558" snippet_file_name="blog_20160816_1_4965860"  code_snippet_id="1832558" snippet_file_name="blog_20160816_1_4965860" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#define inf 99999999
+#define N 10
+
+//测试用例，40块，每组俩块 
+//1 3 7 4 -1 -1 5 6 3 2
+//5 7 8 -1 -1 -1 -1 6 4 7
+//2 1 -1 -1 -1 -1 -1 -1 0 9
+//6 -1 -1 -1 -1 -1 -1 -1 -1 8
+//-1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+//-1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+//5 -1 -1 -1 -1 -1 -1 -1 -1 1
+//6 9 -1 -1 -1 -1 -1 -1 2 4
+//4 0 0 -1 -1 -1 -1 2 3 8
+//1 3 0 7 -1 -1 8 9 9 5 
+
+using namespace std;
+
+typedef struct nod    //伪哈希表的判断成员，每个关键字基本被分配2.5个（涂图有25对的时候），会超过拉链法的120%的要求，但是这已经不是哈希表了，我的优化策略 
+{
+	int x;
+	int y;
+	struct nod* next;
+}node;
+
+class hash
+{
+	public:
+		hash()
+		{
+			for(int i=0;i&lt;N;i++) book[i].next=NULL;
+		}
+		~hash()   //有指针的存在，防止内存泄漏 
+		{
+			for(int i=0;i&lt;N;i++)
+			{
+				node* p=book[i].next;
+				while(p!=NULL)
+				{
+					book[i].next=book[i].next-&gt;next;
+					free(p);
+					p=book[i].next;
+				}
+			}
+		}
+		node* returnxy(int);    //按照关键字返回下一个同状态的块的坐标信息
+		void push(node,int);    //int代表关键字，node代表位置，根据这两点在设置图的同时将信息加入哈希表
+		void pop(node,int);    //块已经被删除了，该点弹出哈希表 
+		node*&amp; returnnode(int key)
+		{
+			node* p=book[key].next;
+			return p;
+		}
+	private:
+		node book[N];
+};
+
+class point
+{
+	public:
+		point()
+		{
+			thing=-1;
+			check=death=0;
+			mincross=mindest=inf;   //为了保持最优化转台并且好判断，该两项初始化为无穷大 
+		} 
+		void givething(int);   //初始化图的时候和消除的时候的重行分配内容的操作 
+		void choosepoint();    //该点被加入队列，check准备变换,之后的map勒种还要加入全图清楚check标记的函数操作,形参表包含父亲点的坐标，目的是帮助在此函数内修改mincross和mindest成员 
+		void claimdeath();     //该点已经被判断过是思索的状态，这样做是为了方便之后的其他块判断死锁状态时忽略掉改掉，从而加快速度 
+		int returnthing()
+		{
+			return thing;
+		}
+		void initpoint()
+		{
+			check=death=0;
+			mincross=mindest=inf;
+		}
+		void setmincross(int a)
+		{
+			mincross=a;
+		}
+		void setmindest(int a)
+		{
+			mindest=a;
+		}
+		int returnmincross()
+		{
+			return mincross;
+		}
+		int returnmindest()
+		{
+			return mindest;
+		}
+		int returndeath()
+		{
+			return death;
+		}
+		int returncheck()
+		{
+			return check;
+		}
+	private:
+		bool check;   //当前是否被选中，加入队列中
+		int thing;   //该块中的信息,若为-1,代表此点没有块，为空，否则应该在0-9之间的状态 
+		bool death;   //死锁标记
+		int mincross;   //该点被扩展时的转弯次数，该项要被不断的更新为最小的状态
+		int mindest;   //该点被扩展的时候，在mincross的情况下的距离起点的路程 
+};
+
+class linkup
+{
+	public:
+		linkup()
+		{
+			memset(queue,0,sizeof(queue));
+			head=tail=0;
+			num=0;
+			startx=starty=endx=endy=0;
+			cross=dest=inf;
+		}
+		void initmap();    //每次消除完或者判断连接失败之后之后，我们都要将图中每个点的queue,head,tail,check，death，mincross，mindest，startx等成员全部清空
+		bool bfs(int,int,int,int);    //后两个形参可以变更为判断死锁的时候的查找点，在游戏进行中的时候，代表的是起点和终点 
+		void creatmap();      //遗留问题，怎么实现随机生成图？？？ 
+		bool spread(int,int,int,int);   //扩展的父亲点,bfs的附属函数 
+		void print();    //打印全图，以便玩家浏览
+		void listenmotion();    //监听玩家的动作，输入坐标
+		bool giveanswer();     //对于玩家的动作，根据bfs进行相应的处理，并且输出语句告知玩家
+		bool judge();    //判断是否死锁，如果死锁我们告知玩家游戏结束 
+		void stream();    //游戏的流程 
+		void clearjudge()
+		{
+			memset(queue,0,sizeof(queue));
+			head=tail=1;
+		}
+	private:
+		point map[N][N];    //10*10的图，50个空位，25对连接
+		hash hashmap;     //哈希表
+		int num;    //目前剩余的块的数目num/2代表目前剩下的对数 
+		int startx;
+		int starty;
+		int endx;
+		int endy;
+		node queue[N*N];
+		int head;
+		int tail;
+		int cross;    //每次连接完之后的最短路径的数据 
+		int dest;
+};
+
+node* hash::returnxy(int key)
+{
+	node* p=book[key].next;
+	if(p==NULL) 
+	{
+		cout&lt;&lt;&quot;图存在问题，你可以扇游戏制作者一个巴掌了&quot;&lt;&lt;endl;
+		return NULL;
+	}
+	else
+	{
+		return p;
+	}
+}
+
+void hash::push(node p,int key)
+{
+	node* k=new node;
+	k-&gt;x=p.x;	k-&gt;y=p.y;
+	k-&gt;next=book[key].next;
+	book[key].next=k;
+}
+
+void hash::pop(node p,int key)   
+{
+	node* help=&amp;book[key];
+	node* k=book[key].next;
+	while(k!=NULL)
+	{
+		if(k-&gt;x==p.x&amp;&amp;k-&gt;y==p.y) 
+		{
+			help-&gt;next=k-&gt;next;
+			free(k);
+			break;
+		}
+		else help=k;
+		k=k-&gt;next;
+	}
+}
+
+void point::givething(int key)
+{
+	thing=key;
+}
+
+void point::choosepoint()
+{
+	check=1;
+}
+
+void point::claimdeath()
+{
+	death=1;
+}
+
+void linkup::creatmap()
+{
+	cout&lt;&lt;&quot;开始输入你的地图(-1代表空地，0-9代表块)&quot;&lt;&lt;endl;
+	for(int i=0;i&lt;N;i++)
+	{
+		for(int j=0;j&lt;N;j++)
+		{
+			node p;
+			p.x=i;p.y=j;
+			int key;
+			cin&gt;&gt;key;
+			map[i][j].givething(key);
+			hashmap.push(p,key);
+			if(key!=-1) num++;
+		} 
+	}
+}
+
+void linkup::listenmotion()
+{
+	cout&lt;&lt;&quot;玩家开始输入必要的信息&quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;起点坐标&quot;;cin&gt;&gt;startx&gt;&gt;starty;
+	cout&lt;&lt;&quot;终点坐标&quot;;cin&gt;&gt;endx&gt;&gt;endy;
+	cout&lt;&lt;&quot;你的请求已经受理，即将返回你的选择结果&quot;&lt;&lt;endl;
+}
+
+bool linkup::bfs(int sx,int sy,int ex,int ey)
+{
+	tail++;
+	map[sx][sy].setmincross(-1);    //定义刚开始的拐弯数是-1，方便后续计算 
+	map[sx][sy].setmindest(0);
+	if(spread(sx,sy,ex,ey)==1) return true;
+	else
+	{
+		int i=1;
+		while(head!=tail&amp;&amp;i&lt;3)   //控制转弯次数 
+		{
+			if(spread(queue[head].x,queue[head].y,ex,ey)) return true;   //BFS找到了，返回true，在giveanswer中进行删除操作 
+			i++;
+		}
+	    return false;
+	}
+}
+
+bool linkup::giveanswer()
+{
+	if(map[startx][starty].returnthing()!=map[endx][endy].returnthing()) return false;
+	else
+	{
+		if(bfs(startx,starty,endx,endy))   //可以连接 
+    	{
+    		node help;
+	    	help.x=startx;help.y=starty;
+			hashmap.pop(help,map[startx][starty].returnthing());
+			help.x=endx;help.y=endy; 
+			hashmap.pop(help,map[endx][endy].returnthing());
+			num-=2;    //块消除，数目减少 
+			map[startx][starty].givething(-1);   //消除两个点 
+	    	map[endx][endy].givething(-1);
+			return true;
+    	}
+    	else return false;     //不能连接 
+	}
+}
+
+void linkup::initmap()
+{
+	memset(queue,0,sizeof(queue));
+	head=tail=1;
+	for(int i=0;i&lt;N;i++)
+	{
+		for(int j=0;j&lt;N;j++) map[i][j].initpoint();
+	}
+	startx=starty=endx=endy=0;
+	cross=dest=inf;
+}
+
+bool linkup::spread(int x,int y,int ex,int ey)
+{
+	queue[head].x=x;
+	queue[head].y=y;
+	int nextstage=tail-1;
+	map[x][y].choosepoint();
+	while(head&lt;=nextstage)
+	{
+		x=queue[head].x;   //及时更新新的扩展父节点 
+		y=queue[head].y;
+	    for(int i=y+1;i&lt;N;i++)  //向右 
+    	{
+    		if(map[x][i].returncheck()==1&amp;&amp;map[x][i].returnthing()==-1)
+    		{
+    			if(map[x][i].returnmincross()&gt;=map[x][y].returnmincross()+1)
+		    	{
+			    	map[x][i].setmincross(map[x][y].returnmincross()+1);
+		    		map[x][i].setmindest(map[x][y].returnmindest()+i-y);
+    			}
+    			continue;
+    		}
+	    	if(map[x][i].returnthing()==-1) 
+&lt;h2&gt;    		{&lt;/h2&gt;	    		if(map[x][i].returnmincross()&gt;=map[x][y].returnmincross()+1)
+		    	{
+			    	map[x][i].setmincross(map[x][y].returnmincross()+1);
+		    		map[x][i].setmindest(map[x][y].returnmindest()+i-y);
+    			}
+	    		map[x][i].choosepoint();
+		     	queue[tail].x=x;
+		    	queue[tail].y=i;
+		 	    tail++;
+	    	}
+	    	else
+	    	{
+		    	if(x==ex&amp;&amp;i==ey)
+		    	{
+		    		cross=map[x][y].returnmincross();    //搜集到最短路径的数据 
+		    		dest=map[x][y].returnmindest()+i-y;
+		    		return true;
+		    	}
+	    		else break;
+	    	}
+    	}
+    	for(int i=y-1;i&gt;=0;i--)    //向左 
+    	{
+    		if(map[x][i].returncheck()==1&amp;&amp;map[x][i].returnthing()==-1)
+    		{
+    			if(map[x][i].returnmincross()&gt;=map[x][y].returnmincross()+1)
+	    		{
+		    		map[x][i].setmincross(map[x][y].returnmincross()+1);
+			    	map[x][i].setmindest(map[x][y].returnmindest()+y-i);
+	    		}
+	    		continue;
+    		}
+	    	if(map[x][i].returnthing()==-1)
+		    {
+    			if(map[x][i].returnmincross()&gt;=map[x][y].returnmincross()+1)
+	    		{
+		    		map[x][i].setmincross(map[x][y].returnmincross()+1);
+			    	map[x][i].setmindest(map[x][y].returnmindest()+y-i);
+	    		}
+		    	map[x][i].choosepoint();
+	    		queue[tail].x=x;
+		    	queue[tail].y=i;
+	    		tail++;
+    		}
+	    	else
+	    	{
+		    	if(x==ex&amp;&amp;i==ey)
+		    	{
+		    		cross=map[x][y].returnmincross();
+		    		dest=map[x][y].returnmindest()+y-i;
+		    		return true;
+		    	}
+	     		else break;
+		    }
+    	}
+    	for(int i=x-1;i&gt;=0;i--)   //向上 
+    	{
+    		if(map[i][y].returncheck()==1&amp;&amp;map[i][y].returnthing()==-1)
+    		{
+    			if(map[i][y].returnmincross()&gt;=map[x][y].returnmincross()+1)
+	    		{
+		    		map[i][y].setmincross(map[x][y].returnmincross()+1);
+			    	map[i][y].setmindest(map[x][y].returnmindest()+x-i);
+		    	}
+		    	continue;
+    		}
+	    	if(map[i][y].returnthing()==-1)
+	    	{
+		    	if(map[i][y].returnmincross()&gt;=map[x][y].returnmincross()+1)
+	    		{
+		    		map[i][y].setmincross(map[x][y].returnmincross()+1);
+			    	map[i][y].setmindest(map[x][y].returnmindest()+x-i);
+		    	}
+	    		map[i][y].choosepoint();
+		    	queue[tail].x=i;
+		     	queue[tail].y=y;
+			    tail++;
+	    	}
+    		else
+	    	{
+		    	if(i==ex&amp;&amp;y==ey)
+		    	{
+		    		cross=map[x][y].returnmincross();
+		    		dest=map[x][y].returnmindest()+x-i;
+		    		return true;
+		    	}
+			    else break;
+    		}
+    	}
+	    for(int i=x+1;i&lt;N;i++)   //向下 
+    	{
+    		if(map[i][y].returncheck()==1&amp;&amp;map[i][y].returnthing()==-1)
+    		{
+    			if(map[i][y].returnmincross()&gt;=map[x][y].returnmincross()+1)
+		    	{
+			    	map[i][y].setmincross(map[x][y].returnmincross()+1);
+		    		map[i][y].setmindest(map[x][y].returnmindest()+i-x);
+	    		}
+	    		continue;
+    		}
+	    	if(map[i][y].returnthing()==-1)
+		    {
+	     		if(map[i][y].returnmincross()&gt;=map[x][y].returnmincross()+1)
+		    	{
+			    	map[i][y].setmincross(map[x][y].returnmincross()+1);
+		    		map[i][y].setmindest(map[x][y].returnmindest()+i-x);
+	    		}
+		    	map[i][y].choosepoint();
+	     		queue[tail].x=i;
+		    	queue[tail].y=y;
+			    tail++;
+	    	} 
+    		else
+	    	{
+		    	if(i==ex&amp;&amp;y==ey) 
+		    	{
+		    		cross=map[x][y].returnmincross();
+		    		dest=map[x][y].returnmindest()+i-x;
+		    		return true;
+		    	}
+	    		else break;
+    		}
+    	}
+    	head++;
+	}
+	return false;
+}
+
+bool linkup::judge()
+{
+	for(int i=0;i&lt;N;i++)
+	{
+		for(int j=0;j&lt;N;j++)
+		{
+			if(map[i][j].returnthing()!=-1&amp;&amp;map[i][j].returndeath()!=1)
+			{
+				int key=map[i][j].returnthing();
+				node* p=hashmap.returnnode(key);
+				while(p!=NULL)
+				{
+					if(p-&gt;x==i&amp;&amp;p-&gt;y==j) p=p-&gt;next;
+					else if(bfs(i,j,p-&gt;x,p-&gt;y)) return true;
+					else p=p-&gt;next;
+				}
+				clearjudge();
+			}
+			map[i][j].claimdeath();   //判断都不成功，加上死亡标记 
+		}
+	}
+	return false;
+}
+
+void linkup::print()
+{
+	printf(&quot;  &quot;);
+	for(int i=0;i&lt;N;i++) cout&lt;&lt;i&lt;&lt;&#39; &#39;;   //打印表头
+	cout&lt;&lt;endl;
+	for(int i=0;i&lt;N;i++)
+	{
+		cout&lt;&lt;i&lt;&lt;&#39; &#39;;    //打印表列 
+		for(int j=0;j&lt;N;j++) 
+		{
+			if(map[i][j].returnthing()!=-1) cout&lt;&lt;map[i][j].returnthing()&lt;&lt;&#39; &#39;;
+			else printf(&quot;  &quot;); 
+		} 
+		cout&lt;&lt;endl;
+	} 
+}
+
+void linkup::stream()
+{
+	creatmap();
+	print();
+	while(num!=0)
+	{
+		if(judge()==0)
+		{
+			clearjudge();
+			cout&lt;&lt;&quot;很不幸，地图死锁，游戏失败！&quot;&lt;&lt;endl;
+			return ;
+		}
+		else
+		{
+			clearjudge();
+			initmap();
+			listenmotion();
+			if(startx&lt;0||startx&gt;=N||starty&lt;0||starty&gt;=N||endx&lt;0||endx&gt;=N||endy&lt;0||endy&gt;=N) 
+			{
+				cout&lt;&lt;&quot;输入的坐标点存在错误，请重新输入&quot;&lt;&lt;endl;
+				continue;
+			}
+			if(giveanswer()==1) 
+			{
+				cout&lt;&lt;&quot;本次的连接，拐弯次数:&quot;&lt;&lt;cross+1&lt;&lt;&quot;路径长度:&quot;&lt;&lt;dest&lt;&lt;endl;
+				system(&quot;PAUSE&quot;); 
+				system(&quot;cls&quot;);
+				print();
+				cout&lt;&lt;&quot;连接有效，开始删除&quot;&lt;&lt;endl;
+			}
+			else
+			{
+				system(&quot;cls&quot;);
+				print();
+				cout&lt;&lt;&quot;不能连接或者图样不匹配，连接失败！&quot;&lt;&lt;endl;
+			}
+		}
+	}
+	cout&lt;&lt;&quot;全部消除，恭喜你游戏成功！&quot;&lt;&lt;endl;
+	return ;
+}
+
+int main()
+{
+	linkup my;
+	my.stream();
+	return 0;
+}</pre>
+<h2>4.结语：</h2>
+<div>Dijstra,DFS，BFS,A*都可以实现，各有优点，BFS是可以搜索出最优的拐弯数下的最优解路径</div>
+<div>BFS可以较快低损耗的求出可行解，不一定最优</div>
+<div>A*和Dijstra相对于上面的搜索算法来说，在这种地图下不高效在有些情况的路径下很低效</div>
+<div>感谢《编程之美》这本书，我对数的扩展问题真的非常的有兴趣，对于我的代码实现的思路和优化，还有扩展问题的解决，如果读者有更好的思路，欢迎在评论区call我，希望和打架一起分享代码和优化思路的乐趣</div>
+<br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12932.html" target="_blank">读书笔记</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52217291" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qingyuanluofeng/article/details/39273255"  target="_blank" strategy="BlogCommendFromCsdn_0">编程之美：第一章 1.14连连看游戏设计</a></h2>
+                    <div class="summary">
+                        /*
+连连看游戏设计:
+主要包含游戏局面的状态描述，游戏规则的描述：状态的合法转移（哪些操作满足规则，经过这些操作，达到哪些状态）。自动机模型适合描述游戏设计。
+如何求出相同图形之间的最短路径，最短路...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qingyuanluofeng" target="_blank" strategy="BlogCommendFromCsdn_0"><img src="http://avatar.csdn.net/0/D/D/2_qingyuanluofeng.jpg" alt="qingyuanluofeng" title="qingyuanluofeng"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qingyuanluofeng">qingyuanluofeng</a></li>
+                        <li class="time">2014-09-14 21:07</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1045</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/emily_cyy/article/details/41324185"  target="_blank" strategy="BlogCommendFromCsdn_1">软件工程结对项目——连连看</a></h2>
+                    <div class="summary">
+                        第一章&#160;&#160;同类产品比较
+比较了同类的几款连连看，发现他们共同点是简洁大方，主题明确但是主题都很单调,PM&#160;link保留了以往的连连看两张图片进行匹配更推出自己的创新模式即图片与相应的英语单词进行匹配。...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Emily_cyy" target="_blank" strategy="BlogCommendFromCsdn_1"><img src="http://avatar.csdn.net/1/1/9/2_emily_cyy.jpg" alt="Emily_cyy" title="Emily_cyy"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Emily_cyy">Emily_cyy</a></li>
+                        <li class="time">2014-11-20 22:57</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>815</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+               	<dt><a href="http://download.csdn.net/detail/ziyeh2/3796934" target="_blank" strategy="BlogCommendFromCsdn_2"><img class="maxwidth" src="http://download.csdn.net/images/minetype/pdf.svg" alt="" title=""></a></dt>
+		<dd>
+			<div class="summary">
+				<h2><a href="http://download.csdn.net/detail/ziyeh2/3796934" target="_blank" strategy="BlogCommendFromCsdn_2">1.14 连连看游戏设计.pdf</a></h2>
+				<div class="summary">
+				  <ul>
+					  <li class="time">2011-11-15 10:47</li>
+					  <li class="visited_num fileSize">245KB</li>
+					  <li class="download_btn"><a href="http://download.csdn.net/detail/ziyeh2/3796934">下载</a></li>
+				  </ul>
+				</div> 
+			</div>
+		</dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/tree__water/article/details/50753283"  target="_blank" strategy="BlogCommendFromCsdn_3">hdu1175-连连看(简单bfs)</a></h2>
+                    <div class="summary">
+                        连连看
+Time Limit: 20000/10000 MS (Java/Others)&#160;&#160;&#160;&#160;Memory Limit: 65536/32768 K (Java/Others)
+Total Subm...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/tree__water" target="_blank" strategy="BlogCommendFromCsdn_3"><img src="http://avatar.csdn.net/E/0/C/2_tree__water.jpg" alt="tree__water" title="tree__water"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/tree__water">tree__water</a></li>
+                        <li class="time">2016-02-27 00:21</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>722</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qq_33266889/article/details/53576384"  target="_blank" strategy="BlogCommendFromCsdn_4">HDU 1175 连连看 （BFS处理转折点）</a></h2>
+                    <div class="summary">
+                        第二个处理附带转折问题的题目
+分析：
+&#160; &#160; 1.开始时就直接判断 如果起点处和目标点处数字不同，或则起点或终点有一个是0，直接no。 
+&#160; &#160; 2.因为限定了最小转向次数，所以采用bfs单向搜，hd...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qq_33266889" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/D/F/4/2_qq_33266889.jpg" alt="qq_33266889" title="qq_33266889"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qq_33266889">qq_33266889</a></li>
+                        <li class="time">2016-12-11 22:44</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>133</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/dragon60066/article/details/62235719"  target="_blank" strategy="BlogCommendFromCsdn_5">HDU1175 - 连连看 - bfs</a></h2>
+                    <div class="summary">
+                        1.题目描述：
+
+
+连连看
+Time Limit: 20000/10000 MS (Java/Others)&#160;&#160;&#160;&#160;Memory Limit: 65536/32768 K (Java/Othe...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/dragon60066" target="_blank" strategy="BlogCommendFromCsdn_5"><img src="http://avatar.csdn.net/9/F/4/2_dragon60066.jpg" alt="dragon60066" title="dragon60066"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/dragon60066">dragon60066</a></li>
+                        <li class="time">2017-03-15 19:29</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>80</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/opheelia/article/details/47344223"  target="_blank" strategy="BlogCommendFromCsdn_6">hdu 1175 连连看（BFS的搜索方向与效率问题）</a></h2>
+                    <div class="summary">
+                        题目链接，点我点我！
+之所以写这篇解题报告，主要是讨论一下BFS的优先搜索方向与效率问题，从Time Limits（超过10000ms）到100ms，如此大的一个跨度，深深感到自己之前写的程序有多渣...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Opheelia" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/8/0/5/2_opheelia.jpg" alt="Opheelia" title="Opheelia"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Opheelia">Opheelia</a></li>
+                        <li class="time">2015-08-07 19:59</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>262</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/laojiu_/article/details/51952405"  target="_blank" strategy="BlogCommendFromCsdn_7">hdu1175 连连看 --DFS/BFS</a></h2>
+                    <div class="summary">
+                        原题链接： 
+http://acm.hdu.edu.cn/showproblem.php?pid=1175
+
+
+
+直接上代码，不是很难。
+#define _CRT_SECURE_NO_DEPRECAT...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/LaoJiu_" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/4/E/7/2_laojiu_.jpg" alt="LaoJiu_" title="LaoJiu_"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/LaoJiu_">LaoJiu_</a></li>
+                        <li class="time">2016-07-19 08:37</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>181</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/mirror58229/article/details/53613003"  target="_blank" strategy="BlogCommendFromCsdn_8">HDU 1175 连连看（BFS）</a></h2>
+                    <div class="summary">
+                        BFS卡题中
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/mirror58229" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/5/C/E/2_mirror58229.jpg" alt="mirror58229" title="mirror58229"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/mirror58229">mirror58229</a></li>
+                        <li class="time">2016-12-13 20:18</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>99</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/liangzhaoyang1/article/details/51550209"  target="_blank" strategy="BlogCommendFromCsdn_9">HDU 1175 连连看 （BFS 或者 DFS）</a></h2>
+                    <div class="summary">
+                        连连看
+Time Limit: 20000/10000 MS (Java/Others)&#160;&#160;&#160;&#160;Memory Limit: 65536/32768 K (Java/Others)
+Total Su...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/liangzhaoyang1" target="_blank" strategy="BlogCommendFromCsdn_9"><img src="http://avatar.csdn.net/2/2/7/2_liangzhaoyang1.jpg" alt="liangzhaoyang1" title="liangzhaoyang1"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/liangzhaoyang1">liangzhaoyang1</a></li>
+                        <li class="time">2016-05-31 23:49</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>414</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">1</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

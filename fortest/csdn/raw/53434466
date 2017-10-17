@@ -1,0 +1,1421 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/53434466"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '53434466';var commentscount = 0; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=0;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="外部排序 
+外部排序和内部排序还是有非常的的不同的,我们的外部排序主要针对的优化目标也是不同的,这里我先从外部排序的物理基础开始进行讲解
+
+1.外存:
+外部存储设备,相对于我们的内部存储设备而言具有一些特点
+
+1.优点:永久存储能力,便携性,存储空间大
+2.缺点:访问速度相对于内存的访问速度来说极其低下(相差约5~6个数量级)
+
+因此对于外存来说,我们要遵守的基本操作原则就是:尽" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>胜者树 败者树 K-路最佳归并树 高效外部排序 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">胜者树 败者树 K-路最佳归并树 高效外部排序</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年12月02日 16:33:21</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">1465</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>外部排序 </h2>
+<p>外部排序和内部排序还是有非常的的不同的,我们的外部排序主要针对的优化目标也是不同的,这里我先从外部排序的物理基础开始进行讲解<br>
+</p>
+<h3>1.外存:</h3>
+<p>外部存储设备,相对于我们的内部存储设备而言具有一些特点<br>
+<br>
+1.<strong>优点</strong>:永久存储能力,便携性,存储空间大<br>
+2.<strong>缺点</strong>:访问速度相对于内存的访问速度来说极其低下(相差约5~6个数量级)<br>
+<br>
+因此对于外存来说,我们要遵守的基本操作原则就是:<strong>尽可能的减少我们的对外存的访问的次数</strong><br>
+对于外存的类型来说,我们分成了磁带和磁盘两个方面,在这里我们对磁带就不过多的赘述了,我们主要来看看磁盘<br>
+<img alt="" src="http://hi.csdn.net/attachment/201106/7/8394323_13074405911zG7.jpg"><br>
+如图所示,我们可以大致的了解到磁盘的主要的操作部件,在这里我们对操作的具体不见不做过多的描述,我们主要来考虑一下我们的这些部件对我们的计算机和磁盘之间的交互的时间效率的影响</p>
+<p><br>
+<strong>磁盘的存取时间</strong><br>
+磁盘访问时间主要由寻道时间，旋转延迟时间和数据传输时间组组成。 <br>
+寻道时间（Seek time）tseek：是移动磁盘臂，定位到正确磁道所需的时间。<br>
+旋转延迟时间tla：是等待被存取的扇区出现在读写头下所需的时间。<br>
+传输时间twm：是传输一个字符的时间。<br>
+<strong>TI/O=tseek &#43; tek &#43; la &#43; twm</strong><br>
+我们每次都是将我们的磁盘中的数据按**块**为单位传输到我们的内存的高速缓冲区中（cache）我们每次在内存中对数据进行读取的时候，都要先从cache中开始检查，如果cache中存在数据我们就从cache中读取，如果cache为空，我们在从磁盘中进行读取<br>
+<br>
+我们在外存上的数据基本都可以看作是文件，我们对外部数据进行的操作主要可以分成这么几类<br>
+文件上的操作<br>
+**检索**：在文件中寻找满足一定条件的记录 <br>
+**修改**：对记录中某些数据&#20540;进行修改。若对关键字进行修改，就相当于删除加插入。<br>
+**插入**：向文件中增加一个新记录。 <br>
+**删除**：从文件中删去一个记录 。<br>
+**排序**：对指定好的数据项，按其&#20540;的大小把文件中的记录排成序列。常用按关键<br>
+<br>
+简称就是：增删改查排</p>
+<h3>外部排序流程</h3>
+<div>1.外部跑排序基本上由两个独立的过程来组成，第一个就是产生初始的有序的顺串</div>
+<div>2.对有序的顺串进行归并操作</div>
+<div><br>
+</div>
+<div>所以通过这样的流程，我们大致可以将我们的外部排序的实践耗费分成大致的这样几个部分</div>
+<div>1.内部排序生成初始顺串的时间耗费</div>
+<div>2.外存信息读写的时间耗费</div>
+<div>3.内部的归并的时间耗费</div>
+<div><br>
+</div>
+<div>T = m*Tis &#43; d*Tio &#43; s*u*Tmg</div>
+<div>上面的就是我们的外部排序的大致的时间耗费的一个表达式</div>
+<div>1.其中m代表我们要形成m个初始的顺串，Tis代表我们对构成每一个初始的顺串选哟的内部排序的时间耗费</div>
+<div>2.d代表我们的依次外存的读写的次数，Tio代表我们的外存的依次都写的时间的耗费</div>
+<div>3.s代表我们的归并的趟数，u代表我们的趟需要的归并的次数，Tmg代表依次归并的时间耗费</div>
+<div><br>
+</div>
+<div>从上面的表达式中，我们可以大致的看出我们的需要优化的要点在哪里，首先，我们的Tio的时间耗费非常的恐怖，所以说我们呢选哟尽可能遵顼上面体积的原则，尽可能的减少我们的外存的读写的次数，也就是说，我们需要降低d的大小</div>
+<div>在这里，我们需要知道外部排序的外部读写的次数和我们的归并的趟数有关系，我们要尽可能的减少我们的归并的趟数 <strong>h = log(m,k) k - 代表我们采取k路归并</strong></div>
+<div>对于减小h的大小，我们需要增大k，减少m(意味着我们构建的初始顺串要尽可能的大)</div>
+<div>在这里的话，我们的优化思路就出来了，我们可以采用多路归并的方式从而减少外部读写的次数，降低我们的时间耗费</div>
+<div>对于我们的m来说，这和我们的内存的规模大小有关，我们招惹里就不再多余的考虑这个问题</div>
+<div>我们这里需要另外一个知识要点就是我们的两种选择树和一种K-Haffman树来进行对我们的依次归并的时间的耗费的优化</div>
+<div><br>
+</div>
+<h2>选择树</h2>
+<div>对于我们归并的操作，我们需要一些优化的数据结构来满足我们的相应的要求</div>
+<div>首先我们先引入我们的归并操作的步骤</div>
+<div>1.当归并序列的数目只有两组的时候</div>
+<div>我们采用依次扫描的O(n)时间复杂度和O(n)的空间复杂度我们呢就可以实现我们的归并操作</div>
+<div>或者我们采用另一种优化后的算法<a target="_blank" href="http://blog.csdn.net/ltyqljhwcm/article/details/52155097?locationNum=6&amp;fps=1">Lantian的手摇算法讲解</a></div>
+<div>手摇算法O(n)的时间复杂度以及O(1)的空间复杂度就可以完成我们的归并操作</div>
+<div><br>
+</div>
+<div>2.但是当我们的归并序列的组数非常的多的时候，我们上面已经讨论过了，归并的路数越多可能我们的外部读写的次数会降低很多，这里我们的多路归并的思路还是非常有必要的，但是如果我们还是采用之前的朴素的方法来进行比较的话，我们会发现，我们的比较次数会变得非常的冗杂，假设我们每次都要进行k录归并的划，依次比较需要O(k)才能得到结果，我们如果需要找到最终的归并序列，需要至少O(k*n)的归并次数，在归并路数非常答的情况下，无疑非常的麻烦且并且效率底下，这里我们的优化思路就出来了</div>
+<div><br>
+</div>
+<div>3<strong>.选择树的优化思路</strong></div>
+<div>我们会发现，我们之所以朴素的方法效率底下的原因在于，我们依次只能找出一个最有数据信息，但是下一次，我们的最优信息就会选哟我们重新进行重复的操作来得到</div>
+<div>我们的选择树构建的思路就是，依次不仅仅将我们的最优的欣喜求解出来，我们还要在依次的操作中将我们的之后的次优的信息都保存下来，下一次，我们就可以是按尽可能的高效读取了</div>
+<div>这里的选择书我们有两种情况，下面我们一一道来</div>
+<h2>胜者树</h2>
+<div>我们对胜者树进行定义：</div>
+<div>1.胜者树是一颗完全二叉树</div>
+<div>2.胜者树的叶子结点保存我们的一个输入缓冲区（一路归并顺序表）</div>
+<div>3.胜者树的非叶子节点保存当前比较的胜者的输入缓冲区的指针</div>
+<div>4.胜者树的根节点保存我们的胜者树当前的的一次比较中的冠军（最优&#20540;）</div>
+<div><img src="http://img.my.csdn.net/uploads/201210/15/1350310110_2414.jpg" alt=""></div>
+<div>现在我们来看一下胜者树的操作：</div>
+<div>当我们将我们的胜者树的最优&#20540;输入到我们的<strong>输出缓冲区（输出缓冲区从内存中额外开辟出来的一段，我们存储当前的归并的结果，缓冲区满写入磁盘）</strong></div>
+<div>之后，我们的根节点便出现了空的情况，我们需要从根节点对应的输入缓冲区中在读入一个数据来充当下一次比较的选手，然后从下到上进行维护，我们的每一次的维护都需要比较兄弟的胜者然后选出新一轮的胜者然后一直优化到我们的根的路径上（从低至上，贯穿整个树）</div>
+<div>之后我们不断地进行上述的操作，指导我们的所有的输入缓冲区已经为空为止</div>
+<h2>败者树</h2>
+<div>我们通过上面的胜者树可以发现，我们的胜者数虽然相对于我们的之前的擦偶哦已经进行了很大程度上的优化，今本上已经达到了我们的O(k*logk)的实践复杂度</div>
+<div>但是我们会注意到，我们每一次每个接待你都保存着我们的生者的信息而不是败者的信息</div>
+<div>那么这个差别会对我们的实践效率有什么影响呢</div>
+<div><br>
+</div>
+<div><strong>下面这段解释非常的重要：</strong></div>
+<div>我们会发现，我们的胜者树维护的时候每次都需要去查找我们的根的兄弟节点的位置来进行比较，但是我们的每一次都要多一步查找兄弟的划，无论是对我们的程序的实现过程还是我们的时间效率上来看都还存在改进的余地</div>
+<div>这里我们就要引入败者树</div>
+<div><strong>败者树的定义：</strong></div>
+<div>1.败者树是一颗完全二叉树</div>
+<div>2.败者树的叶子结点保存的是我我们的输入缓冲区</div>
+<div>3.败者树的非叶子结点保存我们的当前的比较中败者的对应的输入缓冲区的指针</div>
+<div>4.败者树根保存我们的当前比较的亚军，根上面还有一个节点保存我们的冠军</div>
+<div><img src="http://img.ph.126.net/3eGZA35Xo1MmXzVzsaoXAQ==/2651775755607958867.jpg" alt=""></div>
+<div>如图所示，那么对于我们的调整树的过程中，我们只需要和当前的跟对应的败者的输入缓冲区的之比较就ok，减少了我们依次比较次数，那么在树庞大的时候，我们扽优化效果是非常的明显的</div>
+<div><br>
+</div>
+<h2>败者树 VS 堆</h2>
+<div>我们在进行我们的败者树选取的时候，读者那面都会遇到我的这种问题，如果我们的败者树进行归并排序的话，我们的堆排序的思路和败者树比较的话谁优谁劣？</div>
+<div>这里的话，我们还真不好描述这个问题的最终结果，但是我想，败者树存在是有它的实际意义的</div>
+<div><strong><em>1.堆排序</em></strong></div>
+<div>首先，一旦存在了堆排序的划，我们就无需构建输出缓冲区，内存这个题就可以充当输出缓冲区，我们只要将我们n数据量的数据进行归并排序就好，实践复杂度是O(n*logn)</div>
+<div>优点：</div>
+<div>&nbsp;&nbsp;&nbsp; 无输出缓冲区，充分利用内存资源</div>
+<div>&nbsp;&nbsp;&nbsp; 时间复杂度优秀O(n*logn)</div>
+<div>&nbsp;&nbsp;&nbsp; 相对于败者树来说，我们往往不需要从根维护到底，在维护的路径中有可能直接就中断</div>
+<div>缺点：</div>
+<div>&nbsp;&nbsp;&nbsp; 树庞大，我们的logn&#20540;相对于我们的k路数来说很巨大，树的深度较大</div>
+<div>&nbsp;&nbsp;&nbsp; 建堆时间耗费很高，我们的缓冲区内的数据已经实现了按块基本有序</div>
+<div>&nbsp;&nbsp;&nbsp; 我们的堆维护的时候，每一层至少需要比较两次，败者树只需要一次就可以</div>
+<div><strong><em>2.败者树</em></strong></div>
+<div>优点：</div>
+<div>&nbsp;&nbsp;&nbsp; 相对于堆来说，我们的树的规模很小，&#20284;的我们的时间复杂度在在实践中可能会平均状态下更加优秀</div>
+<div>&nbsp;&nbsp;&nbsp; 每次维护我们每一层只需要比较一次</div>
+<div>缺点：</div>
+<div>&nbsp;&nbsp;&nbsp; 我们的败者树的维护过程中必须要从底一直维护到根，这个路径不能中断，我们的堆实际中调整的次数可能会更小</div>
+<div><br>
+</div>
+<div>最后究竟谁胜还真不好比较，我会再次问老师以求解答</div>
+<div><br>
+</div>
+<h2>K-路最佳归并树</h2>
+<div>上面的选择树中的败者树已经给我们的依次归并的实践效率给予了很好的优化，现在我们需要从另一个角度来考虑减少我们的外部读写的次数了</div>
+<div>首先，我们需要了解到，我们的每个输入缓冲区的数据量都不一定是一样的，这意味着什么</div>
+<div>这意味着我们的每一次的每个块的外部读写的次数是不一样，数据量大的外部读写次数相对高，数据量小的外部读写次数相对底</div>
+<div><br>
+</div>
+<div>那么我们想到了什么？</div>
+<div>没错，就是我们的最有二叉树 - Haffman树&nbsp; <a target="_blank" href="http://blog.csdn.net/ltyqljhwcm/article/details/52472653?locationNum=1&amp;fps=1">
+Lantian的Haffman讲解</a></div>
+<div><br>
+</div>
+<div>我们想到的方向很对，K-路最佳归并树实质上就是K-Haffman数，我们的优化的ing一需求是尽量的让我们的数据量大的块读写次数少，数据量小的读写次数多，利用我在Haffman中的反证贪心法，这样构成的K-路最佳归并树无疑可以让我们的外部读写次数降到最低&#20540;</div>
+<div><br>
+</div>
+<div>K-路最佳归并树的思路：</div>
+<div>1.挑选出K个权&#20540;（数据量）最小的缓冲区</div>
+<div>2.缓冲区利用败者树进行一次归并操作，生成一个新的大的缓冲区，加入到我们的选择序列</div>
+<div>3.重复上述的过程指导只剩下一个输入缓冲区，我们的归并操作结束，生成了有序的外部文件</div>
+<div><strong><br>
+</strong></div>
+<div><strong>上面的操作1我们为了提高时间效率通常使用堆来进行优化</strong></div>
+<div><strong><br>
+</strong></div>
+<h2>核心伪代码：</h2>
+<div>1.堆</div>
+<div><pre code_snippet_id="2022966" snippet_file_name="blog_20161202_1_7947335"  class="cpp" name="code">heap - array save the number of the data
+heapnum - the size of the heap
+
+siftdown(i):
+    t
+    while i*2&lt;=heapnum:
+        if heap[i]&gt;heap[i*2]: t=i*2
+        else t=i
+        if i*2+1&lt;=heapnum and heap[i*2+1]&lt;heap[t]:  t=i*2+1
+        if i!=t:
+            swap(i,t)
+            i=t
+        else break
+
+siftup(i):
+    while i!=1:
+        if heap[i]&lt;heap[i/2]:
+            swap(i,i/2)
+            i=i/2
+        else break
+
+creat_heap(heapnum):
+    for i=heapnum/2 to 1:
+        siftdown(i)
+</pre><br>
+2.K-路最佳归并树</div>
+<pre code_snippet_id="2022966" snippet_file_name="blog_20161202_2_3759450"  class="cpp" name="code">m - the size of the K-Haffman
+data[] - the size is m,the input cache,waited to merge
+
+K_Merge(data,m):
+    creat_heap(m)
+    while heapnum!=1:
+        help=[]   //保存k个选出的缓冲区序列
+        for i=1 to k:
+            help.append(pop())   //弹出堆顶并进行维护最小堆性质
+        Loser_Tree(help,k)</pre>
+<div><br>
+</div>
+<div>3.败者树:</div>
+<pre code_snippet_id="2022966" snippet_file_name="blog_20161202_3_9921011"  class="cpp" name="code">data - the size is the k,the array wait to merge
+k - the size
+ls - 非叶子节点，保存我们的输入缓冲区指针
+MIN - 最小值，在我们建树的时候用来辅助维护
+MAX - 我们维护的时候，为了防止出现一个缓冲区为空的情况，添加的哨兵
+
+Loser_Tree(data,k):
+    new_input //新的输入缓冲区，需要返回的结果
+    creat_Loser_Tree(data,k)
+    while data[ls[0]].top()!=MAX:
+        new_input.append(data[ls[0]].top)
+        data[ls[0]].pop()
+        Adjust(ls[0])   //调整
+
+creat_Loser_Tree(data,k):
+    data[0].append(MIN)   //哨兵,辅助构建败者树
+    clear ls
+    for i=1 to k:
+        data[i].append(MAX)   //哨兵，辅助维护败者树
+    for i=k down to 1:
+        Adjust(i)
+
+
+Adjust(int root):
+    father = root /2
+    winner = root
+    t = root
+    while t!=0:   //0是要维护到败者树的最顶端
+        if win:
+            swap(winner,loser)
+   ls[0]=winner      
+        </pre>
+<h2><br>
+C&#43;&#43; Code:</h2>
+<div><pre code_snippet_id="2022966" snippet_file_name="blog_20161202_4_825301"  class="cpp" name="code">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#include&quot;algorithm&quot;
+#define N 1005
+#define INF 0x3fffffff
+#define MIN -INF
+
+/*
+利用OOP思路 构建cache高速缓存类 在不考虑内存容量的前提下 模拟最佳归并树，败者树 
+cache内利用栈模拟 
+*/
+
+using namespace std;
+
+class Empty_Error{}; 
+
+class cache   //模拟高速缓存 
+{
+	public:
+	    cache()
+		{
+			head=1;
+			memset(stack,0,sizeof(stack));
+			tail=1;
+		} 
+		inline int top()
+		{
+			try
+			{
+				if(empty()) throw Empty_Error();
+				else return stack[head];
+			}
+			catch(Empty_Error x)
+			{
+				cout&lt;&lt;&quot;try to get the element from an empty cache!&quot;&lt;&lt;endl; 
+			}
+		}
+		inline void pop()
+		{
+			try
+			{
+				if(empty()) throw Empty_Error();
+				else head++;
+			}
+			catch(Empty_Error x)
+			{
+				cout&lt;&lt;&quot;try to pop the element from an empty cache!&quot;&lt;&lt;endl; 
+			}
+		}
+		inline int size()
+		{
+			return tail-head;
+		}
+		inline bool empty()
+		{
+			if(head == tail) return true;
+			else return false;
+		}
+		inline bool full()
+		{
+			if(tail &gt;= N) return true;
+			else false;
+		}
+		inline void append(int x)   //添加数据项接口 
+		{
+			stack[tail++]=x;
+		}
+	private:
+		int head;
+		int tail;
+		int stack[N];   
+};
+
+cache test[1005];
+int heapnum;
+int k;
+int m;
+
+void jiaohuan(int i,int t)
+{
+	cache p=test[i];
+	test[i]=test[t];
+	test[t]=p;
+}
+
+void sift_down(int i)
+{
+	int t;
+	while(i*2&lt;=heapnum)
+	{
+		if(test[i*2].size() &lt; test[i].size()) t=i*2;
+		else t=i;
+		if(i*2+1 &lt;= heapnum &amp;&amp; test[i*2+1].size() &lt; test[t].size()) t=i*2+1;
+		if(i != t)
+		{
+			jiaohuan(i,t);
+			i=t;
+		}
+		else break;
+	}
+} 
+
+void sift_up(int i)
+{
+	int t;
+	while(i!=1)
+	{
+		if(test[i].size() &lt; test[i/2].size())
+		{
+			int k=i/2;
+			jiaohuan(i,k);
+			i=i/2;
+		}
+		else break;
+	}
+}
+
+void creat_heap(int num)
+{
+	for(int i=(num&gt;&gt;1);i&gt;=1;i--)
+	{
+		sift_down(i);
+	}
+}
+
+void Adjust_tree(int start,int ls[],cache* queue)
+{
+	int winner=start;
+	int t=(start+k-1)/2;
+	while(t!=0)
+	{
+		int a=queue[winner].top();
+		int b=queue[ls[t]].top();
+		if(a &gt; b)
+		{
+			int loser=winner;
+			winner=ls[t];
+			ls[t]=loser;
+		}
+		t=t/2;
+	}
+	ls[0]=winner;
+}
+
+void creat_Loser_tree(int ls[],cache* queue)
+{
+	for(int i=1;i&lt;N;i++) ls[i]=0;
+	for(int i=1;i&lt;=k;i++) queue[i].append(INF);   //加入最大项辅助维护败者树 
+	queue[0].append(MIN);   //插入min项，辅助构造败者树,这里的模板性质被破坏了，再深入考虑一下 
+	for(int i=k;i&gt;=1;i--)
+	{
+		Adjust_tree(i,ls,queue);
+	} 
+}
+
+cache K_merge(cache* queue,int k)
+{
+    cache ans;
+	int ls[N];    //实际上只需要2*k+1的辅助空间  
+	creat_Loser_tree(ls,queue);
+	while(queue[ls[0]].top()!=INF)
+	{
+		ans.append(queue[ls[0]].top());
+		queue[ls[0]].pop();
+		Adjust_tree(ls[0],ls,queue);
+	}
+	return ans;
+}
+
+int main()   //测试入口 
+{
+	printf(&quot;决定K-路归并:&quot;);
+	scanf(&quot;%d&quot;,&amp;k);
+	printf(&quot;决定块数:&quot;);
+	scanf(&quot;%d&quot;,&amp;m);
+	int b=k-(m-1)%(k-1)-1;
+	int NUM = b+m;
+	heapnum = NUM;
+	
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x;
+		int y;
+		printf(&quot;初始化高速缓存%d\n&quot;,i);
+		printf(&quot;缓存容量:\n&quot;);
+		scanf(&quot;%d&quot;,&amp;x);
+		for(int j=1;j&lt;=x;j++)
+		{
+			scanf(&quot;%d&quot;,&amp;y);
+			test[i].append(y);
+		 } 
+    }
+	
+	creat_heap(NUM);
+	
+	cache Loser_tree[k+5];
+	for(int i=1;i&lt;=NUM;i *= k)
+	{
+		for(int j=1;j&lt;=k;j++)   //获取归并序列 
+		{
+			Loser_tree[j] = test[1];
+			test[1]=test[heapnum--];
+			sift_down(1);
+		} 
+		cache ans=	K_merge(Loser_tree,k);
+		test[heapnum+1]=ans;
+		heapnum++;
+		sift_up(heapnum); 
+	} 
+	
+	//测试输出
+	while(!test[1].empty())
+	{
+		cout&lt;&lt;test[1].top()&lt;&lt;&quot; &quot;;
+		test[1].pop();
+	} 
+	cout&lt;&lt;endl;
+	return 0;
+}</pre><br>
+</div>
+<h2>遗留问题以及鸣谢：</h2>
+<div>1.感谢屈老师的课件</div>
+<div>2.<a target="_blank" href="https://my.oschina.net/liudiwu/blog/387280">https://my.oschina.net/liudiwu/blog/387280</a></div>
+<div>3.<a target="_blank" href="https://segmentfault.com/q/1010000000315760">https://segmentfault.com/q/1010000000315760</a></div>
+<div>4.《数据结构》 - 严老师</div>
+<div><br>
+</div>
+<div>1.C&#43;&#43;代码的模板类型 - 存在毛病</div>
+<div>2.败者树和堆的效率比较</div>
+<div><br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>0</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=53434466" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/xiaolei1982/article/details/50721877"  target="_blank" strategy="BlogCommendFromBaidu_0">败者树 多路归并排序</a></h2>
+                    <div class="summary">
+                        一 外部排序的基本思路
+
+假设有一个72KB的文件，其中存储了18K个整数，磁盘中物理块的大小为4KB，将文件分成18组，每组刚好4KB。
+
+首先通过18次内部排序，把18组数据排好序，得到初始的18...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/xiaolei1982" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/A/F/C/2_xiaolei1982.jpg" alt="xiaolei1982" title="xiaolei1982"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/xiaolei1982">xiaolei1982</a></li>
+                        <li class="time">2016-02-23 11:35</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>494</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/tiantangrenjian/article/details/6838491"  target="_blank" strategy="BlogCommendFromBaidu_1">败者树  K-路归并排序</a></h2>
+                    <div class="summary">
+                        外部排序指的是大文件的排序，即待排序的记录存储在外存储器上，待排序的文件无法一次装入内存，需要在内存和外部存储器之间进行多次数据交换，以达到排序整个文件的目的。外部排序最常用的算法是多路归并排序，即将...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/tiantangrenjian" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/9/C/6/2_tiantangrenjian.jpg" alt="tiantangrenjian" title="tiantangrenjian"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/tiantangrenjian">tiantangrenjian</a></li>
+                        <li class="time">2011-09-30 22:15</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>9458</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/h330531987/article/details/70767394"  target="_blank" strategy="BlogCommendFromCsdn_2">胜者树与败者树, 多路平衡归并外部排序</a></h2>
+                    <div class="summary">
+                        胜者树与败者树&#160;&#160;
+
+
+
+
+&#160;&#160;&#160;&#160;&#160;&#160; 胜者树和败者树都是完全二叉树，是树形选择排序的一种变型。每个叶子结点相当于一个选手，每个中间结点相当于一场比赛，每一层相当于一轮比赛。
+
+&#160;
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/h330531987" target="_blank" strategy="BlogCommendFromCsdn_2"><img src="http://avatar.csdn.net/9/9/E/2_h330531987.jpg" alt="h330531987" title="h330531987"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/h330531987">h330531987</a></li>
+                        <li class="time">2017-04-25 21:14</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>245</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/xhu_eternalcc/article/details/23918079"  target="_blank" strategy="BlogCommendFromCsdn_3">外部排序--胜者树与败者树</a></h2>
+                    <div class="summary">
+                        转自：http://blog.163.com/zhaohai_1988/blog/static/20951008520128510538412
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/xhu_eternalcc" target="_blank" strategy="BlogCommendFromCsdn_3"><img src="http://avatar.csdn.net/F/E/A/2_xhu_eternalcc.jpg" alt="xhu_eternalcc" title="xhu_eternalcc"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/xhu_eternalcc">xhu_eternalcc</a></li>
+                        <li class="time">2014-04-17 10:57</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>907</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/comesmiletoface/article/details/8453254"  target="_blank" strategy="BlogCommendFromCsdn_4">败者树实现多路平衡归并外部排序算法</a></h2>
+                    <div class="summary">
+                        一 外部排序的基本思路
+
+假设有一个72KB的文件，其中存储了18K个整数，磁盘中物理块的大小为4KB，将文件分成18组，每组刚好4KB。
+
+首先通过18次内部排序，把18组数据排好序，得到初...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/comesmiletoface" target="_blank" strategy="BlogCommendFromCsdn_4"><img src="http://avatar.csdn.net/2/0/4/2_comesmiletoface.jpg" alt="comesmiletoface" title="comesmiletoface"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/comesmiletoface">comesmiletoface</a></li>
+                        <li class="time">2012-12-30 18:38</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1325</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/stormlovetao/article/details/7659712"  target="_blank" strategy="BlogCommendFromCsdn_5">败者树实现多路平衡归并外部排序算法</a></h2>
+                    <div class="summary">
+                        一 外部排序的基本思路
+
+假设有一个72KB的文件，其中存储了18K个整数，磁盘中物理块的大小为4KB，将文件分成18组，每组刚好4KB。
+
+首先通过18次内部排序，把18组数据排好序，得到初...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/stormlovetao" target="_blank" strategy="BlogCommendFromCsdn_5"><img src="http://avatar.csdn.net/D/9/4/2_stormlovetao.jpg" alt="stormlovetao" title="stormlovetao"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/stormlovetao">stormlovetao</a></li>
+                        <li class="time">2012-06-13 15:29</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1293</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u010246947/article/details/55002041"  target="_blank" strategy="BlogCommendFromCsdn_6">排序4：多路归并排序之预备：胜者树与败者树</a></h2>
+                    <div class="summary">
+                        胜者树和败者树的描述，常用于加速多路归并排序的合并排序环节。
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u010246947" target="_blank" strategy="BlogCommendFromCsdn_6"><img src="http://avatar.csdn.net/3/B/5/2_u010246947.jpg" alt="u010246947" title="u010246947"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u010246947">u010246947</a></li>
+                        <li class="time">2017-02-12 19:29</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>228</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/y519476132/article/details/21873295"  target="_blank" strategy="BlogCommendFromCsdn_7">C++代码，数据结构-外部排序-败者树</a></h2>
+                    <div class="summary">
+                        败者树是树形选择排序的一种变型，它的每个非终端结点表示左右孩子中的败者，至于为什么要使用败者树，而不是胜者树，这个问题我在网上也没有寻找到答案，可能在建立树的调整树的时候败者树更加符合外部排序的要求吧...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/y519476132" target="_blank" strategy="BlogCommendFromCsdn_7"><img src="http://avatar.csdn.net/B/6/A/2_y519476132.jpg" alt="y519476132" title="y519476132"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/y519476132">y519476132</a></li>
+                        <li class="time">2014-03-23 16:03</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>554</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/gjt19910817/article/details/7200204"  target="_blank" strategy="BlogCommendFromCsdn_8">败者树 K-路归并排序</a></h2>
+                    <div class="summary">
+                        转载自：http://blog.csdn.net/tiantangrenjian/article/details/6838491
+
+
+
+
+外部排序指的是大文件的排序，即待排序的记录存储在外存...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/gjt19910817" target="_blank" strategy="BlogCommendFromCsdn_8"><img src="http://avatar.csdn.net/8/A/8/2_gjt19910817.jpg" alt="gjt19910817" title="gjt19910817"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/gjt19910817">gjt19910817</a></li>
+                        <li class="time">2012-01-14 10:00</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1661</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/yxc135/article/details/8900645"  target="_blank" strategy="BlogCommendFromCsdn_9">用败者树优化K路归并排序</a></h2>
+                    <div class="summary">
+                        图9.16给出的归并过程属于2路平衡归并。做K路平衡归并(k-way balanced merging)时，如果有m个初始归并段，则相应的归并树有[logkm]+1层，南非要归并[logkm]趟。
+...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/yxc135" target="_blank" strategy="BlogCommendFromCsdn_9"><img src="http://avatar.csdn.net/8/A/A/2_yxc135.jpg" alt="yxc135" title="yxc135"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/yxc135">yxc135</a></li>
+                        <li class="time">2013-05-08 15:37</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2350</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">4</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

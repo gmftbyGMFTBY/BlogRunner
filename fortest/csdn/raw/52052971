@@ -1,0 +1,1695 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52052971"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52052971';var commentscount = 1; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=1;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="较为完全的初学者学习最小生成树的利器，想要玩转ACM的小编倾情奉献" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>最小生成树算法汇总 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">最小生成树算法汇总</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年07月28日 15:38:29</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">1579</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<p>达神上次给我提了一个建议，对算法进行数学证明，我也是这么想的，但是这样的话，我就需要在自学一遍算法学了，不过学习嘛，就是这样</p>
+<p>所以，再过几期之后我会开始自学算法学，尽力将数学证明过程添加到讲解里面，让算法变的更加的“原来如此<span style="font-size:12px">”</span></p>
+<p><span style="font-size:12px"><br>
+</span></p>
+<p>步入正题：</p>
+<h1>最小生成树算法汇总</h1>
+<h2>1.Krustral（贪心&#43;并查集&#43;排序）</h2>
+<h3><span style="white-space:pre"></span>1.算法的思路：</h3>
+<div><span style="white-space:pre"></span>Krustral算法通过边集数组来保存图中的边的信息，我们通过对边集数组按照边的权重进行排序后，按照从小到大的顺序每次选择一条边（头和尾不在不在一个集合中（并查集判断））知道我们选择完了n-1条边之后，最小生成树酒构造完毕（算法的贪心的证明我以后会给出）</div>
+<h3><span style="white-space:pre"></span>2.算法举例描述（无情的粘自百度百科，毕竟人家有图言卵）：</h3>
+<div><span style="white-space:pre"><a target="_blank" target="_blank" href="http://http://baike.baidu.com/link?url=Qx0ctZuS7IOi27Avtc1aVoiqAhfcwUo5YFs1q6ph69qsCCfWeupcphDHBoBIRnJloQEKfzIlriiAn6_ul0xKs_">百度讲解Krustral</a></span></div>
+<div><br>
+</div>
+<h3><span style="white-space:pre"></span>3.代码示例：</h3>
+<div><pre code_snippet_id="1790276" snippet_file_name="blog_20160728_1_4837988"  code_snippet_id="1790276" snippet_file_name="blog_20160728_1_4837988" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+
+using namespace std;
+
+typedef struct node
+{
+	int x,y;
+	int weight;
+}e;
+
+e edge[100];
+int fa[100];
+int deep[100];
+int n,m;
+int sum=0;
+
+void init()
+{
+	for(int i=1;i&lt;=n;i++)
+	{
+		fa[i]=i;
+		deep[i]=1;
+	}
+}
+
+int find(int x)
+{
+	if(x==fa[x]) return x;
+	else return fa[x]=find(fa[x]);
+}
+
+void unit(int x,int y)
+{
+	x=find(x);
+	y=find(y);
+	if(x==y) return ;
+	else
+	{
+		if(deep[x]&gt;deep[y]) fa[y]=x;
+		else
+		{
+			fa[x]=y;
+			if(deep[x]==deep[y]) deep[y]++;
+		}
+	}
+}
+
+bool same(int x,int y)
+{
+	return find(x)==find(y);
+}
+
+void quicksort(int left,int right)
+{
+	if(left&gt;right) return ;
+	else
+	{
+		int i=left;
+		int j=right;
+		e t;
+		e temp=edge[left];
+		while(i!=j)
+		{
+			while(i&lt;j&amp;&amp;edge[j].weight&gt;=temp.weight) j--;
+			while(i&lt;j&amp;&amp;edge[i].weight&lt;=temp.weight) i++;
+			if(i&lt;j)
+			{
+				t=edge[i];
+				edge[i]=edge[j];
+				edge[j]=t;
+			}
+		}
+		edge[left]=edge[i];
+		edge[i]=temp;
+		quicksort(left,i-1);
+		quicksort(i+1,right);
+		return ;
+	}
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=m;i++) cin&gt;&gt;edge[i].x&gt;&gt;edge[i].y&gt;&gt;edge[i].weight;
+	init();
+	quicksort(1,m);
+	for(int i=1;i&lt;=n-1;)
+	{
+		if(!same(edge[i].x,edge[i].y))
+		{
+			unit(edge[i].x,edge[i].y);
+			sum+=edge[i].weight;
+			i++;
+		}
+	}
+	cout&lt;&lt;sum&lt;&lt;endl;
+	return 0;
+}</pre><br>
+<br>
+</div>
+<h3><span style="white-space:pre"></span>4.数据结构的选择：</h3>
+<div><span style="white-space:pre"></span>因为我们要涉及到边集的排序，所以我们选择边集数组算是一个不错的选择</div>
+<h3><span style="white-space:pre"></span>5.总结：</h3>
+<div><span style="white-space:pre"></span>Krustral算法通过利用贪心的策略，每一次都是选择相对小最小的权&#20540;的边，直至构建出来最小生成树，在这里，排序算法我推荐快排，冰茶记得作用是通过判断是否具有仙童的父亲来判断这条边是否会构成回路，从而方便我们进行选择。</div>
+<div><br>
+</div>
+<h2>2.Prim（贪心&#43;扩展）</h2>
+<h3><span style="white-space:pre"></span>1.算法的思路：</h3>
+<div><span style="white-space:pre"></span>在这里Prim算法思路和Dijstra算法的思路有一些类&#20284;，我们都通过开辟内存空间记录距离，但是区别在于，Dijstra算法记录的是单元最短路距离，而，Prim算法的记录数组记录的是点到生成树的最短距离</div>
+<h3><span style="white-space:pre"></span>2.算法的过程：</h3>
+<div><span style="white-space:pre"></span>初始的时候选择一个开始源点，此时生成树中只有她一个源点，所以此时dis数组的含义就是其他店到该生成树上的最短距离，然后我们选择最近的一个加入到生成树中，形成新的生成树，然后进行dis数组的维护，知道所有的点都已经在生成树中为止<span style="white-space:pre"></span></div>
+<h3><span style="white-space:pre"></span>3.代码示例：</h3>
+<h4><span style="white-space:pre"></span>3.1》》朴素Prim：</h4>
+<div><pre code_snippet_id="1790276" snippet_file_name="blog_20160728_2_3015871"  code_snippet_id="1790276" snippet_file_name="blog_20160728_2_3015871" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstdlib&quot;
+
+using namespace std;
+
+int n,m;
+int dis[100];
+int u[100];
+int v[100];
+int w[100];
+int first[100];
+int nextk[100];
+int book[100];
+int sum=0;
+int inf=99999999;
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=n;i++)
+	{
+		dis[i]=inf;
+		first[i]=-1;
+		book[i]=0;
+	}
+	memset(nextk,0,sizeof(nextk));
+	dis[1]=0;    //我把 1 当作初始扩展节点
+	book[1]=1;
+	for(int i=1;i&lt;=m;i++) cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];
+	for(int i=m+1;i&lt;=2*m;i++)   //无向图 
+	{
+		u[i]=v[i-m];
+		v[i]=u[i-m];
+		w[i]=w[i-m]; 
+	}
+	for(int i=1;i&lt;=2*m;i++)
+	{
+		nextk[i]=first[u[i]];
+		first[u[i]]=i;
+	}
+	int k=first[1];
+	while(k!=-1)
+	{
+		dis[v[k]]=w[k];
+		k=nextk[k];
+	} 
+	for(int i=1;i&lt;=n-1;i++)
+	{
+		int minpoint;
+		int mink=inf;
+		for(int j=1;j&lt;=n;j++)   //寻找最近的节点 
+		{
+			if(book[j]==0&amp;&amp;dis[j]&lt;mink)
+			{
+				mink=dis[j];
+				minpoint=j;
+			}
+		}
+		book[minpoint]=1;
+		sum+=dis[minpoint];
+		k=first[minpoint];
+		while(k!=-1)    //松弛出边 
+		{
+			if(dis[v[k]]&gt;w[k]) dis[v[k]]=w[k];
+			k=nextk[k];
+		}
+	}
+	cout&lt;&lt;sum&lt;&lt;endl; 
+	return 0;
+}</pre><br>
+<h4><span style="white-space:pre"></span>3.2》》堆优化：</h4>
+</div>
+<div><pre code_snippet_id="1790276" snippet_file_name="blog_20160728_3_1892649"  code_snippet_id="1790276" snippet_file_name="blog_20160728_3_1892649" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+
+using namespace std;
+
+int n,m;
+int u[100];
+int v[100];
+int w[100];
+int first[100];
+int nextk[100];
+int dis[100];
+int heap[100];
+int pos[100];
+int sum=0;
+int inf=99999999;
+int heapnum=0;
+
+void swap(int x,int y)
+{
+	int t=heap[x];
+	heap[x]=heap[y];
+	heap[y]=t;
+	
+	t=pos[heap[x]];    //同步调整 
+	pos[heap[x]]=pos[heap[y]];
+	pos[heap[y]]=t;
+}
+
+void siftdown(int i)
+{
+	int t,flag=0;
+	while(i*2&lt;=heapnum&amp;&amp;flag==0)
+	{
+		if(dis[heap[i]]&gt;dis[heap[i*2]]) t=i*2;
+		else t=i;
+		if(i*2+1&lt;=heapnum&amp;&amp;dis[heap[i*2+1]]&lt;dis[heap[t]]) t=i*2+1;
+		if(t!=i)
+		{
+			swap(i,t);
+			i=t;
+		} 
+		else flag=1;
+	}
+} 
+
+void siftup(int i)
+{
+	int t,flag=0;
+	while(i!=1&amp;&amp;flag==0)
+	{
+		if(dis[heap[i]]&lt;dis[heap[i/2]])
+		{
+			swap(i,i/2);
+			i=i/2;
+		}
+		else flag=1;
+	}
+}
+
+int pop()
+{
+	int t=heap[1];
+	swap(1,heapnum);
+	heapnum--;
+	siftdown(1);
+	return t;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	memset(first,-1,sizeof(first));
+	memset(nextk,0,sizeof(nextk));
+	for(int i=1;i&lt;=n;i++)
+	{
+		dis[i]=inf;
+		heap[i]=pos[i]=i;
+	}
+	for(int i=1;i&lt;=m;i++) cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];
+	for(int i=1+m;i&lt;=2*m;i++)
+	{
+		u[i]=v[i-m];
+		v[i]=u[i-m];
+		w[i]=w[i-m];
+	}
+	for(int i=1;i&lt;=2*m;i++)
+	{
+		nextk[i]=first[u[i]];
+		first[u[i]]=i;
+	}
+	int k=first[1];
+	dis[1]=0;    //同样以 1 为初始节点
+	heapnum=n;
+	while(k!=-1)
+	{
+		dis[v[k]]=w[k];
+		k=nextk[k];
+	}
+	for(int i=n/2;i&gt;=1;i--) siftdown(i);   //堆初始化 
+	pop();
+	for(int i=1;i&lt;=n-1;i++)
+	{
+		int d=pop();    //弹出节点 
+		sum+=dis[d];
+		k=first[d];
+		while(k!=-1) 
+		{
+			if(dis[v[k]]&gt;w[k])
+			{
+				dis[v[k]]=w[k];   
+				siftup(pos[v[k]]);   //按照dis数组进行堆调整 
+			}
+			k=nextk[k];
+		}
+	} 
+	cout&lt;&lt;sum&lt;&lt;endl; 
+	return 0;
+}</pre><br>
+<h3><span style="white-space:pre"></span>4.数据结构的选择：</h3>
+</div>
+<div><span style="white-space:pre"></span>因为我们要涉及到对节点出边松弛，所以说我们用数组链表（邻接表）可以很简单的实现</div>
+<div><span style="white-space:pre"></span></div>
+<h3><span style="white-space:pre"></span>5.堆优化：</h3>
+<div><span style="white-space:pre"></span>通过对来进行优化，我们可以降低选边的复杂度，从而加快prim算法的速度</div>
+<div><br>
+</div>
+<div><br>
+</div>
+<h2>3.路径记录的策略：</h2>
+<div>其实我们都可以用二维数组的方式来记录两个顶点之间是否存在边，但是二维数组的空间消耗太大，所以引出下面的方法</div>
+<h3><span style="white-space:pre"></span>1.Krustral算法：</h3>
+<div><span style="white-space:pre"></span>Krustral算法应用了边集数组，所以我们可以直接记录边就可以记录下来最小生成树中的边</div>
+<h3><span style="white-space:pre"></span>2.Prim算法：</h3>
+<div><span style="white-space:pre"></span>Prim算法因为是采用了邻接表还不断进进行了变得优化，看样子好像无法记录，但是实际上，我们可以开辟一个前驱数组记录在最小生成树中直接连<pre code_snippet_id="1790276" snippet_file_name="blog_20160728_4_1957122"  code_snippet_id="1790276" snippet_file_name="blog_20160728_4_1957122" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+
+using namespace std;
+
+int n,m;
+int u[100];
+int v[100];
+int w[100];
+int first[100];
+int nextk[100];
+int dis[100];
+int heap[100];
+int pos[100];
+int sum=0;
+int inf=99999999;
+int heapnum=0;
+int pre[100];
+
+typedef struct node
+{
+	int x,y;
+	int weight;
+}e;
+
+e edge[100];
+
+void swap(int x,int y)
+{
+	int t=heap[x];
+	heap[x]=heap[y];
+	heap[y]=t;
+	
+	t=pos[heap[x]];    //同步调整 
+	pos[heap[x]]=pos[heap[y]];
+	pos[heap[y]]=t;
+}
+
+void siftdown(int i)
+{
+	int t,flag=0;
+	while(i*2&lt;=heapnum&amp;&amp;flag==0)
+	{
+		if(dis[heap[i]]&gt;dis[heap[i*2]]) t=i*2;
+		else t=i;
+		if(i*2+1&lt;=heapnum&amp;&amp;dis[heap[i*2+1]]&lt;dis[heap[t]]) t=i*2+1;
+		if(t!=i)
+		{
+			swap(i,t);
+			i=t;
+		} 
+		else flag=1;
+	}
+} 
+
+void siftup(int i)
+{
+	int t,flag=0;
+	while(i!=1&amp;&amp;flag==0)
+	{
+		if(dis[heap[i]]&lt;dis[heap[i/2]])
+		{
+			swap(i,i/2);
+			i=i/2;
+		}
+		else flag=1;
+	}
+}
+
+int pop()
+{
+	int t=heap[1];
+	swap(1,heapnum);
+	heapnum--;
+	siftdown(1);
+	return t;
+}
+
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m;
+	memset(first,-1,sizeof(first));
+	memset(nextk,0,sizeof(nextk));
+	for(int i=1;i&lt;=n;i++)
+	{
+		dis[i]=inf;
+		heap[i]=pos[i]=pre[i]=i;   //开始每个点的前驱都是自己，因为 1 是厨师的节点所以1的前驱永远是自己，这一点反而可以用作我们判断 
+	}
+	for(int i=1;i&lt;=m;i++) cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];
+	for(int i=1+m;i&lt;=2*m;i++)
+	{
+		u[i]=v[i-m];
+		v[i]=u[i-m];
+		w[i]=w[i-m];
+	}
+	for(int i=1;i&lt;=2*m;i++)
+	{
+		nextk[i]=first[u[i]];
+		first[u[i]]=i;
+	}
+	int k=first[1];
+	dis[1]=0;    //同样以 1 为初始节点
+	heapnum=n;
+	while(k!=-1)
+	{
+		dis[v[k]]=w[k];
+		pre[v[k]]=1;
+		k=nextk[k];
+	}
+	for(int i=n/2;i&gt;=1;i--) siftdown(i);   //堆初始化 
+	pop();
+	for(int i=1;i&lt;=n-1;i++)
+	{
+		int d=pop();    //弹出节点 
+		sum+=dis[d];
+		k=first[d];
+		while(k!=-1) 
+		{
+			if(dis[v[k]]&gt;w[k])
+			{
+				dis[v[k]]=w[k];
+				pre[v[k]]=u[k];   //修改前驱   
+				siftup(pos[v[k]]);   //按照dis数组进行堆调整 
+			}
+			k=nextk[k];
+		}
+		edge[i].x=pre[d];
+		edge[i].y=d;
+		edge[i].weight=dis[d];
+	} 
+	for(int i=1;i&lt;=n-1;i++)
+	{
+		cout&lt;&lt;edge[i].x&lt;&lt;&#39;-&#39;&lt;&lt;edge[i].y&lt;&lt;&#39;-&#39;&lt;&lt;edge[i].weight&lt;&lt;endl;
+	}
+	cout&lt;&lt;sum&lt;&lt;endl; 
+	return 0;
+}</pre><br>
+</div>
+<h2>4.次小生成树（动态规划&#43;最小生成树）</h2>
+<h3><span style="white-space:pre"></span>1.算法描述：</h3>
+<div><span style="white-space:pre"></span>我们发现在最小生成树上加一条边必然会构成一个环，那么如果我枚举出来所有的环得情况，然后都删除掉环中<strong>第二大的边</strong>，找到最小的那种变更情况不就是次小生成树了吗，在这里我要对第二大进行一下简单的解析，如果加了一条不在生成树上的边，那么这条边必然是加后环里面最大的边，为什么呢，如果这条边在不再生成树里面，说明它比环的和还要大，所以必然是最大得，我们只要删除第二大的就好，因为这样才可以保证是次小的</div>
+<div><br>
+</div>
+<div>我们用反证法来证明一下，构成环的那一个新家的边一定是乘的环里面最大的一条边</div>
+<div>我们加上这条不在生成树中的边，构成了环，如果该边比环中的其中一条边的权&#20540;小，那么我们完全可以删除比他大的边构成一个更小的最小生成树，但是实际上我们意境的到了最小生成树，所以我们的假设是错误的</div>
+<div>即新的加的那一条边必定是新城的环中最大的一条边</div>
+<h3><span style="white-space:pre"></span>2.算法的实现：</h3>
+<div><span style="white-space:pre"></span>在这里，我们用到了动态规划的思想，我们开辟所谓的dp二位数组，dp[i][]j用来记录从i到j的路径中最大的那条边的权&#20540;</div>
+<div>在这里动态转移方程是dp[i][j]=max(dp[i][j],min) 【min的含义是目前我们在进行最小生成树的构建过程中，挑选出来的最短的边的权&#20540;】</div>
+<div>最后我们只要枚举出所有不在最小生成树上的点之后，统一计算一下新的生成树的权&#20540;求出最小的那就是次小生成树的权&#20540;</div>
+<div>在这里如果我们要记录边的话，需要再开辟一个记录内存保存当前的最小的次小生成树的边的状态，如果遇到更小的，用原来的最小生成树的替换一下就好（还有好方法吗？）</div>
+<h3><span style="white-space:pre"></span>3.注意要点：</h3>
+<div><span style="white-space:pre"></span>因为这里我们需要枚举边，所以说我们最好用二维数组来保存二者之间是否存在边，空间换时间，方便我们遍历操作</div>
+<div><br>
+</div>
+<h3><span style="white-space:pre"></span>4.代码示例：</h3>
+<div><pre code_snippet_id="1790276" snippet_file_name="blog_20160728_5_1880675"  code_snippet_id="1790276" snippet_file_name="blog_20160728_5_1880675" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+
+using namespace std;
+
+int n,m;
+int book[100][100];   //记录生成树上的存边 
+int sum=0;
+int u[100];
+int v[100];
+int w[100];
+int first[100];
+int nextk[100];
+int dp[100][100];     //为了节约脑力，就不写堆优化了 
+int dis[100];
+int inf=99999999;
+int vis[100];
+int pre[100];
+
+int main()
+{
+	memset(vis,0,sizeof(vis));
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i=1;i&lt;=n;i++) 
+	{
+		dis[i]=inf;
+		pre[i]=i;
+	}
+	dis[1]=0;
+	vis[1]=1;
+	memset(first,-1,sizeof(first));
+	memset(book,0,sizeof(book));
+	memset(dp,0,sizeof(dp));
+	for(int i=1;i&lt;=m;i++) cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];
+	for(int i=1+m;i&lt;=m*2;i++)
+	{
+		u[i]=v[i-m];
+		v[i]=u[i-m];
+		w[i]=w[i-m]; 
+	}
+	for(int i=1;i&lt;=2*m;i++)
+	{
+		nextk[i]=first[u[i]];
+		first[u[i]]=i;
+	}
+	int k=first[1];
+	while(k!=-1)
+	{
+		dis[v[k]]=w[k];
+		pre[v[k]]=u[k];
+		k=nextk[k];
+	}
+	for(int i=1;i&lt;=n-1;i++)
+	{
+		int mink=inf;
+		int minpoint;
+		for(int j=1;j&lt;=n;j++)
+		{
+			if(vis[j]==0&amp;&amp;dis[j]&lt;mink)
+			{
+				mink=dis[j];
+				minpoint=j;
+			}
+		}
+		book[pre[minpoint]][minpoint]=book[minpoint][pre[minpoint]]=1;   //记录最小生成树上的边 
+		vis[minpoint]=1;
+		sum+=dis[minpoint];
+		
+		for(int j=1;j&lt;=n;j++)   //动态规划 
+		{
+			if(vis[j]==1)
+			{
+				dp[minpoint][j]=dp[j][minpoint]=max(dis[minpoint],dp[j][pre[minpoint]]);
+			}
+		}
+		
+		k=first[minpoint];
+		while(k!=-1)
+		{
+			if(dis[v[k]]&gt;w[k]) 
+			{
+				dis[v[k]]=w[k];
+				pre[v[k]]=minpoint;
+			}
+			k=nextk[k];
+		}
+	}
+	
+	int high=inf; 
+	for(int i=1;i&lt;=n;i++)
+	{
+		int p=first[i];
+		while(p!=-1)
+		{
+			if(book[u[p]][v[p]]==0)
+			{
+				 high=min(high,sum-dp[u[p]][v[p]]+w[p]);
+				 book[u[p]][v[p]]=book[v[p]][u[p]]=1;   //杜绝下次无用的判断，把判断过的边锁死
+			}
+			p=nextk[p];
+		}
+	}
+	cout&lt;&lt;high&lt;&lt;endl;
+	return 0;
+}</pre><br>
+<h2><br>
+</h2>
+</div>
+<h2>5.待解决的问题：</h2>
+<div><span style="white-space:pre"></span>1.存在不存在求解k小生成树的算法呢</div>
+<div><span style="white-space:pre"></span>2.记录次小生成树上的边有没有更好的方法</div>
+<div><span style="white-space:pre"></span>3.堆优化Prim的判断与分析，算法的复杂度分析学习</div>
+<div><br>
+</div>
+<h2>6.POJ例题解决（次小生成树）：</h2>
+<div><span style="white-space:pre"><a target="_blank" target="_blank" href="http://http://poj.org/problem?id=1679">POJ1679 次小生成树水题</a></span></div>
+<div><br>
+</div>
+<div><span style="white-space:pre"></span>AC代码如下（本体描述有问题，在下将变得大小扩大至1000则AC，意欲AC这道题的小朋友注意一下，不要相信题的100那个数据，是1000）：</div>
+<div><pre code_snippet_id="1790276" snippet_file_name="blog_20160728_6_5566219"  code_snippet_id="1790276" snippet_file_name="blog_20160728_6_5566219" name="code" class="cpp">#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#include&quot;cmath&quot;
+#define N 1005
+
+using namespace std;
+
+int n,m;
+int u[N*20];
+int v[N*20];
+int w[N*20];
+int first[N];
+int nextk[N*20];
+int sum=0;
+int high=0;
+int dp[N][N];
+int pre[N];
+int book[N][N];
+int dis[N];
+int inf=99999999;
+int vis[N];
+int number[N];
+int num=0;
+
+int main()
+{
+	int t;
+	scanf(&quot;%d&quot;,&amp;t);
+	while(t--)
+	{
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+		sum=0;
+		num=0;
+		number[++num]=1;
+		memset(first,-1,sizeof(first));
+		for(int i=1;i&lt;=n;i++) 
+		{
+			dis[i]=inf;
+			pre[i]=i;
+		}
+		dis[1]=0;
+		memset(book,0,sizeof(book));
+		memset(vis,0,sizeof(vis));
+		for(int i=1;i&lt;=m;i++) scanf(&quot;%d%d%d&quot;,&amp;u[i],&amp;v[i],&amp;w[i]);
+		for(int i=m+1;i&lt;=2*m;i++)
+ 		{
+			u[i]=v[i-m];
+			v[i]=u[i-m];
+			w[i]=w[i-m];
+		}
+		for(int i=1;i&lt;=2*m;i++)
+		{
+			nextk[i]=first[u[i]];
+			first[u[i]]=i;
+		}
+		int k=first[1];
+		while(k!=-1)
+		{
+			dis[v[k]]=w[k];
+			pre[v[k]]=1;
+			k=nextk[k];
+		}
+		
+		vis[1]=1;
+		for(int i=1;i&lt;=n-1;i++)
+		{
+			int mink=inf;
+			int minpoint;
+			for(int j=1;j&lt;=n;j++)
+			{
+				if(vis[j]==0&amp;&amp;dis[j]&lt;mink)
+				{
+					mink=dis[j];
+					minpoint=j;
+				}
+			}
+			vis[minpoint]=1;
+			sum+=dis[minpoint];
+			book[minpoint][pre[minpoint]]=book[pre[minpoint]][minpoint]=1;
+			
+			for(int j=1;j&lt;=num;j++) dp[minpoint][number[j]]=dp[number[j]][minpoint]=max(dp[number[j]][pre[minpoint]],dis[minpoint]);
+			
+			number[++num]=minpoint;
+			k=first[minpoint];
+			while(k!=-1)
+			{
+				if(dis[v[k]]&gt;w[k])
+				{
+					dis[v[k]]=w[k];
+					pre[v[k]]=u[k];
+				}
+				k=nextk[k];
+			}
+		}
+		
+		high=inf;
+		for(int i=1;i&lt;=n;i++)
+		{
+			k=first[i];
+			while(k!=-1)
+			{
+				if(book[u[k]][v[k]]==0)
+				{
+					high=min(high,sum+w[k]-dp[u[k]][v[k]]);
+					book[u[k]][v[k]]=book[v[k]][u[k]]=1;
+				}
+				k=nextk[k];
+			}
+		}
+		if(high==sum) printf(&quot;Not Unique!\n&quot;);
+		else printf(&quot;%d\n&quot;,sum);
+	}
+	return 0;
+}</pre>
+<div><br>
+</div>
+2016-11-10-补充<br>
+<h2>7.算法分析:</h2>
+</div>
+<div>1.Prim算法我们得分析会发现，我们每次要对每个点的出边就你行维护以及查询每个的最小出边，都需要遍历一遍所有的出度</div>
+<div>但是我们始终没有考虑边的分类，所以说我们在图很稠密的时候，图中的边非常的多的时候，我们尽量采用Prim算法，时间复杂度是O(n^2)，n是点的数目</div>
+<div><br>
+</div>
+<div>2.Krustral算法：</div>
+<div>我们会发现Krustral算法的话，我们是对边的操作，先排序，我们在挑选变，所以说在边少的时候我们采用Krustral算法，时间复杂度是O(n*logn)，n是边的数目，适用于稀疏图</div>
+<div><br>
+</div>
+<h2>8.参考文献：</h2>
+<div><a target="_blank" target="_blank" href="http://http://www.cnblogs.com/hxsyl/p/3290832.html">火星十一郎-张鹏飞的博客</a><br>
+</div>
+<div><a target="_blank" target="_blank" href="http://http://blog.sina.com.cn/s/blog_63509b890100r445.html">语文-满分的博客</a><br>
+</div>
+<div><a target="_blank" target="_blank" href="http://http://blog.csdn.net/niushuai666/article/details/6925258">飘过的小牛的博客</a><br>
+</div>
+<div><a target="_blank" target="_blank" href="http://http://baike.baidu.com/link?url=kOd56zqkzhfpSDcMW4F_-xPeykQluIkpfMJj55Yj7ShmBazYAA0T29W0X2FZFLBE5c8czBoSXQAe29_d555C3q">Krustral百度百科</a><br>
+</div>
+<div><a target="_blank" target="_blank" href="http://https://xueshu.glgoo.org/scholar?hl=zh-CN&amp;q=次小生成树&amp;btnG=&amp;lr=">Google学术-最小生成树论文集和</a><br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>1</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52052971" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/i_am_a_winer/article/details/45276643"  target="_blank" strategy="BlogCommendFromBaidu_0">最小生成树的两种算法：Prim和Kruskal算法</a></h2>
+                    <div class="summary">
+                        越来越明白了一个道理：你写不出代码的原因只有一个，那就是你没有彻底理解这个算法的思想！！
+以前写过最小生成树，但是，水了几道题后，过了一段时间，就会忘却，一点也写不出来了。也许原因只有一个，那就是我没...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/I_am_a_winer" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/5/D/4/2_i_am_a_winer.jpg" alt="I_am_a_winer" title="I_am_a_winer"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/I_am_a_winer">I_am_a_winer</a></li>
+                        <li class="time">2015-04-25 22:42</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1254</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/yanerhao/article/details/46637995"  target="_blank" strategy="BlogCommendFromBaidu_1">图论中最小生成树构造算法之Prim算法和Kruskal算法</a></h2>
+                    <div class="summary">
+                        图是 由顶点的有穷非空集合和点之间边的集合构成：
+G={V,E}，V是顶点集合，E是顶点之间边的集合。根基顶点之间边有无方向性可分为：有向图和无向图：
+
+
+在图中，当对边赋予有意义数值时候，成为网图。...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/yanerhao" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/9/B/2/2_yanerhao.jpg" alt="yanerhao" title="yanerhao"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/yanerhao">yanerhao</a></li>
+                        <li class="time">2015-06-25 16:24</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1468</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/yigelangmandeshiren/article/details/8316990"  target="_blank" strategy="BlogCommendFromBaidu_2">【数据结构与算法】图之最小生成树</a></h2>
+                    <div class="summary">
+                        最小生成树的基本概念
+&#160; &#160; &#160;一个有n个结点的连通图的生成树是原图的极小连通子图，它包含原图中的所有n个结点，并且有保持图连通的最少的边。
+&#160; &#160; &#160;如果无向连通图是一个带权图，那么它的所有生成...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/yigelangmandeshiren" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/C/4/4/2_yigelangmandeshiren.jpg" alt="yigelangmandeshiren" title="yigelangmandeshiren"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/yigelangmandeshiren">yigelangmandeshiren</a></li>
+                        <li class="time">2012-12-19 00:13</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>3812</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/hurmishine/article/details/51244216"  target="_blank" strategy="BlogCommendFromBaidu_3">最小生成树（prime算法、kruskal算法） 和 最短路径算法（floyd、dijkstra）</a></h2>
+                    <div class="summary">
+                        文章转自:http://www.cnblogs.com/aiyelinglong/archive/2012/03/26/2418707.html
+
+
+
+
+简介:
+
+
+带权图分为有向和无向，无向图的最短...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/hurmishine" target="_blank" strategy="BlogCommendFromBaidu_3"><img src="http://avatar.csdn.net/8/D/6/2_hurmishine.jpg" alt="hurmishine" title="hurmishine"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/hurmishine">hurmishine</a></li>
+                        <li class="time">2016-04-25 18:27</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2217</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/ch3656468/article/details/6487762"  target="_blank" strategy="BlogCommendFromBaidu_4">新人报道</a></h2>
+                    <div class="summary">
+                        
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/ch3656468" target="_blank" strategy="BlogCommendFromBaidu_4"><img src="http://avatar.csdn.net/C/0/2/2_ch3656468.jpg" alt="ch3656468" title="ch3656468"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/ch3656468">ch3656468</a></li>
+                        <li class="time">2010-03-07 19:59</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>182</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/weinierbian/article/details/8059129"  target="_blank" strategy="BlogCommendFromBaidu_5">最小生成树（普利姆算法、克鲁斯卡尔算法）</a></h2>
+                    <div class="summary">
+                        给定一个带权的无向连通图,如何选取一棵生成树,使树上所有边上权的总和为最小,这叫最小生成树.
+求最小生成树的算法
+(1)&#160;克鲁斯卡尔算法
+图的存贮结构采用边集数组,且权值相等的边在数组中排列次序...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/weinierbian" target="_blank" strategy="BlogCommendFromBaidu_5"><img src="http://avatar.csdn.net/5/2/F/2_weinierbian.jpg" alt="weinierbian" title="weinierbian"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/weinierbian">weinierbian</a></li>
+                        <li class="time">2012-10-11 10:01</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>90585</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/qq_32400847/article/details/51148917"  target="_blank" strategy="BlogCommendFromBaidu_7">从零开始学动态规划</a></h2>
+                    <div class="summary">
+                        本文在写作过程中参考了大量资料，不能一一列举，还请见谅。
+动态规划的定义：
+动态规划是运筹学的一个分支，是求解决策过程的最优化的数学方法。20世纪50年代初美国数学家R.E.Bellman等人在研究多...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/qq_32400847" target="_blank" strategy="BlogCommendFromBaidu_7"><img src="http://avatar.csdn.net/7/D/D/2_qq_32400847.jpg" alt="qq_32400847" title="qq_32400847"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/qq_32400847">qq_32400847</a></li>
+                        <li class="time">2016-04-24 18:00</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>7393</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/gettogetto/article/details/53216951"  target="_blank" strategy="BlogCommendFromBaidu_8">最小生成树-Prim算法和Kruskal算法</a></h2>
+                    <div class="summary">
+                        Prim算法
+
+1.概览
+
+普里姆算法（Prim算法），图论中的一种算法，可在加权连通图里搜索最小生成树。意即由此算法搜索到的边子集所构成的树中，不但包括了连通图里的所有顶点（英语：Vertex
+ (...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/gettogetto" target="_blank" strategy="BlogCommendFromBaidu_8"><img src="http://avatar.csdn.net/8/7/5/2_gettogetto.jpg" alt="gettogetto" title="gettogetto"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/gettogetto">gettogetto</a></li>
+                        <li class="time">2016-11-18 15:11</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1439</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/jung_zhang/article/details/50986387"  target="_blank" strategy="BlogCommendFromBaidu_9">图算法之最小生成树(Kruskal)</a></h2>
+                    <div class="summary">
+                        所谓最小生成树是指：给定一个无向图G={V,E}，用集合{u,v}∈E表示从u到v的边，w(u,v)表示从u到v的权值，若{u,v}集合中所有元素权值之和最小且没有构成回路，则称集合{u,v}为该图的...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/Jung_zhang" target="_blank" strategy="BlogCommendFromBaidu_9"><img src="http://avatar.csdn.net/3/5/E/2_jung_zhang.jpg" alt="Jung_zhang" title="Jung_zhang"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/Jung_zhang">Jung_zhang</a></li>
+                        <li class="time">2016-03-26 13:15</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>473</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">4</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+

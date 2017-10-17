@@ -1,0 +1,1158 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+            <link rel="canonical" href="http://blog.csdn.net/ltyqljhwcm/article/details/52544151"/> 
+
+    <script type="text/javascript">
+        var username = "ltyqljhwcm";var _blogger = username;var blog_address = "http://blog.csdn.net/ltyqljhwcm";var static_host = "http://static.blog.csdn.net";
+        var currentUserName = ""; var fileName = '52544151';var commentscount = 1; var islock = false
+        window.quickReplyflag = true;
+        var totalFloor=1;
+                
+                 var isBole = false;
+                
+                
+                 var isDigg = false;
+                
+          
+             var isExpert=false;
+          
+    </script>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/static/css/avatar.css">
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+    <link rel="stylesheet" href="http://static.blog.csdn.net/Skin/skin3-template/css/style.css?v=2017.032">
+    <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/fonts/iconfont.js"></script>
+    <script src="//csdnimg.cn/rabbit/exposure-click/main.js?v1.15.23"></script>
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking_for_recommend.js?v=0911" charset="utf-8"></script>
+    <script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js" charset="utf-8"></script>
+ 
+    <link rel="stylesheet" href="http://static.blog.csdn.net/code/prettify.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/code/prettify.js"></script>
+<script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+
+
+
+    </script>
+    <meta name="description" content="1.何为LCS问题：
+在求解LCS问题之前，我们需要先了解一下什么叫做最长公共子序列
+最长公共子序列：用我们最容易通俗理解的话语来解释的话，最长公共子序列就是两个或者多个串中，最长的相同的子序列
+ps：子序列可以不连续，但是有先后的次序关系
+
+
+LCS问题应用非常的广泛
+2.如何求解LCS问题：
+1.暴力搜索
+LCS问题如果我们只仅限于两个的=字符串的话，我们的首先的思考的策略是" />
+    <meta name="keywords" content="" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+
+
+    <title>LCS问题求解-动态规划 - CSDN博客</title>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="http://blog.csdn.net"></script>
+
+<div class="container clearfix">
+    <main>
+        <article>
+            <h1 class="csdn_top">LCS问题求解-动态规划</h1>
+            <div class="article_bar clearfix">
+                <div class="artical_tag">
+                    <span class="original">原创</span>
+                    <span class="time">2016年09月15日 00:11:54</span>
+                </div>
+				<ul class="article_tags clearfix csdn-tracking-statistics" data-mod="popu_377">
+					<li class="tit">标签：</li>
+					
+				</ul>
+                <ul class="right_bar">
+                    <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">959</span></button></li>
+                    <!--<li><button class="btn-noborder"><i class="icon iconfont icon-dashang-"></i><span class="txt">0</span></button></li>-->
+
+                    <li class="edit">
+                        <a class="btn-noborder" href="" >
+                            <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                        </a>
+                    </li>
+                    <li class="del">
+                        <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                            <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="article_content" class="article_content csdn-tracking-statistics" data-mod="popu_307" data-dsm="post">
+                
+<h2>1.何为LCS问题：</h2>
+<div>在求解LCS问题之前，我们需要先了解一下什么叫做最长公共子序列</div>
+<div>最长公共子序列：用我们最容易通俗理解的话语来解释的话，最长公共子序列就是两个或者多个串中，最长的相同的子序列</div>
+<div>ps：子序列可以不连续，但是有先后的次序关系</div>
+<div><br>
+</div>
+<div>LCS问题应用非常的广泛</div>
+<h2>2.如何求解LCS问题：</h2>
+<div>1.暴力搜索</div>
+<div>LCS问题如果我们只仅限于两个的=字符串的话，我们的首先的思考的策略是暴力搜索，那么暴力搜索的复杂性到底有多大呢，我们稍微来计算一下，假设题目只让我们求两个序列的LCS，那么假设a串长是n，b串的长是m</div>
+<div>那么很容易求得，a串的子序列的个数有2^n，b串的子序列的个数有2^m，那么我们对于每一种情况进行匹配的话，时间复杂度就会变成绝对无法容忍的O(2^n*2^m)指数的爆炸式增长，这是最恐怖的一点</div>
+<div>那么如果我们要在k个串中查找LCS，那么这个指数式的时间是绝对无法容忍的</div>
+<div><br>
+</div>
+<div>2.动态规划：</div>
+<div>动态规划对于这类求解最优解的问题，往往都可以给出多项式时间的优化算法</div>
+<div>那么问题来了，LCS的DP思路是什么呢：</div>
+<div><br>
+</div>
+<div>定义状态：（这里还是假设求的是两个串的LCS）</div>
+<div>dp[i][j]:定义为a串第i位置b串第j位置以前的两个序列的最大的LCS，那么显而易见，dp[0][0]=0,dp[n][m]就是我们要求的最大&#20540;</div>
+<div><br>
+</div>
+<div>状态转移方程：</div>
+<div>1.a[i]=b[j] &nbsp; dp[i][j]=dp[i-1][j-1]&#43;1</div>
+<div>2.a[i]!=b[j] &nbsp; dp[i][j]=max(dp[i-1][j],dp[i][j-1])</div>
+<div><br>
+</div>
+<div>对于上面的状态转移方程的解释：</div>
+<div>当i，j位置的字符匹配的时候，我们i，j位置以前的LCS就是i-1，j-1位置以前的LCS的长度&#43;1</div>
+<div>当i，j位置的字符不匹配的时候，那么LCS的长度是不会增加的，但是我们有两种选择，就是i，j-1位置以前的和i，j-1位置以前的，我们选取最大的LCS作为当前的LCS即可</div>
+<div><br>
+</div>
+<div>附图好理解：</div>
+<div><img src="http://blog.chinaunix.net/attachment/201301/22/27767798_1358843808C4xG.png" alt=""><br>
+</div>
+<div>如上，其实使LCS长度增加的只是图上的额矩阵的对角线路径而已</div>
+<div>&nbsp;</div>
+<div>核心代码示例：</div>
+<div><pre name="code" class="cpp">for(int i=1;i&lt;=n;i++)
+{
+	for(int j=1;j&lt;=m;j++)
+	{
+		if(a[i]==b[j]) dp[i][j]=dp[i-1][j-1]+1;
+		else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+	}
+} 
+
+print dp[n][m]</pre><br>
+<h2>3.LCS的优化：</h2>
+</div>
+<div>我们会发现动态规划虽然可以将我们求解的指数时间复杂度问题转化成O(n*n)的多项式时间复杂度，但是我们不能沪铝的是，DP的求解速录为了能够快速得到结果，开辟了大量的空间用来保存中间结果，是的我们的空间复杂度变的很臃肿O(n*m)的空间复杂度一旦我们限制内存的大小或者我们给出的额数据的范围过于巨大的话，我们就必须考虑对LCS的DP求解思路进行空间上的优化</div>
+<div><br>
+</div>
+<div>优化策略:</div>
+<div>我们发现，实际上，我们在计算下一个位置之前的时候，我们最多只用到了这么一些数据dp[i-1][j],dp[i-1][j-1],dp[i][j-1],也就是说，我们最多也就只用到了i-1行和之前的dp[i][j-]的计算结果，那么我们很明显的可以发现，我们完全可以通过<strong><em><u>O(min(strlen(a),strlen(b)))</u></em></strong>的空间复杂度就可以完成整个DP的所有的操作，也就是说，我们把我们的状态压缩到一维数组</div>
+<div><br>
+</div>
+<div>操作方案：</div>
+<div>因为我们每次都会将新的结果覆盖到之前的一维数组之上，所以说，我们在进行计算当前的dp[i]的时候，必须提前将我们的dp[i-1](dp[i]的对角线的元素)记录下来（save）,我们最后要计算的就是这么几个情况：</div>
+<div>1.当前匹配：dp[i]=save&#43;1;</div>
+<div>2.当前不匹配：dp[i-1]（刚计算完的）和dp[i]取最大&#20540;即可</div>
+<div>所以说，我们这里的最核心的要点就是保存save变量</div>
+<div><br>
+</div>
+<div>核心代码：</div>
+<div><pre name="code" class="cpp">for(int i=1;i&lt;=la;i++)
+		{
+			save=dp[0];
+			for(int j=1;j&lt;=lb;j++)
+			{
+				int k=dp[j];   //提取当前值 
+				if(a[i]==b[j]) dp[j]=save+1;
+				else dp[j]=max(dp[j-1],dp[j]);
+				save=k;     //save记录 
+			}
+		}
+		cout&lt;&lt;dp[lb]&lt;&lt;endl;  //注意这里要对应好 </pre><br>
+<h2>4.例题解析：NYOJ36</h2>
+</div>
+<div>LCS版题：</div>
+<div>朴素LCS dp：</div>
+<div><pre name="code" class="cpp"> 
+#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#define N 1002
+
+using namespace std;
+
+int dp[N];
+char a[N];
+char b[N];
+int la;
+int lb;
+int save;
+
+int main()
+{
+	int t;
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		memset(a,0,sizeof(a));
+		memset(b,0,sizeof(b));
+		memset(dp,0,sizeof(dp));
+		scanf(&quot;%s&quot;,a+1);
+		scanf(&quot;%s&quot;,b+1);
+		la=strlen(a+1);
+		lb=strlen(b+1);
+		for(int i=1;i&lt;=la;i++)
+		{
+			save=dp[0];
+			for(int j=1;j&lt;=lb;j++)
+			{
+				int k=dp[j];   //提取当前值 
+				if(a[i]==b[j]) dp[j]=save+1;
+				else dp[j]=max(dp[j-1],dp[j]);
+				save=k;     //save记录 
+			}
+		}
+		cout&lt;&lt;dp[lb]&lt;&lt;endl;  //注意这里要对应好 
+	}
+	return 0;
+}        </pre><br>
+优化后LCS：空间复杂度O(min(a,b))</div>
+<div><pre name="code" class="cpp"> 
+#include&quot;iostream&quot;
+#include&quot;cstdio&quot;
+#include&quot;cstring&quot;
+#include&quot;cstdlib&quot;
+#define N 1002
+
+using namespace std;
+
+int dp[N];
+char a[N];
+char b[N];
+int la;
+int lb;
+int save;
+
+int main()
+{
+	int t;
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		memset(a,0,sizeof(a));
+		memset(b,0,sizeof(b));
+		memset(dp,0,sizeof(dp));
+		scanf(&quot;%s&quot;,a+1);
+		scanf(&quot;%s&quot;,b+1);
+		la=strlen(a+1);
+		lb=strlen(b+1);
+		for(int i=1;i&lt;=la;i++)
+		{
+			save=dp[0];
+			for(int j=1;j&lt;=lb;j++)
+			{
+				int k=dp[j];   //提取当前值 
+				if(a[i]==b[j]) dp[j]=save+1;
+				else dp[j]=max(dp[j-1],dp[j]);
+				save=k;     //save记录 
+			}
+		}
+		cout&lt;&lt;dp[lb]&lt;&lt;endl;  //注意这里要对应好 
+	}
+	return 0;
+}        </pre><br>
+<br>
+</div>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" />
+            </div>
+        </article>
+        <div class="readall_box csdn-tracking-statistics" data-mod="popu_376">
+			<div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <div class="article_copyright">
+            版权声明：本文为博主原创文章，未经博主允许不得转载。
+        </div>
+        <!--  <div class="reward_box">
+            <div class="tit">
+              <button class="btn_reward"><i class="icon iconfont icon-dashang-"></i></button>
+            </div>
+            <dl class="clearfix">
+              <dt><a href="#" target="_blank">近期打赏</a></dt>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+              <dd><a href="#" target="_blank"><img src="http://avatar.csdn.net/9/3/2/2_nzf_001.jpg" alt="聂兆芳" title="聂兆芳"></a></dd>
+            </dl>
+          </div>-->
+
+        <ul class="article_collect clearfix csdn-tracking-statistics"  data-mod="popu_378">
+            <li class="tit">本文已收录于以下专栏：</li>
+            
+            <li><a href="http://blog.csdn.net/column/details/12704.html" target="_blank">算法与数据结构</a></li>
+            
+        </ul>
+        <div class="comment_box clearfix">
+            <div id="comment_form">
+                <div id="commentsbmitarear">
+                    <!-- <h6><span>1</span>条评论</h6> -->
+           <!--          <dl class="clearfix" id="commentbox">
+                        <dt>
+                            <a href="http://my.csdn.net/"><img src="" ></a>
+                        </dt>
+                        <dd>
+                            <a href="http://my.csdn.net/" target="_blank"></a>
+                        </dd>
+                        <dd class="txt_tip"><span id="tip_comment" class="tip"></span></dd>
+                    </dl> -->
+                    <div class="comment_area clearfix">
+						<div class="userimg"><a href="http://my.csdn.net/"><img src=""></a></div>
+                        <form action="/ltyqljhwcm/comment/submit?id=52544151" method="post" onsubmit="return subform(this);" id="commentform">
+                            <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="发表你的评论"></textarea>
+                            <div class="bot_bar clearfix">
+                                <div id="ubbtools" class="add_code">
+                                    <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                                </div>
+
+                                <input type="hidden" id="comment_replyId" name="comment_replyId">
+                                <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                                <input type="hidden" id="commentId" name="commentId" value="">
+                                <input type="submit" class="btn btn-redborder" value="发表评论">
+								<span id="tip_comment" class="tip">
+                                <div style="display: none;" class="csdn-tracking-statistics" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                                <div id="lang_list" code="code">
+                                    <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                    <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                    <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                    <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                    <a href="#php" target="_self">PHP</a>
+                                    <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                    <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                    <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                    <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                    <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                    <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                    <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                    <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                    <span class="arrb"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_li_outbox">
+            <div id="comment_list"></div>
+        </div>
+
+        <div class="more_comment">
+            <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+        </div>
+
+        <h3 class="recommend_tit">相关文章推荐</h3>
+        <div class="recommend_list clearfix">
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/orbit/article/details/6717125"  target="_blank" strategy="BlogCommendFromBaidu_0">算法系列之五：最长公共子序列（LCS）问题（非连续子序列）的两种解法</a></h2>
+                    <div class="summary">
+                        算法系列之五：最长公共子序列（LCS）问题（非连续子序列）的两种解法
+
+&#160;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; 最长公共子序列也称作最长公共子串，英文缩写是LCS（Longest Common Subsequenc...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/orbit" target="_blank" strategy="BlogCommendFromBaidu_0"><img src="http://avatar.csdn.net/1/1/9/2_orbit.jpg" alt="orbit" title="orbit"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/orbit">orbit</a></li>
+                        <li class="time">2011-08-25 09:11</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>11306</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/rrrfff/article/details/7523437"  target="_blank" strategy="BlogCommendFromBaidu_1">动态规划算法解最长公共子序列LCS问题</a></h2>
+                    <div class="summary">
+                        动态规划算法解LCS问题
+动态规划一般也只能应用于有最优子结构的问题。最优子结构的意思是局部最优解能决定全局最优解(对有些问题这个要求并不能完全满足，故有时需要引入一
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/rrrfff" target="_blank" strategy="BlogCommendFromBaidu_1"><img src="http://avatar.csdn.net/9/B/1/2_rrrfff.jpg" alt="rrrfff" title="rrrfff"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/rrrfff">rrrfff</a></li>
+                        <li class="time">2012-04-30 07:59</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>31865</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <!--dl class="clearfix csdn-tracking-statistics" data-mod="popu_393">
+                <dt><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog10" target="_blank"><img class="maxwidth" src="http://img.blog.csdn.net/20170928113144608" alt="" title=""></a></dt>
+                <dd>
+                    <div class="summary">
+                        <h2><a href='http://edu.csdn.net/topic/python1?utm_source=blog10' target='_blank'>伤心啊！年度热门编程语言排行榜出来了...</a></h2>  <div class="summary">近期，IEEE Spectrum 发布了第四届顶级编程语言交互排行榜。结合 10 个线上数据源的 12 个标准，对 48 种语言进行了排行！此外，七牛云许式伟曾说过Go语言会取代Java...气氛... </div> 
+                    </div>
+                </dd>
+            </dl-->
+	<script>
+		(function() {
+		    var s = "_" + Math.random().toString(36).slice(2);
+		    document.write('<div id="' + s + '"></div>');
+		    (window.slotbydup=window.slotbydup || []).push({
+			id: '4765209',
+			container: s,
+			size: '808,120',
+			display: 'inlay-fix'
+		    });
+		})();
+	</script>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/lvshubao1314/article/details/38539741"  target="_blank" strategy="BlogCommendFromBaidu_2">LCS 最长公共子序列并输出该序列</a></h2>
+                    <div class="summary">
+                        #include 
+#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+using namespace std;
+string s1...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u013573047" target="_blank" strategy="BlogCommendFromBaidu_2"><img src="http://avatar.csdn.net/6/F/2/2_u013573047.jpg" alt="u013573047" title="u013573047"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u013573047">u013573047</a></li>
+                        <li class="time">2014-08-13 17:17</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>809</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/synapse7/article/details/11720559"  target="_blank" strategy="BlogCommendFromBaidu_3">动态规划解最长公共子序列(LCS)问题 (附可打印LCS完整代码)</a></h2>
+                    <div class="summary">
+                        动态规划法
+
+经常会遇到复杂问题不能简单地分解成几个子问题，而会分解出一系列的子问题。简单地采用把大问题分解成子问题，并综合子问题的解导出大问题的解的方法，问题求解耗时会按问题规模呈幂级数增加。
+
+为...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/synapse7" target="_blank" strategy="BlogCommendFromBaidu_3"><img src="http://avatar.csdn.net/B/5/1/2_synapse7.jpg" alt="synapse7" title="synapse7"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/synapse7">synapse7</a></li>
+                        <li class="time">2013-09-16 09:05</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2181</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/hpugym/article/details/45081087"  target="_blank" strategy="BlogCommendFromBaidu_4">动态规划 之 【最长公共序列】 LCS算法</a></h2>
+                    <div class="summary">
+                        【最长公共序列】LCS算法
+&#160;
+&#160;&#160;&#160;&#160;&#160; 
+首先将要看到如何运用动态编程查找两个 DNA 序列的最长公共子序列（longest common subsequence，LCS）。发现了新的基因序...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/hpugym" target="_blank" strategy="BlogCommendFromBaidu_4"><img src="http://avatar.csdn.net/2/3/6/2_hpugym.jpg" alt="hpugym" title="hpugym"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/hpugym">hpugym</a></li>
+                        <li class="time">2015-04-16 21:16</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>625</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/chenchaofuck1/article/details/51719808"  target="_blank" strategy="BlogCommendFromBaidu_5">动态规划算法解最长公共子序列LCS问题</a></h2>
+                    <div class="summary">
+                        第一部分、什么是动态规划算法&#160;
+
+&#160;&#160;&#160; ok，咱们先来了解下什么是动态规划算法。
+
+&#160;&#160;&#160; 动态规划一般也只能应用于有最优子结构的问题。最优子结构的意思是局部最优解能决定全局最优解(对有些问题这个要...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/chenchaofuck1" target="_blank" strategy="BlogCommendFromBaidu_5"><img src="http://avatar.csdn.net/D/3/B/2_chenchaofuck1.jpg" alt="chenchaofuck1" title="chenchaofuck1"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/chenchaofuck1">chenchaofuck1</a></li>
+                        <li class="time">2016-06-20 12:05</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1748</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/v_july_v/article/details/6695482"  target="_blank" strategy="BlogCommendFromBaidu_6">程序员编程艺术第十一章：最长公共子序列(LCS)问题</a></h2>
+                    <div class="summary">
+                        程序员编程艺术第十一章：最长公共子序列(LCS)问题0、前言&#160;&#160;&#160; 程序员编程艺术系列重新开始创作了（前十章，请参考程序员编程艺术第一~十章集锦与总结）。回顾之前的前十章，有些代码是值得商榷的，因当时...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/v_JULY_v" target="_blank" strategy="BlogCommendFromBaidu_6"><img src="http://avatar.csdn.net/E/0/C/2_v_july_v.jpg" alt="v_JULY_v" title="v_JULY_v"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/v_JULY_v">v_JULY_v</a></li>
+                        <li class="time">2011-08-17 16:47</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>55456</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/zr459927180/article/details/51037727"  target="_blank" strategy="BlogCommendFromBaidu_7">动态规划算法解最长公共子序列LCS问题</a></h2>
+                    <div class="summary">
+                        原文地址：http://blog.csdn.net/rrrfff/article/details/7523437
+
+
+
+
+
+
+
+
+
+动态规划算法解LCS问题
+
+
+
+
+
+
+
+
+
+
+作者 July 二零一...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/zr459927180" target="_blank" strategy="BlogCommendFromBaidu_7"><img src="http://avatar.csdn.net/D/B/2/2_zr459927180.jpg" alt="zr459927180" title="zr459927180"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/zr459927180">zr459927180</a></li>
+                        <li class="time">2016-04-01 16:14</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1561</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/zhouworld16/article/details/16338141"  target="_blank" strategy="BlogCommendFromBaidu_8">动态规划求解最长公共子序列（LCS）</a></h2>
+                    <div class="summary">
+                        看了《算法导论》中文第二版P208的动态规划求解LCS问题，觉得很赞，但总觉得算导写得有些晦涩，希望自己能写得简单易懂一些，纯当锻炼了，欢迎指导交流。
+首先，子序列和子串是不一样的。子串是连续的，而子...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/zhouworld16" target="_blank" strategy="BlogCommendFromBaidu_8"><img src="http://avatar.csdn.net/E/8/C/2_zhouworld16.jpg" alt="zhouworld16" title="zhouworld16"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/zhouworld16">zhouworld16</a></li>
+                        <li class="time">2013-11-15 20:23</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6239</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+            <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <dd>
+                    <h2><a href="/u013445530/article/details/45645307"  target="_blank" strategy="BlogCommendFromBaidu_9">白话算法之【动态规划入门】</a></h2>
+                    <div class="summary">
+                        动态规划入门
+什么是动态规划?
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;动态规划(Dynamic&#160;Programming，所以我们简称动态规划为DP)是运筹学的一个分支，是求解决策过程(decision&#160;process)最优...
+                    </div>
+                    <ul>
+                        <li class="avatar_img"><a href="http://blog.csdn.net/u013445530" target="_blank" strategy="BlogCommendFromBaidu_9"><img src="http://avatar.csdn.net/A/A/E/2_u013445530.jpg" alt="u013445530" title="u013445530"></a></li>
+                        <li class="user_name"><a href="http://blog.csdn.net/u013445530">u013445530</a></li>
+                        <li class="time">2015-05-11 16:39</li>
+                        <li class="visited_num"><i class="icon iconfont icon-read"></i><span>23151</span></li>
+                    </ul>
+                </dd>
+            </dl>
+            
+
+	   
+
+            
+
+            
+        </div>
+    </main>
+    <aside>
+        <div class="right_box user_info">
+            <dl class="inf_bar clearfix">
+                <dt class="csdn-tracking-statistics" data-mod="popu_381">
+                    <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank">
+                        <img src="http://avatar.csdn.net/A/7/0/1_ltyqljhwcm.jpg" class="avatar_pic">
+                    </a>
+                    <span class="medals" title="">
+                <svg class="icon" aria-hidden="true">
+                    
+                </svg>
+              </span>
+                </dt>
+                <dd>
+                    <h3 class="csdn-tracking-statistics"  data-mod="popu_380"><a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" id="uid">ltyqljhwcm</a></h3>
+                    <span  class="csdn-tracking-statistics" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">＋关注</a></span>
+                </dd>
+            </dl>
+            <div class="inf_number_box clearfix">
+                <dl>
+                    <dt>原创</dt>
+                    <dd>219</dd>
+                </dl>
+                <dl>
+                    <dt>粉丝</dt>
+                    <dd id='fan'>39</dd>
+                </dl>
+                <dl>
+                    <dt>喜欢</dt>
+                    <dd>0</dd>
+                </dl>
+								 <dl>
+              <dt>码云</dt>
+              <dd>&nbsp;</dd>
+            </dl>
+
+            </div>
+	    <div class="writings">
+              <div class="public_signal clearfix">
+                <h3>他的最新文章</h3>
+                <a href="http://blog.csdn.net/ltyqljhwcm" target="_blank" class="more_z"><span>更多文章</span></a>
+              </div>
+                <ul class="inf_list clearfix csdn-tracking-statistics" data-mod="popu_382">
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53454971" target="_blank">POJ 3295 - 位运算 + 模拟 +递归</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53444306" target="_blank">NYOJ 118 次小生成树</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53434466" target="_blank">胜者树 败者树 K-路最佳归并树 高效外部排序</a>
+                    </li>
+                    
+                    <li class="clearfix">
+                      
+                        <a href="/ltyqljhwcm/article/details/53411183" target="_blank">POJ 1062 - 昂贵的聘礼 - 经典题</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="extension_other csdn-tracking-statistics" data-mod="popu_389">
+						<!--u3032528-->
+			<div class="flashrecommend">
+            <script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+		    </div>
+        </div>
+
+		<div class="host-column">
+          <h3>博主专栏</h3>
+          <ul class="column-list">
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13704.html">
+                  <img src="http://img.blog.csdn.net/20161126164008952" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13704.html">NYOJ 好题总结</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3080</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13628.html">
+                  <img src="http://img.blog.csdn.net/20161121124730884" alt="">
+                  <div>56</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13628.html">POJ 专项题解</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>19375</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/13409.html">
+                  <img src="http://img.blog.csdn.net/20161102193750895" alt="">
+                  <div>4</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/13409.html">Leetcode</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1266</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12932.html">
+                  <img src="http://img.blog.csdn.net/20160915093249392" alt="">
+                  <div>8</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12932.html">读书笔记</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2246</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/12704.html">
+                  <img src="http://img.blog.csdn.net/20160826002037987" alt="">
+                  <div>37</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/12704.html">算法与数据结构</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>41992</span></div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="img list-left">
+                <a href="http://blog.csdn.net/column/details/mystudyrecord001.html">
+                  <img src="http://img.blog.csdn.net/20160809183336359" alt="">
+                  <div>15</div>
+                </a>
+              </div>
+              <div class="content list-left">
+                <h4 class="title"><a href="http://blog.csdn.net/column/details/mystudyrecord001.html">微软面试百题</a></h4>
+                <div class="read list-left"><i class="icon iconfont icon-read"></i><span>8448</span></div>
+              </div>
+            </li>
+
+          </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+		
+        
+        <div class="fixRight">
+            <div class="right_box padb0 csdn-tracking-statistics" data-mod="popu_391">
+                <h3 class="tit"><span><em>在线课程</em></span></h3>
+                <ul class="edu_li clearfix">
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111134087930.png" alt="Presto服务治理与架构优化在京东的实践应用" title="Presto服务治理与架构优化在京东的实践应用">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/series_detail/64?utm_source=blog7" target="_blank">Presto服务治理与架构优化在京东的实践应用</a></p>
+                      <p>讲师：王哲涵</p>
+                    </div>
+                  </li>
+                  
+                  <li>
+                    <div>
+                      <a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">
+                        <img src="http://img.bss.csdn.net/201710111123195350.png" alt="【免费直播】Python最佳学习路线" title="【免费直播】Python最佳学习路线">
+                      </a>
+                    </div>
+                    <div>
+                      <p><a href="http://edu.csdn.net/huiyiCourse/detail/581?utm_source=blog7" target="_blank">【免费直播】Python最佳学习路线</a></p>
+                      <p>讲师：韦玮</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+            </div>
+			<!--u3032529-->
+            <!-- <div class="extension_other csdn-tracking-statistics baidu_box" data-mod="popu_395">
+								
+                <script type="text/javascript" src="http://mpb1.iteye.com/cxpdpmumfaedgm.js"></script>
+            </div> -->
+			<div class="extension_other csdn-tracking-statistics bottomRcom" data-mod="popu_389" style="position:absolute;z-index:-5;opacity:0;pointer-events:none">
+						<!--u3032528-->
+				<div class="flashrecommend">
+				<script type="text/javascript" src="http://mpb1.iteye.com/bwocoltlyzdec.js"></script>
+				</div>
+			</div>
+        </div>
+		<div class="user-hotArticle">
+          <h3>热门文章</h3>
+          <ul class="hotArticle-list">
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/53043646">快速幂取模算法详解</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>5853</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/51952942">最短路径算法汇总</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4540</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52966874">ELFhash - 优秀的字符串哈希算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2787</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52145746">快速排序全面讲解（含复杂度证明）——即将引出八大排序算法</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2041</span></div>
+            </li>
+ 
+            <li>
+              <a href="/ltyqljhwcm/article/details/52497853">2016BIT小学期——电话号码问题（哈希+位运算）</a>
+              <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1921</span></div>
+            </li>
+ 
+          </ul>
+        </div>
+
+
+    </aside>
+</div>
+
+<div class="left_fixed">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+				<span class="txt">2</span>
+            </button>
+        </li>
+		<li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374"  id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+		<li>
+          <button class="left-fixed-btn btn-pinglun" >
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics"  data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics" data-mod="popu_172">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="right_fixed">
+  <div class="r_ico">
+	<i class="icon iconfont icon-jubao"></i>
+	<span class="txt" id="reportBtn">内容举报</span>
+  </div>
+  <div class="returnTop">
+   <i class="icon iconfont icon-fanhuidingbu"></i>
+   <span>返回顶部</span>
+ </div>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="http://blog.csdn.net/raintungli/article/details/76583070" target="_blank">深度学习：神经网络中的前向传播和反向传播算法推导</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="http://static.blog.csdn.net/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="http://static.blog.csdn.net/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "http://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+
+                var data = {
+                    articleId: 76583070,
+                    commentId: 0,
+                    reportType: reportType,
+                    originalurl: $("#originalurl").val(),
+                    report_other_content: $("#report_other_content").val(),
+                    report_description: $("#report_description").val(),
+                    currentUserName: currentUserName,
+                    updatetime: "2017/8/8 16:54:12",
+                    blogUser: "raintungli"
+                };
+                if(!isComment){//如果是举报文章
+                    data.report_other_content = data.report_description;
+                    data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+                }
+
+                $.post(blog_address + "/common/report?id=76583070&t=2", data, function (data) {
+                    if (data.result == 1){
+                        SetError("感谢您的举报，我们会尽快审核！");
+                    }else{
+                        if (data.content) alert(data.content);
+                    }
+
+                });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide().html("");
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+
+<script src="http://c.csdnimg.cn/public/common/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/blog_ver.js?v=3"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/Skin/skin3-template/js/skin2017.js?v=2017.032"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/cnick.js"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","http://write.blog.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+if($("#fan").html()=="")
+{
+$("#fan").html(0);	
+}
+</script>
+</body>
+
+<script  type="text/javascript">
+    var fromjs=$("#fromjs");
+    if(fromjs.length>0)
+    {                  
+        $("#fromjs .markdown_views pre").addClass("prettyprint");       
+        prettyPrint();
+
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+
+        $('.pre-numbering li').css("color","#999");             
+    }
+
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);         
+       
+
+    });
+
+    setTimeout(function () {
+        $(".toc a[target='_blank']").attr("target", "");
+    }, 500);
+
+</script>
+</html>
+
