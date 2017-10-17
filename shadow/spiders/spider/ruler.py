@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-'''This module define the ruler for the spider to crawl the website , this module is for HTML_item object not for photo_item'''
+'''This module define the ruler for the spider to crawl the website , this module is for HTML_item object not for photo_item,demo实例简单期间，对于我们的伯恩爬取采用csdn作为目标网站，搜索引擎的选取采用baidu,支队博主进行搜搜，在baidu中对博文进行搜索'''
 class ruler:
     def __init__(self):
         '''
@@ -25,3 +25,4 @@ class ruler:
         except KeyError:
             print("The rule you point does not exist!")
             return False
+
