@@ -7,6 +7,7 @@ import urllib.request as ur
 import re
 import time
 import hashlib
+import analyse
 
 def save_page(domain , href):
     # 本业博客提取
@@ -19,19 +20,19 @@ def save_page(domain , href):
         try:
             # ur.urlretrieve(i[0] , filename = '/home/lantian/fortest/test/' + i[1])
             md5 = hashlib.md5()
-            con = md5.update(i[0].encode('utf8'))
-            with open('/home/lantian/File/BlogRunner/fortest/csdn/raw/' + con , 'w') as f:
-                ans = requests.get(i[0])
-                ans.encoding = 'utf8'
-                f.write(ans.text)
+            md5.update(i[0].encode('utf8'))
+            con = md5.hexdigest()
+            ans = requests.get(i[0])
+            ans.encoding = 'utf8'
+            analyse.crawl_sample(con , ans.text)
         except:
             print('服务器正在检测爬虫，异常躲避 10s ...')
             time.sleep(10)    # 延时爬虫
 
 # domain = sys.argv[1]
 
-# url_page = 'http://blog.csdn.net/ltyqljhwcm'
-url_page = sys.argv[1]
+url_page = 'http://blog.csdn.net/ltyqljhwcm'
+# url_page = sys.argv[1]
 domain = url_page
 
 while True :
