@@ -1,285 +1,363 @@
 <html><head><meta charset="utf8"></head><body><article>
  <h1 class="csdn_top">
-  GCD Extends_GCD 欧几里得算法+扩展欧几里得算法详解
+  POJ1182——带权并查集
  </h1>
  <div class="article_content csdn-tracking-statistics" data-dsm="post" data-mod="popu_307" id="article_content">
-  <h2>
-   1.欧几里得算法：
-  </h2>
-  <div>
-   我们从小学开始老师都会让我们求解一一种问题，叫做最大公约数，这里的最大公约数就叫做GCD
+  <p>
+   1.问题描述：
+  </p>
+  <p>
+  </p>
+  <div class="ptt" lang="en-US" style="text-align:center; font-size:18pt; font-weight:bold; color:blue">
+   食物链
   </div>
-  <div>
-   当然求解最大公约数的算法也是非常的重要，我们在这里就引入欧几里得的算法，也就是著名的辗转相除法
+  <div class="plm" style="text-align:center; font-size:14px">
+   <table align="center">
+    <tbody>
+     <tr>
+      <td>
+       <strong>
+        Time Limit:
+       </strong>
+       1000MS
+      </td>
+      <td width="10px">
+      </td>
+      <td>
+       <strong>
+        Memory Limit:
+       </strong>
+       10000K
+      </td>
+     </tr>
+     <tr>
+      <td>
+       <strong>
+        Total Submissions:
+       </strong>
+       64435
+      </td>
+      <td width="10px">
+      </td>
+      <td>
+       <strong>
+        Accepted:
+       </strong>
+       18933
+      </td>
+     </tr>
+    </tbody>
+   </table>
   </div>
-  <div>
-   首先给出定义：
+  <p>
+  </p>
+  <p class="pst" style="font-size:18pt; font-weight:bold; color:blue">
+   Description
+  </p>
+  <div class="ptx" lang="en-US" style="font-family:'Times New Roman',Times,serif; font-size:14px">
+   动物王国中有三类动物A,B,C，这三类动物的食物链构成了有趣的环形。A吃B， B吃C，C吃A。
+   <br/>
+   现有N个动物，以1－N编号。每个动物都是A,B,C中的一种，但是我们并不知道它到底是哪一种。
+   <br/>
+   有人用两种说法对这N个动物所构成的食物链关系进行描述：
+   <br/>
+   第一种说法是"1 X Y"，表示X和Y是同类。
+   <br/>
+   第二种说法是"2 X Y"，表示X吃Y。
+   <br/>
+   此人对N个动物，用上述两种说法，一句接一句地说出K句话，这K句话有的是真的，有的是假的。当一句话满足下列三条之一时，这句话就是假话，否则就是真话。
+   <br/>
+   1） 当前的话与前面的某些真的话冲突，就是假话；
+   <br/>
+   2） 当前的话中X或Y比N大，就是假话；
+   <br/>
+   3） 当前的话表示X吃X，就是假话。
+   <br/>
+   你的任务是根据给定的N（1 &lt;= N &lt;= 50,000）和K句话（0 &lt;= K &lt;= 100,000），输出假话的总数。
+   <br/>
   </div>
-  <div>
-   GCD(a,b)=GCD(b,a%b)
+  <p class="pst" style="font-size:18pt; font-weight:bold; color:blue">
+   Input
+  </p>
+  <div class="ptx" lang="en-US" style="font-family:'Times New Roman',Times,serif; font-size:14px">
+   第一行是两个整数N和K，以一个空格分隔。
+   <br/>
+   以下K行每行是三个正整数 D，X，Y，两数之间用一个空格隔开，其中D表示说法的种类。
+   <br/>
+   若D=1，则表示X和Y是同类。
+   <br/>
+   若D=2，则表示X吃Y。
   </div>
-  <div>
-   在这里有的人会问a，b到底哪个大才能使对的，其实在这里我们的a，b是没有大小之分的，要是硬说影响的话，是有那么一点影响，但是无关痛痒
+  <p class="pst" style="font-size:18pt; font-weight:bold; color:blue">
+   Output
+  </p>
+  <div class="ptx" lang="en-US" style="font-family:'Times New Roman',Times,serif; font-size:14px">
+   只有一个整数，表示假话的数目。
   </div>
-  <div>
-   首先这里的生命是最好a&gt;b
-  </div>
-  <div>
-   但是当a&lt;b的时候，我们会发现a%b=a，也就是说这个算法会自动调换会a&gt;b的状态，所以我们说这一点影响无关痛痒，不影响算法的本质
-  </div>
-  <div>
-   证明这里我们就不在涉及
-  </div>
-  <div>
-   但是在算法的实现方面我有一些要说的：
-  </div>
-  <div>
-   <pre class="python" code_snippet_id="1968600" name="code" snippet_file_name="blog_20161105_1_5691855">from time import *
-def gcd_1(a,b):
-    if b==0:
-        return a
-    else:
-        return gcd_1(b,a%b)
-
-def gcd_2(a,b):    #一旦数据量差距过大无法应用，但是在数据量相差不多的情况下，还是很优秀的，总而言之不要用，因为不稳定
-    if a==b:
-        return a
-    elif a&gt;b:
-        return gcd_2(a-b,b)
-    else:
-        return gcd_2(b-a,a)
-
-def gcd_3(a,b):
-    if a==b:
-        return a
-    elif a&lt;b:
-        return gcd_3(b,a)
-    elif not(a&amp;1) and not(b&amp;1):
-        return gcd_3(a&gt;&gt;1,b&gt;&gt;1)&lt;&lt;1
-    elif not(a&amp;1) and b&amp;1:
-        return gcd_3(a&gt;&gt;1,b)
-    elif not(b&amp;1) and a&amp;1:
-        return gcd_3(a,b&gt;&gt;1)
-    else:
-        return gcd_3(a-b,b)
-
-time=clock()
-a=eval(input("a:"))
-b=eval(input("b:"))
-print("gcd_1:%d"%gcd_1(a,b))
-print("time gcd_1:%lf"%(clock()-time))
-#time=clock()
-#print("gcd_2:%d"%gcd_2(a,b))
-#print("time gcd_2:%lf"%(clock()-time))
-time=clock()
-print("gcd_3:%d"%gcd_3(a,b))
-print("time gcd_3:%lf"%(clock()-time))
+  <p class="pst" style="font-size:18pt; font-weight:bold; color:blue">
+   Sample Input
+  </p>
+  <pre class="sio" style="font-family:'Courier New',Courier,monospace; font-size:14px">100 7
+1 101 1 
+2 1 2
+2 2 3 
+2 3 3 
+1 1 3 
+2 3 1 
+1 5 5
 </pre>
-   实验结果：
-  </div>
-  <div>
-   <pre class="python" code_snippet_id="1968600" name="code" snippet_file_name="blog_20161105_2_1297010">a:34567890
-b:1234567
-gcd_1:1
-time gcd_1:2.589272
-gcd_3:1
-time gcd_3:0.032302</pre>
-   很显然，虽然朴素的GCD写的很简洁，但是毫无疑问，朴素的GCD因为取模运算的限制太过，我们的位运算+更相孙减术（gcd_2）结合的优势最明显，在我们的工程项目中最好用gcd_3的写法
+  <p class="pst" style="font-size:18pt; font-weight:bold; color:blue">
+   Sample Output
+  </p>
+  <pre class="sio" style="font-family:'Courier New',Courier,monospace; font-size:14px">3</pre>
+  2.算法描述：
+  <p>
+   本题有两种思路，第一是开辟三个并查集同时进行维护
+  </p>
+  <p>
+   第二是开辟一个带权并查集我们来记录，不相交集合中的元素之间的相对关系
+  </p>
+  <p>
+   3.解释：
+  </p>
+  <p>
+   3.1三个并查集：
+  </p>
+  <p>
+   首先，我们先要明确一下三个并查集是如何作用的
+  </p>
+  <p>
+   1.fa[1-n] 代表的全是A物种，fa[n+1-2*n]代表的全是B物种,fa[2*n+1-3*n]代表的全是C物种
+  </p>
+  <p>
+   这是三个并查集，我们进行合并操作的额时候，首先需要明确一点，并查集的作用是将有“关系”的两个元素拉进同一颗树中，那么我们对于合法（真话）的操作如何进行合并操作呢
+  </p>
+  <p>
+   如果关系值是1，说明是同类，我们unit(x,y),unit(x+n,y+n),unit(x+2*n,y+2*n)
+  </p>
+  <p>
+   这三句话的含义是在这句话我们判断合法的前提下，我们认为A物种的x,y是同一物种，B物种的x,y是同一物种,C物种的x,y是同一物种（他们是有关系的）
+  </p>
+  <p>
+   我们认为阿门是有关系的，并且在合法的前提下，他们既然有关系，说明他们的关系是同一物种
+  </p>
+  <p>
    <br/>
+  </p>
+  <p>
+   如果关系值是2，代表x吃y，我们在判断该句话的真实性的前提下，unit(x,y+n),unit(x+n,y+2*n),unit(x+2*n,y)这三句话的含义是我们认为在这句话的正确的前提下，我们认为Ax与By,Bx与Cy,Cx与Ay是有关系的，也就是说我们认为他们存在前者对后者的捕食关系
+  </p>
+  <p>
    <br/>
-   <h2>
-    2.Extends_gcd扩展欧几里得算法：
-   </h2>
-   <div>
-    我们的欧几里得算法很优秀，但是只用来求解最大公约数好像屈才了，所以这里我们对欧几里得算法进行扩展，我们引入扩展欧几里得算法
-   </div>
-   <div>
-    在讲解扩展欧几里得算法之前，我们先来讲解个很重要的知识：
-   </div>
-   <div>
-    1.贝祖定理：
-   </div>
-   <div>
-    对于任何一组不全是0的两个数x，y总是满足
-   </div>
-   <div>
-    ax+by=gcd(x,y)这是一定成立的（之后我们还要讲一下不成立的另一个中很相近的定理）
-   </div>
-   <div>
-    <strong>
-     这个解是唯一的
-    </strong>
-   </div>
-   <div>
-    但是想要求解出这个等式的整数解确实非常的麻烦，我们需要不断的尝试，这是没有办法忍受的异常繁琐的工作
-   </div>
-   <div>
-    所以说，这时候，为了快速求解出这个唯一的解，我们就需要用到扩展欧几里得算法
-   </div>
-   <div>
-    但是这里请注意，扩展欧几里得算法是基于欧几里得算法的，我们在这里只是引入了逆推 的过程
-   </div>
-   <div>
-    逆推导：
-   </div>
-   <div>
-    <pre class="cpp" code_snippet_id="1968600" name="code" snippet_file_name="blog_20161105_3_2965450">aX0+bY0=gcd(a,b)=gcd(b,b%a)
-gcd(b,a%b)=bX1+(a%b)Y1
-....
-gcd(a,0)=aXn+0*Yn=a    上面已经提到过了，最后的状态一定是a&gt;b的
-这时候我们让Xn=1，Yn=0就可以
-逆推导开始：
-aX0+bY0=gcd(a,b)=gcd(b,a%b)
-gcd(b,a%b)=bX1+(a%b)Y1
-gcd(b,a%b)=bX1+(a-b*(a/b))Y1=aY1+b*(X1-a/bY1)=gcd(a,b)
-显然，我们可以得到
-X0=Y1
-Y0=X1-a/bY1</pre>
-    这就是我们的逆推导关系，我们利用C++的引用的手段，可以轻松的实现参数的时时改变，轻而易举实现这个算法
-   </div>
-   <div>
-    但是小心一点，我们的逆推导的过程是建立在
-   </div>
-   <div>
-    ax+by=gcd(a,b)上的，也就是说扩展欧几里得算法求出来的解是在等号右边是gcd(a,b)的解，这就引出了我们下面的问题
-   </div>
-   <div>
-    <br/>
-   </div>
-   <div>
-    扩展欧几里得算法的应用：
-   </div>
-   <div>
-    <strong>
-     1.求解不定方程：
-    </strong>
-   </div>
-   <div>
-    ax+by=c
-   </div>
-   <div>
-    是不是看上去和我们上面的贝祖定理非常的相似？没错这时候我们利用扩展欧几里得求出来ax+by=gcd(a,b)的话，如果这时候c是gcd(a,b)的整数倍的话，我们扩展欧几里得算法得到的解都乘上c/gcd(a,b)得到的就是这个不定方程的解，但是，如果c不是gcd(a,b)的整数倍，说明这个不定方程没有解
-   </div>
-   <div>
-    为什么？
-   </div>
-   <div>
-    因为我们的ax+by=gcd(a,b)如果有解的条件就是gcd(a,b)是gcd(a,b)的1倍，但是如果没有说明我们没有办法分解出这个ax+by=gcd(a,b)的式子，那么自然，gcd(a,b)的倍数依旧没有解
-   </div>
-   <div>
-    <br/>
-   </div>
-   <div>
-    <strong>
-     2.求解线性同余方程：
-    </strong>
-   </div>
-   <div>
-    我们将ax=b(mod n)（ps:那个等号是三等号，代表同余）满足的解称之为a模b关于n同余，这时候我们根据同余的定义可以得到
-   </div>
-   <div>
-    n|(ax-b)-&gt;ax-b=my-&gt;ax-my=b-&gt;ax+my=b(m只是一个常数，正负无所谓)
-   </div>
-   <div>
-    是不是又觉得这个方程眼熟，没错还是扩展欧几里得的不定方程
-   </div>
-   <div>
-    这时候我们就转化成了求不定方程的问题了，注意这里的同余的结果有很多个
-   </div>
-   <div>
-    但是这些结果都有一个同性
-   </div>
-   <div>
-    <span style="white-space:pre">
-    </span>
-    1.结果总数有gcd(a,n)个
-   </div>
-   <div>
-    <span style="white-space:pre">
-    </span>
-    2.自通解以后，每个解相差b/gac(a,n)   //这里我有一个问题，按照程序角度来说，我们会不会少元素的输出？
-   </div>
-   <div>
-    <br/>
-   </div>
-   <strong>
-    3.求解模逆元：
-   </strong>
-  </div>
-  <div>
-   模拟元的定义，如果
-  </div>
-  <div>
-   ax=1(mod n)称x是a的模逆元，这里的条件是a,n必须互素
-  </div>
-  <div>
-   为什么，我们再转化一下：
-  </div>
-  <div>
-   ax+ny=1只有我们的gcd(a,n)=1的时候才有解，并且解唯一，gcd(a,n)=1的意思就是互素
-  </div>
-  <div>
-   所以模逆元存在的条件是a，n必须互素
-  </div>
-  <div>
-   性质是模逆元唯一
-  </div>
-  <div>
-   转化一下，这时候我们还是要求一个不定方程
-  </div>
-  <div>
+  </p>
+  <p>
+   对于判断我们的思路也是一样的
+  </p>
+  <p>
+   归根到底，我们对于same(A,B)里面的结果认为是正确的，我们根据其正确性来判断当前的话的正确性，否则我们进行相应的合并操作
+  </p>
+  <p>
    <br/>
-  </div>
-  <div>
-   综上，我们的利用欧几里得的问题始终就是求一个不定方程，只不过是不定方程的等号的右边的值不断的改变罢了，只有等号右边的值是gcd的整数倍才有解，有gcd个解，否则没有解
-  </div>
-  <h2>
-   3.Code:
-  </h2>
-  <div>
-   <pre class="cpp" code_snippet_id="1968600" name="code" snippet_file_name="blog_20161105_4_5124257">#include"iostream"
+  </p>
+  <p>
+   AC代码：
+  </p>
+  <p>
+  </p>
+  <pre class="cpp" name="code">#include"iostream"
 #include"cstdio"
 #include"cstring"
 #include"cstdlib"
+#define N 150010
 
 using namespace std;
 
-int gcd(int a,int b)   //GCD
+int fa[N];
+int n,m;
+
+void init()
 {
-	return b?gcd(b,a%b):a;
+	for(int i=1;i&lt;=3*n;i++)
+	{
+		fa[i]=i;
+	}
 }
 
-int Extends_gcd(int a,int b,int&amp; x,int&amp; y)   //扩展欧几里得算法 
+int find(int x)
 {
-	if(b==0)
-	{
-		x=1;
-		y=0;
-		return a;
-	}
-	int g=Extends_gcd(b,a%b,x,y);
-	int t=x;
-	x=y;
-	y=t-(a/b)*y;
-	return g; 
-} 
+	if(x==fa[x]) return x;
+	else return fa[x]=find(fa[x]);
+}
+
+void unit(int x,int y)
+{
+	x=find(x);
+	y=find(y);
+	if(x==y) return ;
+	else fa[y]=x;
+    return ;
+}
+
+bool same(int x,int y)
+{
+	return find(x)==find(y);
+}
 
 int main()
 {
-	int x;
-	int y;
-	int a,b,c;
-	scanf("%d%d%d",&amp;a,&amp;b,&amp;c);
-	int g=Extends_gcd(a,b,x,y);
-	printf("GCD:%d\n",g);
-	//以下是求出解得，必须要乘倍数，是因为我们当时算的基础以gcd，但是实际上方程的右边是gcd的倍数（有解的话），所以我们要先乘上一个倍数 ，才是真正的解 
-	if(c%g) printf("No solution\n");
-	else printf("%d*%d+%d*%d=%d\n",a,x*(c/g),b,y*(c/g),c);
+	scanf("%d%d",&amp;n,&amp;m);
+	init();
+	int sum=0;
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,z;
+		scanf("%d%d%d",&amp;z,&amp;x,&amp;y);
+		if(x&gt;n||y&gt;n) sum++;
+		else if(z==2&amp;&amp;x==y) sum++;
+		else
+		{
+			if(z==1)
+			{
+				if(same(x,y+n)||same(x,y+2*n)) sum++;
+				else
+				{
+					unit(x,y);
+					unit(x+n,y+n);
+					unit(x+2*n,y+2*n);
+				}
+			}
+			else
+			{
+				if(same(x,y)||same(x,y+2*n)) sum++;   //这里我们只判断一次same(x,y)的原因而不用same(x+n,y+n)等都判断在于我们如果same(x,y)成立，那么same(x+n,y+n)等必然也成立，我们判断一个就可以代表全部的信息了
+				else
+				{
+					unit(x,y+n);
+					unit(x+n,y+2*n);
+					unit(x+2*n,y);
+				}
+			}
+		}
+	}
+	printf("%d\n",sum);
 	return 0;
-} </pre>
+}</pre>
+  <br/>
+  3.2带权并查集
+  <p>
+   我们都知道，并查集作为不相交集合，他的优势在于我们将有关系的两个数据进行合并，然后我们用一个根节点代表着一整个数据，从未实现我们队位置关系的快速判断，现在我们的手段对于解决高级的并查集的题目已经远远不能适应了，我们不仅要知道所谓的两者之间有没有关系，我们还要知道，两者之间的相对关系，本体作为一个绝好的例子，向我们说明了，相对的关系我们如何进行判断，我们采用带权的并查集
+  </p>
+  <p>
+   这里我们首先要明确，我们的权是带有方向的
+  </p>
+  <p>
+   在这里我先致歉，本人愚笨未能考虑出大神的向量思维的玄妙，这我只能证明方法的正确性，对于方法的来源 和具体作用却是真的一知半解
+  </p>
+  <p>
+   在这里我的讲解这是局限于我们对这道题的理解，非常的抱歉
+  </p>
+  <p>
    <br/>
+  </p>
+  <p>
+   首先我们将节点重新进行定义，我们不仅需要父亲域，我们还需要对于父亲的关系域，注意，在这里我们对于发亲的关系域是从本节点指向父亲节点的向量
+  </p>
+  <p>
+  </p>
+  <pre class="cpp" name="code">typedef struct node
+{
+       int fa;
+       int re;   //记录和父亲之间的关系，0代表同类，1代表被父亲吃，2代表吃父亲
+};</pre>
+  <p>
+   之后对于find函数我们不仅要进行路径压缩（在本题的带权并查集的问题中，路径压缩是必须的，因为我们要通过根节点进行比较，我们对于根节点的额直接关系是必须要知道的，不进行路径压缩，我们的父亲节点就不一定是根节点，那么我们的关系域就不一定是针对根节点的），我们还要对关系域进行更新
+  </p>
+  <p>
    <br/>
-  </div>
+  </p>
+  <p>
+   在这里我本人对计算关系域的正确性的所有情况都进行了证明，是完全正确的也是非常玄妙的，为什么取模就可以实现这么完美有优秀的思想转变？百思不得其解
+  </p>
+  <p>
+   在这里，详细注释参考代码或者网上大神的讲解
+   <a href="http://blog.csdn.net/niushuai666/article/details/6981689" target="_blank">
+    点击打开链接
+   </a>
+  </p>
+  <p>
+   AC代码：
+  </p>
+  <p>
+  </p>
+  <pre class="cpp" name="code">#include"iostream"
+#include"cstdio"
+#include"cstdlib"
+#include"cstring"
+#define N 50010
+
+using namespace std;
+
+typedef struct node
+{
+	int fa;
+	int re;
+}point;
+
+point data[N];
+int n,m;
+
+void init()
+{
+	for(int i=1;i&lt;=n;i++)
+	{
+		data[i].fa=i;
+		data[i].re=0;
+	}
+}
+
+int find(int x)
+{
+	if(x==data[x].fa) return x;
+	else
+	{
+		int temp=data[x].fa;   //注意，这里我们要首先保存该节点的父亲节点，因为我们修改关系域的时候要用到和原父亲的关系，本人在这里WA了，没有保存，直接原父亲的标号
+		data[x].fa=find(temp);
+		data[x].re=(data[x].re+data[temp].re)%3;   //该式子可以证明
+		return data[x].fa;
+	}
+}
+
+int main()
+{
+	scanf("%d%d",&amp;n,&amp;m);
+	init();
+	int count=0;
+	for(int i=1;i&lt;=m;i++)
+	{
+		int x,y,z;
+		scanf("%d%d%d",&amp;z,&amp;x,&amp;y);
+		if(x&gt;n||y&gt;n) count++;
+		else if(z==2&amp;&amp;x==y)	count++;
+		else
+		{
+			int rootx=find(x);
+			int rooty=find(y);
+			if(rootx==rooty)
+			{
+				if(z==2&amp;&amp;(z-1!=(data[y].re+3-data[x].re)%3)) count++;   //向量的表示法
+				if(z==1&amp;&amp;data[x].re!=data[y].re) count++;
+			}
+			else
+			{
+				data[rooty].fa=rootx;
+				data[rooty].re=(z-1+3-data[y].re+data[x].re)%3;   //向量的表示法
+			}
+		}
+	}
+	printf("%d\n",count);
+	return 0;
+}</pre>
+  <br/>
+  <br/>
   <link href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=2.0" rel="stylesheet"/>
  </div>
 </article>

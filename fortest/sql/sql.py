@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# TODO : 添加修改模块，必要的
 import pymysql
 
 # 建立连接
@@ -63,16 +64,28 @@ def aifeature_write(md5url = 'NULL' , size = 0 , number_comment = 0 , number_rea
     except Exception as e:
         print(e)
 
-if __name__ == "__main__" :
-    # test for user read
-    #    print(user_read(name = 'xuhengda'))
-    # test for user write
-    #    print(user_write(name = 'lantian',passwd = 'wanggeyuan' , model = "xuehngda"))
-    # test for page read
-    #    print(page_read('lantian'))
-    # test for page write
-    #    print(page_write(md5url = 'xuhengda'))
-    # test for aifeature read
-    #    print(aifeature_read('lantian'))
-    # test for aifeature wrie
-    #    print(aifeature_write('wanggeyuan' , size = 12 , number_like = 1))
+# 该函数提供对数据库操作的统一接口
+def main(type_  , **argv):
+    '''
+    1 - user_read
+    2 - user_write
+    3 - page_read
+    4 - page_write
+    5 - aifeature_read
+    6 - aifeature_write
+    '''
+    # 建立连接
+    conn = pymysql.connect(host = '127.0.0.1' , port = 3306 , user = 'root' \
+            , passwd = 'lt970106' , db = 'fortest' , charset = 'utf8')
+    cur = conn.cursor()
+    print("数据库和游标建立成功")
+    if type_ == 1 : user_read(**argv)
+    elif type_ == 2 : user_write(**argv)
+    elif type_ == 3 : page_read(**argv)
+    elif type_ == 4 : page_write(**argv)
+    elif type_ == 5 : aifeature_read(**argv)
+    elif type_ == 6 : aifeature_write(**argv)
+    cur.close()
+    conn.close()
+    print("数据库顺利关闭，数据读写成功")
+
