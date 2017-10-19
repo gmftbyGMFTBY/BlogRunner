@@ -79,16 +79,15 @@ def aifeature_alter(cur , conn , md5url = 'NULL', grade = 0.0):
 
 def user_alter(cur , conn , old_name = 'NULL', new_name = 'NULL' , passwd = 'NULL' , photo = 'NULL' , model = 'NULL'):
     try:
+        a , b , c , d = user_read(cur , conn , name = old_name)
+        if new_name == 'NULL' : new_name = a
+        if passwd == 'NULL' : passwd = b
+        if photo == 'NULL' : photo = c[2:-1]
+        if model == 'NULL' : model = d
         if old_name == 'NULL':
             raise Exception('ERROR for no name to the user')
         else:
-            answer = 'update user set '
-            if new_name != 'NULL' : answer += 'name = "%s"' % new_name
-            if passwd != 'NULL' : answer += ',passwd = "%s"' % passwd
-            if photo != 'NULL' : answer += ',photo = "%s"' % photo
-            if model != 'NULL' : answer += ',model = "%s"' % model
-            answer += ' where name = "%s"' % old_name
-            print(answer)
+            answer = 'update user set name = "%s" , passwd = "%s" , photo = "%s" , model = "%s" where name = "%s"' % (new_name , passwd , photo , model , old_name)
             cur.execute(answer)
             conn.commit()
             f = cur.fetchall()
