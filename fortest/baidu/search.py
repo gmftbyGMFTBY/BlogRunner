@@ -6,6 +6,8 @@ import sys
 import urllib.request as ur
 import hashlib
 import time
+sys.path.append('../')
+import analyse
 
 def add_url(soup):
     url = []
@@ -56,15 +58,13 @@ for j , i in enumerate(urls):
     try:
         content = md5.hexdigest()
         print('Downloading ' + content + ' ...' , j + 1)
-        # ur.urlretrieve(i , '/home/lantian/fortest/baidu/raw/' + content)
-        # urlretrieve容易被封，用request进行存储
-        with open('/home/lantian/fortest/baidu/raw/' + content , 'w') as f:
-            con = requests.get(url , headers = {'User-Agent' : 'Mozilla/5.0 (compatible; MSIE 5.5; Windows NT)'})
-            con.encoding = 'utf8'
-            f.write(con.text)
-    except:
+        con = requests.get(i)
+        con.encoding = 'utf8'
+        filename = md5.hexdigest()
+        analyse.crawl_sample(filename , con.text)
+    except Exception as e:
+        print(e)
         print('CSDN服务器正在扫描爬虫，延时 10s 躲避')
         time.sleep(10)
-        # print("重新下载 " + content)
-        # ur.urlretrieve(i , '/home/lantian/fortest/baidu/raw/' + content)
+        
 print('End')

@@ -44,7 +44,7 @@ while True :
     link = soup.find_all(id = 'papelist')[0]
     save_page(url_page , href)
     link_next = [i for i in link.find_all(name = 'a') if list(i.strings)[0] == '下一页']
-    if len(link_next) == 0 :
+    if len(link_next) == 0 : 
         print('End')
         break
     else : 
