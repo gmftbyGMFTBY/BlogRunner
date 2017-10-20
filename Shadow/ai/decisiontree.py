@@ -1,5 +1,13 @@
 #!/usr/bin/python3
 
+# Author : GMFTBY
+# Time : 2017.10.19
+
+'''
+该模块对于输入的网页特征数据从数据库中抽取并且计算相应的决策树并返回
+this model can be changed !
+'''
+
 import sys
 sys.path.append('..')
 import sql.sql as sql    # 导入数据库存储模块
@@ -15,8 +23,37 @@ def load_data():
     # data
     data = []
     for i in save:
-        p = i[1:4] + i[5:] + (i[4],)
-        data.append(list(p))
+        # 数值型变量离散化
+        p = []
+        # size 离散化
+        if 0 <= i[1] < 1000 : p.append(1)
+        elif 1000 <= i[1] < 5000 : p.append(2)
+        else : p.append(3)
+        # number_reader
+        if 0 <= i[2] < 500 : p.append(1)
+        elif 500 <= i[2] < 1000 : p.append(2)
+        else : p.append(3)
+        # number_like
+        if i[3] == 0 : p.append(1)
+        elif 1 <= i[3] < 5 : p.append(2)
+        else : p.append(3)
+        # grade    --    the label
+        if i[4] < 60 : p.append(1)
+        elif 60 <= i[4] <= 80 : p.append(2)
+        else : p.append(3)
+        # number_code
+        if i[5] == 0 : p.append(1)
+        elif 1 <= i[5] <= 3 : p.append(2)
+        else : p.append(3)
+        # number_photo
+        if i[6] == 0 : p.append(1)
+        elif 1 <= i[6] <= 3 : p.append(2)
+        else : p.append(3)
+        # number_link
+        if i[7] == 0 : p.append(1)
+        elif 1 <= i[7] <= 3 : p.append(2)
+        else : p.append(3)
+        data.append(p)
     label = ['content size' , 'number_reader' , 'number_like' , 'number_code' , 'number_photo' , 'number_link']
     return data , label
 
@@ -123,10 +160,10 @@ def get_model_from_sql(user):
     return tree
 
 if __name__ == "__main__":
-    '''
     dataset , label = load_data()
     mytree = createtree(dataset , label)
     save_model_to_sql('xuhengda' , mytree)
     new_tree = get_model_from_sql('xuhengda')
-    '''
-    pass
+    import pprint
+    pprint.pprint(mytree)
+    
