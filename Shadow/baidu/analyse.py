@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 sys.path.append('../')
 from sql import sql
 
-def crawl_sample(filename , ans):
+def crawl_sample(filename , ans , flag):
     soup = BeautifulSoup(ans , 'lxml')
     # 提取正文，富文本化
     main = soup.article
@@ -29,7 +29,7 @@ def crawl_sample(filename , ans):
     noise = main.find_all(class_ = 'article_bar clearfix')[0]
     noise.decompose()    # 删除标签
     feature['number_link'] = len(main.find_all(name = 'a'))
-    sql.main(6 , **feature)
+    if flag != 0 : sql.main(6 , **feature)
     k = main.prettify().replace('"' , '\'')
     # 为了高亮代码块，我们需要将csdn的css样式表插入进来，head头需要包含
     ans = "<html><head><meta charset='utf8'></head><body>" + k + '</body></html>'

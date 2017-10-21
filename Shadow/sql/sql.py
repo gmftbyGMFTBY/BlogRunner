@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# TODO : 添加修改模块，必要的
+# TODO : 添加根据评分信息的批量删除功能函数，在数据苦衷还需要添加对于aifeature和page
+# 对应触发器
+
 import pymysql
 
 def user_read(cur , conn ,name = None):
@@ -95,6 +97,34 @@ def user_alter(cur , conn , old_name = 'NULL', new_name = 'NULL' , passwd = 'NUL
     except Exception as e:
         print(e)
 
+def user_delete(cur , conn , name = None):
+    '''
+    根据用户名删除用户
+    '''
+    try:
+        if name == None : 
+            raise Exception('ERROR for no such user')
+        answer = 'delete from user where name = "%s"' % name
+        cur.execute(answer)
+        conn.commit()
+    except Exception as e:
+        print(e)
+
+def page_delete(cur , conn , md5url = None):
+    '''
+    在这里用户可以通过评分批量删除博文，需要增加对于aifeature和page的触发器和相应的路基实现，目前的该函数提供一个简单的接口用于根据md5url删除博文
+    '''
+    try:
+        if md5url == None : 
+            raise Exception('ERROR for no such blog')
+        answer = 'delete from page where md5url = "%s"' % md5url
+        print(answer)
+        cur.execute(answer)
+        conn.commit()
+        return cur.fetchall()
+    except Exception as e:
+        print(e)
+
 # 该函数提供对数据库操作的统一接口
 def main(type_  , **argv):
     '''
@@ -106,6 +136,8 @@ def main(type_  , **argv):
     6 - aifeature_write
     7 - aifeature_alter
     8 - user_alter
+    9 - user_delete
+    10 - page_delete
     '''
     # 建立连接
     conn = pymysql.connect(host = '127.0.0.1' , port = 3306 , user = 'root' \
@@ -121,6 +153,8 @@ def main(type_  , **argv):
     elif type_ == 6 : aifeature_write(cur , conn ,**argv)  
     elif type_ == 7 : save = aifeature_alter(cur , conn , **argv)
     elif type_ == 8 : save = user_alter(cur , conn , **argv)
+    elif type_ == 9 : user_delete(cur , conn , **argv)
+    elif type_ == 10 : save = page_delete(cur , conn , **argv)
     cur.close()
     conn.close()
     print("数据库顺利关闭，数据读写成功")
@@ -130,4 +164,5 @@ if __name__ == "__main__":
     # main(4 , **{'md5url':'lantian' , 'content':"<html><meta charset='utf8'></html>"})
     # save = main(3 , **{'md5url' : '478f1128df0dd5282960850b106f78d6'})[1].decode('utf8')
     # print(main(7 , **{'md5url' : '34f8f93165d0406366667470d1cb7cf5','grade' : 2000}))
-    print(main(8,**{'old_name' : 'lantian' , 'new_name' : 'xuhengda' , 'passwd' : 'ltyq970806' , 'photo' : 'i am the photo' , 'model': 'i am the photo'}))
+    # print(main(8,**{'old_name' : 'lantian' , 'new_name' : 'xuhengda' , 'passwd' : 'ltyq970806' , 'photo' : 'i am the photo' , 'model': 'i am the photo'}))
+    main(10 , md5url = '478f1128df0dd5282960850b106f78d6')

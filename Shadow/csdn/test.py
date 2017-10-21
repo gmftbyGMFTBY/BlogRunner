@@ -24,7 +24,7 @@ def save_page(domain , href):
             con = md5.hexdigest()
             ans = requests.get(i[0])
             ans.encoding = 'utf8'
-            analyse.crawl_sample(con , ans.text)
+            analyse.crawl_sample(con , ans.text , 1)
         except:
             print('服务器正在检测爬虫，异常躲避 10s ...')
             time.sleep(10)    # 延时爬虫
