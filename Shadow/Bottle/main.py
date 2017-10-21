@@ -16,7 +16,7 @@ import MYSQL.sql as sql
 from CSDN import analyse
 from CSDN import website
 from CSDN import keyword
-# from ai import ....    # ai预测模块
+from AI import get_grade    # ai预测模块
 
 '''
 该函数接收用户上传的URL，并且经过我们的ai预测返回一个可能的值作为预测的阅读量
@@ -28,7 +28,12 @@ def get_upload():
     page = requests.get(url , headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     page.encoding = 'utf8'
     f = page.text
-    force = ai.get_number_reader()
+    # ...这个等待和前端的接口搭建完使用，或者可以开始着手进行博文的机器学习的算法训练集的搭建
+    # 这里可以考虑我们的网页的feature数据不存入数据库，但是可以将数据传递给我们的get_grade的AI模块去得到对应的预测值
+    # feature = analyse.crawl_sample( , , 0)
+    # get_grade <= feature
+    # ...
+    force = None
     return force    
 
 '''
@@ -76,6 +81,7 @@ def get_signup():
 '''
 爬虫定义数据接收路由
 '''
+# TODO:这里的记得要加入一个排序处理，排序处理的模块组件写在AI中，这里只是一个中间的处理过程
 @route('/spider/website' , method = 'POST')
 def get_website_spider():
     import json
