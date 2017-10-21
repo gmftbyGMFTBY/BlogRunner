@@ -10,11 +10,12 @@ from bottle import template , route , run , static_file
 from bottle import request , response
 import sys
 sys.path.append('..')
-sys.path.append('../csdn')
-import sql.sql as sql
-from csdn import analyse
-from csdn import website
-from csdn import keyword
+sys.path.append('../CSDN')
+
+import MYSQL.sql as sql
+from CSDN import analyse
+from CSDN import website
+from CSDN import keyword
 # from ai import ....    # ai预测模块
 
 '''
@@ -104,6 +105,14 @@ def blog_delete(md5url):
     '''
     sql.main(10 , **{'md5url' : md5url})
     return '<p><b>Delete the blog successfully!</b></p>'
+
+@route('/blog/batch_delete/<grade:int>')
+def blog_batch_delete(grade):
+    '''
+    批量删除博文接口
+    '''
+    sql.main(11 , **{'grade' : grade})
+    return '<p><b>Batch delete successfully!</b></p>'
 
 @route('/blog/comment/<md5url>/<grade:int>')
 def blog_comment(md5url , grade):

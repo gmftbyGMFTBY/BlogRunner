@@ -5,7 +5,7 @@
 import sys
 from bs4 import BeautifulSoup
 sys.path.append('../')
-from sql import sql
+from MYSQL import sql
 
 def crawl_sample(filename , ans , flag):
     soup = BeautifulSoup(ans , 'lxml')

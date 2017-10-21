@@ -10,12 +10,12 @@ this model can be changed !
 
 import sys
 sys.path.append('..')
-import sql.sql as sql    # 导入数据库存储模块
+import MYSQL.sql as sql    # 导入数据库存储模块
 from math import log
 import operator
 import pprint
 
-def load_data():
+def load_data_for_grade():
     '''
     该函数从数据库中抽取所有的样本空间数据，将信息规整病返还给监督学习组件去学习
     '''
@@ -29,19 +29,13 @@ def load_data():
         if 0 <= i[1] < 1000 : p.append(1)
         elif 1000 <= i[1] < 5000 : p.append(2)
         else : p.append(3)
-        '''
         # number_reader
         if 0 <= i[2] < 500 : p.append(1)
         elif 500 <= i[2] < 1000 : p.append(2)
         else : p.append(3)
-        '''
         # number_like
         if i[3] == 0 : p.append(1)
         elif 1 <= i[3] < 5 : p.append(2)
-        else : p.append(3)
-        # grade    --    the label
-        if i[4] < 60 : p.append(1)
-        elif 60 <= i[4] <= 80 : p.append(2)
         else : p.append(3)
         # number_code
         if i[5] == 0 : p.append(1)
@@ -55,8 +49,52 @@ def load_data():
         if i[7] == 0 : p.append(1)
         elif 1 <= i[7] <= 3 : p.append(2)
         else : p.append(3)
+        # grade --++
+        if 0 <= i[4] < 60 : p.append(1)
+        elif 60 <= i[4] < 80 : p.append(2)
+        else : p.append(3)
         data.append(p)
-    label = ['content size', 'number_like' , 'number_code' , 'number_photo' , 'number_link']
+    label = ['content size' , 'number_reader' , 'number_like' , 'number_code' , 'number_photo' , 'number_link']
+    return data , label
+
+def load_data_for_reader():
+    '''
+    该函数一样使用决策树的代码，只不过改变我们的决策的目标，决策目标更换成对应的阅读量
+    '''
+    save = sql.main(5)
+    data = []
+    for i in save:
+        p = []
+        # size 离散化
+        if 0 <= i[1] < 1000 : p.append(1)
+        elif 1000 <= i[1] < 5000 : p.append(2)
+        else : p.append(3)
+        # number_like
+        if i[3] == 0 : p.append(1)
+        elif 1 <= i[3] < 5 : p.append(2)
+        else : p.append(3)
+        # grade
+        if 0 <= i[4] < 60 : p.append(1)
+        elif 60 <= i[4] < 80 : p.append(2)
+        else : p.append(3)
+        # number_code
+        if i[5] == 0 : p.append(1)
+        elif 1 <= i[5] <= 3 : p.append(2)
+        else : p.append(3)
+        # number_photo
+        if i[6] == 0 : p.append(1)
+        elif 1 <= i[6] <= 3 : p.append(2)
+        else : p.append(3)
+        # number_link
+        if i[7] == 0 : p.append(1)
+        elif 1 <= i[7] <= 3 : p.append(2)
+        else : p.append(3)
+        # number_reader
+        if 0 <= i[2] < 500 : p.append(1)
+        elif 500 <= i[2] < 1000 : p.append(2)
+        else : p.append(3)
+        data.append(p)
+    label = ['content size' , 'number_reader' , 'number_like' , 'number_code' , 'number_photo' , 'number_link']
     return data , label
 
 def calShannoneEnt(dataset):
@@ -145,6 +183,23 @@ def createtree(dataset , label):
         tree[bestfeaturelabel][value] = createtree(splitdataset(dataset , bestfeature , value) , sublabel)
     return tree
 
+def classify(tree , label , test):
+    '''
+    使用决策树决策的函数
+    '''
+    feature = tree.keys()[0]
+    subtree = tree[feature]
+    index = label.index(feature)
+    true_label = None
+    for i in subtree.keys():
+        if test[index] == i:
+            if type(subtree[i]).__name__ == 'dict':
+                true_label = classify(subtree[i] , label , test)
+            else:
+                true_label = subtree[i]
+            break
+    return true_label
+
 def save_model_to_sql(user , model):
     '''
     该函数将产生的字典型决策树模型存储在数据库的user表中
@@ -162,10 +217,4 @@ def get_model_from_sql(user):
     return tree
 
 if __name__ == "__main__":
-    dataset , label = load_data()
-    mytree = createtree(dataset , label)
-    save_model_to_sql('xuhengda' , mytree)
-    new_tree = get_model_from_sql('xuhengda')
-    import pprint
-    pprint.pprint(mytree)
-    
+    pass

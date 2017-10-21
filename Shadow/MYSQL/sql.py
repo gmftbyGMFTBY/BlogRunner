@@ -127,6 +127,21 @@ def page_delete(cur , conn , md5url = None):
     except Exception as e:
         print(e)
 
+def page_batch_delete(cur , conn , grade = -1):
+    '''
+    该函数批量删除某一种评价的博文集合，在前端提供一种办理的操作，后端需要的数据库接口实现
+    '''
+    try:
+        if grade == -1:
+            raise Exception('ERROR for no grade!')
+        else:
+            answer = 'delete from page where md5url in (select md5url from aifeature where grade = %d)' % grade
+            cur.execute(answer)
+            conn.commit()
+            return cur.fetchall()
+    except Exception as e:
+        print(e)
+
 # 该函数提供对数据库操作的统一接口
 def main(type_  , **argv):
     '''
@@ -140,6 +155,7 @@ def main(type_  , **argv):
     8 - user_alter
     9 - user_delete
     10 - page_delete
+    11 - page_batch_delete
     '''
     # 建立连接
     conn = pymysql.connect(host = '127.0.0.1' , port = 3306 , user = 'root' \
@@ -157,14 +173,11 @@ def main(type_  , **argv):
     elif type_ == 8 : save = user_alter(cur , conn , **argv)
     elif type_ == 9 : user_delete(cur , conn , **argv)
     elif type_ == 10 : save = page_delete(cur , conn , **argv)
+    elif type_ == 11 : page_batch_delete(cur , conn , **argv)
     cur.close()
     conn.close()
     print("数据库顺利关闭，数据读写成功")
     return save
 
 if __name__ == "__main__":
-    # main(4 , **{'md5url':'lantian' , 'content':"<html><meta charset='utf8'></html>"})
-    # save = main(3 , **{'md5url' : '478f1128df0dd5282960850b106f78d6'})[1].decode('utf8')
-    # print(main(7 , **{'md5url' : '34f8f93165d0406366667470d1cb7cf5','grade' : 2000}))
-    # print(main(8,**{'old_name' : 'lantian' , 'new_name' : 'xuhengda' , 'passwd' : 'ltyq970806' , 'photo' : 'i am the photo' , 'model': 'i am the photo'}))
-    main(10 , md5url = '478f1128df0dd5282960850b106f78d6')
+   main(11 , **{'grade' : 4})
