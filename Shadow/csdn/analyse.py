@@ -11,6 +11,9 @@ def crawl_sample(filename , ans , flag):
     soup = BeautifulSoup(ans , 'lxml')
     # 提取正文，富文本化
     main = soup.article
+    if main == None:
+        print('目标URL不是博文页面')
+        return 
     # 提取样本
     feature = {}
     feature['md5url'] = filename
