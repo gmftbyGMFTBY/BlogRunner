@@ -29,10 +29,12 @@ def load_data():
         if 0 <= i[1] < 1000 : p.append(1)
         elif 1000 <= i[1] < 5000 : p.append(2)
         else : p.append(3)
+        '''
         # number_reader
         if 0 <= i[2] < 500 : p.append(1)
         elif 500 <= i[2] < 1000 : p.append(2)
         else : p.append(3)
+        '''
         # number_like
         if i[3] == 0 : p.append(1)
         elif 1 <= i[3] < 5 : p.append(2)
@@ -54,7 +56,7 @@ def load_data():
         elif 1 <= i[7] <= 3 : p.append(2)
         else : p.append(3)
         data.append(p)
-    label = ['content size' , 'number_reader' , 'number_like' , 'number_code' , 'number_photo' , 'number_link']
+    label = ['content size', 'number_like' , 'number_code' , 'number_photo' , 'number_link']
     return data , label
 
 def calShannoneEnt(dataset):

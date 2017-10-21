@@ -25,10 +25,12 @@ def user_write(cur , conn , name = 'NULL' , passwd = 'NULL' , photo = 'NULL' , m
 def page_read(cur , conn , md5url = None , content = None):
     if md5url == None : print('Please input the url for searching')
     else :
+        print(md5url)
         answer = 'select * from page where '
         answer += 'md5url = "%s"' % md5url
+        print(answer)
         cur.execute(answer)
-        return cur.fetchone()    # 记得之后的网而言是加密过的
+        return cur.fetchall()    # 记得之后的网而言是加密过的
 
 def page_write(cur , conn ,md5url = 'NULL' , content = 'NULL'):
     try :
