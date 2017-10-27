@@ -36,9 +36,9 @@ def get_upload():
     force = None
     return force    
 
-'''
-用户信息数据获取响应
-'''
+
+# 用户信息数据获取响应
+
 # 用户登录路由
 def check_login(username , passwd):
     print(username , passwd)
@@ -51,10 +51,8 @@ def get_signup():
     username = request.forms.get('username')
     passwd = request.forms.get('passwd')
     if check_login(username , passwd):
-        '''
-        This is the what we want to do
-        用户的登录账号，在这里可以获取用户的model以进一步操作等等
-        '''
+        # This is the what we want to do
+        # 用户的登录账号，在这里可以获取用户的model以进一步操作等等
         return '<p><b>Login successfullly!</b></p>'
     else:
         return '<p><b>Login Failed!</b></p>'
@@ -120,13 +118,15 @@ def blog_batch_delete(grade):
     sql.main(11 , **{'grade' : grade})
     return '<p><b>Batch delete successfully!</b></p>'
 
-@route('/blog/comment/<md5url>/<grade:int>')
-def blog_comment(md5url , grade):
+@route('/blog/comment' , method = 'POST')
+def blog_comment():
     '''
     这里的comment的数据制定了我们对博文的评价成程度
     1,2,3,4,5几个等级
     '''
-    sql.main(7 , **{'md5url' : md5url , 'grade' : grade})
+    comment = int(request.forms.get('comment'))
+    md5url = str(request.forms.get('md5url'))
+    sql.main(7 , **{'md5url' : md5url , 'grade' : comment})
     return '<p><b>Change the blog grade successfully</b></p>'
 
 @route('/blog/open/<md5url>')
@@ -134,8 +134,11 @@ def blog_open(md5url):
     '''
     该模块返回一个新的富文本博文给用户
     '''
-    return sql.main(3 , **{'md5url' :md5url})[0][1]
-
+    content = sql.main(3 , **{'md5url' :md5url})[0][1].decode('utf8')
+    comment = '<form action = "http://127.0.0.8:8888/blog/comment" method="post">md5url : <input type="text" name="md5url"></br>comment : <input type="text" name="comment"></br><input value = "submit" type="submit"></br></form>'
+    index = content.index('</body>')
+    new_content = content[:index] + comment + content[index:]
+    return new_content
 
 # 启动服务器
 run(host = '127.0.0.8' , port = 8888)

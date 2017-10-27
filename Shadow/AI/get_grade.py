@@ -200,21 +200,27 @@ def classify(tree , label , test):
             break
     return true_label
 
-def save_model_to_sql(user , model):
+def save_model_to_sql(model):
     '''
     该函数将产生的字典型决策树模型存储在数据库的user表中
     '''
-    model = str(model)
-    save = sql.main(8 , **{'old_name' : user , 'model' : model})
-    print(save)
+    import pickle
+    with open('../MYSQL/model.pkl' , 'wb') as f:
+        pickle.dump(model , f)
+    print('模型文件存放在../MYSQL/model.pkl中')
 
-def get_model_from_sql(user):
+def get_model_from_sql():
     '''
     该函数将存储在数据库中的决策树模型提取出来
     '''
-    save = sql.main(1 , **{'name' : user})
-    tree = eval(save[3])
-    return tree
+    import pickle
+    with open('../MYSQL/model.pkl' , 'rb') as f:
+        model = pickle.load(f)
+    return model
 
 if __name__ == "__main__":
-    pass
+    dataset , label = load_data_for_grade()
+    model = createtree(dataset , label)
+    print(model)
+    save_model_to_sql(model)
+    print(get_model_from_sql())
