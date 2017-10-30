@@ -1,24 +1,30 @@
 <template>
   <div id="app">
-    <header class="header" :class="{ 'header-fixed' : true }">
-    <el-row>
-      <el-col :span='24'>
-        <el-menu :default-active='4' class='el-menu-demo' mode='horizontal' theme='dark'>
-          <el-menu-item index='0'><img src='./assets/logo.png' height="50" width="50"></el-menu-item>
-          <el-menu-item index='1'><router-link to='/'>爬虫定义</router-link></el-menu-item>
-          <el-menu-item index='2'><router-link to='/result'>结果查询</router-link></el-menu-item>
-          <el-menu-item index='3'><router-link to='/check'>用户检测</router-link></el-menu-item>
-        </el-menu>
-      </el-col>
-    </el-row>
-    </header>
-  <router-view></router-view>
+    <el-menu 
+      :default-active="active1"
+      mode='horizontal'
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+      <el-menu-item index="1"><img src='./assets/logo.png' height="12.5" width="12.5"></el-menu-item>
+      <el-menu-item index="2"><router-link to="/spider">爬虫定义</router-link></el-menu-item>
+      <el-menu-item index="3"><router-link to="/result">结果查询</router-link></el-menu-item>
+      <el-menu-item index="4"><router-link to="/check">用户检测</router-link></el-menu-item>
+    </el-menu>
+    <router-view></router-view>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'app'
+  component: {
+  },
+  data () {
+    return {
+      active1: true
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import spider from '@/components/spider'
 import result from '@/components/result'
 import check from '@/components/check'
 
@@ -9,9 +9,9 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: HelloWorld
+      path: '/spider',
+      name: 'spider',
+      component: spider
     }, {
       path: '/result',
       name: 'result',
