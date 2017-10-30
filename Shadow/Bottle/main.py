@@ -141,4 +141,4 @@ def blog_open(md5url):
     return new_content
 
 # 启动服务器
-run(host = '127.0.0.8' , port = 8888)
+run(host = '10.62.55.91' , port = 8888)
