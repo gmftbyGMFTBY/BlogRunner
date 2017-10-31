@@ -83,9 +83,10 @@ def get_signup():
 @route('/spider/website' , method = 'POST')
 def get_website_spider():
     import json
-    name = request.forms.get('name')
+    data = eval(request.body.readlines()[0].decode('utf8'))
+    limit = int(data['limit'])
+    name = data['name']
     # root_url , limit是传递给其他组件模块的参数
-    limit = int(request.forms.get('limit'))
     domain = 'http://blog.csdn.net/'
     root_url = domain + name
     # 处理,信息返回
@@ -94,12 +95,13 @@ def get_website_spider():
 @route('/spider/keyword' , method = 'POST')
 def get_keyword_spider():
     import json
+    # 这里因为跨域请求的问题，必须要加入该头信息
+    response.set_header('Access-Control-Allow-Origin','*')
     data = eval(request.body.readlines()[0].decode('utf8'))
-    print(data , type(data))
-    '''
-    root_url = 'http://so.csdn.net/so/search/s.do?q=%s&q=%s' % (word , word)
+    limit = int(data['limit'])
+    # print(data , type(data))
+    root_url = 'http://so.csdn.net/so/search/s.do?q=%s&q=%s' % (data['keyword'] , data['keyword'])
     return json.dumps(keyword.crawl(root_url , limit) , indent = 4 , ensure_ascii = False , skipkeys = True)
-    '''
 
 '''
 博文信息管理，删除，评价，博文打开

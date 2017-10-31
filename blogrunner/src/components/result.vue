@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data='tabledata'
+    :data='fordata'
     style="width: 100%"
     >
     <el-table-column
@@ -103,6 +103,11 @@ export default {
         number_photo: 2,
         number_link: 1
       }]
+    }
+  },
+  computed: {
+    fordata () {
+      return this.$store.state.data
     }
   }
 }

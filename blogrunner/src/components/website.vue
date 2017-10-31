@@ -7,7 +7,7 @@
      <el-input v-model="form.limit" size='mini' maxlength="5"></el-input>
    </el-form-item>
    <el-form-item>
-     <el-button type="primary" @click="submit">搜索</el-button>
+     <el-button type="primary" @click="postdata">搜索</el-button>
    </el-form-item>
  </el-form>
 </template>
@@ -20,6 +20,8 @@ export default {
         limit: ''
       }
     }
+  },
+  methods: {
   }
 }
 </script>
