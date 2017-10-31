@@ -94,10 +94,12 @@ def get_website_spider():
 @route('/spider/keyword' , method = 'POST')
 def get_keyword_spider():
     import json
-    word = request.forms.get('keyword')
-    limit = int(request.forms.get('limit'))
+    data = eval(request.body.readlines()[0].decode('utf8'))
+    print(data , type(data))
+    '''
     root_url = 'http://so.csdn.net/so/search/s.do?q=%s&q=%s' % (word , word)
     return json.dumps(keyword.crawl(root_url , limit) , indent = 4 , ensure_ascii = False , skipkeys = True)
+    '''
 
 '''
 博文信息管理，删除，评价，博文打开
@@ -141,4 +143,4 @@ def blog_open(md5url):
     return new_content
 
 # 启动服务器
-run(host = '10.62.55.91' , port = 8888)
+run(host = '127.0.0.8' , port = 8888)

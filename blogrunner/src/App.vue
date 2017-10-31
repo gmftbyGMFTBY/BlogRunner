@@ -1,5 +1,5 @@
-<template>
-  <div id="app">
+<template> 
+<div id="app">
     <el-menu 
       :default-active="active1"
       mode='horizontal'
@@ -7,13 +7,17 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <el-menu-item index="1"><img src='./assets/logo.png' height="12.5" width="12.5"></el-menu-item>
-        <el-submenu index="3">
+        <el-submenu index="2">
           <template slot="title">爬虫定义</template>
             <el-menu-item index="2-1"><router-link to="/keyword">关键字爬虫</router-link></el-menu-item>
             <el-menu-item index="2-2"><router-link to="/website">用户爬虫</router-link></el-menu-item>
         </el-submenu>
       <el-menu-item index="3"><router-link to="/result">结果查询</router-link></el-menu-item>
-      <el-menu-item index="4"><router-link to="/check">用户检测</router-link></el-menu-item>
+      <el-submenu index="4">
+        <template slot="title">用户检测</template>
+          <el-menu-item index="4-1"><router-link to="/urlupload">URL上传</router-link></el-menu-item>
+          <el-menu-item index="4-2"><router-link to="/htmlupload">网页上传</router-link></el-menu-item>
+      </el-submenu>
     </el-menu>
     <router-view></router-view>
   </div>

@@ -93,7 +93,7 @@ export default {
         number_photo: 2,
         number_link: 1
       }, {
-        name: '二叉树',
+        'name': '二叉树',
         grade: 3,
         size: 1024,
         number_reader: 3019,

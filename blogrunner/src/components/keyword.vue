@@ -7,7 +7,7 @@
      <el-input v-model="form.limit"></el-input>
    </el-form-item>
    <el-form-item>
-     <el-button type="primary" @click="submit">搜索</el-button>
+     <el-button type="primary" @click="postdata">搜索</el-button>
    </el-form-item>
  </el-form>
 </template>
@@ -16,9 +16,33 @@ export default {
   data () {
     return {
       form: {
-        name: '',
+        keyword: '',
         limit: ''
       }
+    }
+  },
+  methods: {
+    /*
+    postdata () {
+      this.$http({
+        method: 'post',
+        url: 'http://127.0.0.8:8888/spider/keyword',
+        data: {
+          'keyword': 'gmftby',
+          'limit': 2
+        }
+      })
+    }
+    */
+    postdata () {
+      let data = "{'keyword': 'gmftby' , 'limit': 2}"
+      this.$http.post('http://127.0.0.8:8888/spider/keyword', data)
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     }
   }
 }
