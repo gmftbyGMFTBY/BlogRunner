@@ -128,21 +128,19 @@ def blog_comment():
     这里的comment的数据制定了我们对博文的评价成程度
     1,2,3,4,5几个等级
     '''
-    comment = int(request.forms.get('comment'))
-    md5url = str(request.forms.get('md5url'))
-    sql.main(7 , **{'md5url' : md5url , 'grade' : comment})
-    return '<p><b>Change the blog grade successfully</b></p>'
+    import json
+    response.set_header('Access-Control-Allow-Origin','*')
+    data = eval(request.body.readlines()[0].decode('utf8'))
+    sql.main(7 , **{'md5url' : data['md5url'] , 'grade' : data['grade']})
+    return json.dumps({'done': True} , ensure_ascii = False , skipkeys = True)
 
 @route('/blog/open/<md5url>')
 def blog_open(md5url):
     '''
     该模块返回一个新的富文本博文给用户
     '''
-    content = sql.main(3 , **{'md5url' :md5url})[0][1].decode('utf8')
-    comment = '<form action = "http://127.0.0.8:8888/blog/comment" method="post">md5url : <input type="text" name="md5url"></br>comment : <input type="text" name="comment"></br><input value = "submit" type="submit"></br></form>'
-    index = content.index('</body>')
-    new_content = content[:index] + comment + content[index:]
-    return new_content
+    response.set_header('Access-Control-Allow-Origin','*')
+    return sql.main(3 , **{'md5url' :md5url})[0][1].decode('utf8')
 
 # 启动服务器
 run(host = '127.0.0.8' , port = 8888)

@@ -1,5 +1,10 @@
 <template>
- <el-form ref="form" :model="form" label-width="80px">
+ <el-form
+   v-loading.fullscreen.lock='loading'
+   element-loading-text="拼命加载中"
+   element-loading-spinner="el-icon-loading"
+   element-loading-background="rgba(0, 0, 0, 0.8)"
+   ref="form" :model="form" label-width="80px">
    <el-form-item label="关键字">
      <el-input v-model="form.keyword"></el-input>
    </el-form-item>
@@ -20,7 +25,8 @@ export default {
         keyword: '',
         limit: ''
       },
-      result: []
+      result: [],
+      loading: false
     }
   },
   methods: {
@@ -39,9 +45,11 @@ export default {
     postdata () {
       var self = this
       let data = JSON.stringify(this.form)
-      this.$http.post('http://127.0.0.8:8888/spider/keyword', data)
+      self.loading = true
+      self.$http.post('http://127.0.0.8:8888/spider/keyword', data)
       .then(function (response) {
         self.result = response.data
+        self.loading = false
         self.$store.state.data = self.result
       })
       .catch(function (error) {

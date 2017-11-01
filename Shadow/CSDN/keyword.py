@@ -64,7 +64,8 @@ def crawl(url , page_number):
             con = requests.get(i)
             con.encoding = 'utf8'
             filename = md5.hexdigest()
-            information.append(analyse.crawl_sample(filename , con.text , 1))
+            if analyse.crawl_sample(filename , con.text , 1):
+                information.append(analyse.crawl_sample(filename , con.text , 1))
         except Exception as e:
             print(e)
             print('CSDN服务器正在扫描爬虫，延时 10s 躲避')
