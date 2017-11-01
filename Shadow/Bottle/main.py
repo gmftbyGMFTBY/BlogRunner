@@ -83,9 +83,10 @@ def get_signup():
 @route('/spider/website' , method = 'POST')
 def get_website_spider():
     import json
+    response.set_header('Access-Control-Allow-Origin','*')
     data = eval(request.body.readlines()[0].decode('utf8'))
+    name = data['username']
     limit = int(data['limit'])
-    name = data['name']
     # root_url , limit是传递给其他组件模块的参数
     domain = 'http://blog.csdn.net/'
     root_url = domain + name
@@ -106,13 +107,15 @@ def get_keyword_spider():
 '''
 博文信息管理，删除，评价，博文打开
 '''
-@route('/blog/delete/<md5url>')
+@route('/blog/delete/<md5url>' , method = 'POST')
 def blog_delete(md5url):
     '''
     删除博文，但是不删除对于博文的评价，评价是很重要的信息数据，不能随便的删除
     '''
+    import json
+    response.set_header('Access-Control-Allow-Origin','*')
     sql.main(10 , **{'md5url' : md5url})
-    return '<p><b>Delete the blog successfully!</b></p>'
+    return json.dumps({'delete': True} , ensure_ascii = False , skipkeys = True)
 
 @route('/blog/batch_delete/<grade:int>')
 def blog_batch_delete(grade):
