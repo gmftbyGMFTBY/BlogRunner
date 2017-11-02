@@ -2,9 +2,9 @@
   <el-container>
   <el-container>
   <el-table
-    :data='fordata'
+    :data='filterfordata'
     style="width: 100%"
-    max-height="750"
+    max-height="500"
     tooltip-effect="dark"
     ref="multipleTable"
     @selection-change="selectionchange"
@@ -81,6 +81,14 @@
   </el-table>
   </el-container>
   <el-footer>
+    按照评价信息筛选&nbsp;&nbsp;
+    <el-select v-model="currenttype" placeholder="按照评价筛选" size="small">
+      <el-option
+        v-for="type in types"
+        :value="type">
+      </el-option>
+    </el-select>
+    <el-button type="primary" @click="batchdelete">批量删除</el-button>
   </el-footer>
   </el-container>
 </template>
@@ -122,13 +130,28 @@ export default {
       done: false,
       delete: false,
       chooselist: [],
-      chooselength: 0
+      chooselength: 0,
+      currenttype: 'All',
+      types: ['All', 0, 1, 2, 3, 4, 5]
     }
   },
   computed: {
     fordata () {
       console.log(this.$store.state.data)
       return this.$store.state.data
+    },
+    filterfordata () {
+      var self = this
+      var type = self.currenttype
+      return self.$store.state.data.filter(function (data) {
+        if (type === 'All') {
+          // 全部都显示
+          return true
+        } else {
+          // 否则显示指定的部分
+          return data.grade === type
+        }
+      })
     }
   },
   methods: {
@@ -172,6 +195,7 @@ export default {
     }
     */
     delete_success () {
+      console.log('delete!')
       this.$message({
         message: '恭喜你，删除成功',
         type: 'success'
@@ -192,11 +216,37 @@ export default {
           self.delete_fail()
         }
         // 删除当前表表格项 , scope.$index 获取当前的标号
-        delete self.$store.state.data[scope.$index]
+        self.$store.state.data.splice(scope.$index, 1)
       })
       .catch(function (error) {
         console.log(error)
       })
+    },
+    batchdelete () {
+      var self = this
+      var type = self.currenttype
+      var len = self.$store.state.data.length
+      var p = 1
+      for (var i = 0, flag = true; i < len; flag ? i++ : i) {
+        if (self.$store.state.data[i].grade === type) {
+          self.$store.state.data.splice(i, 1)
+          flag = false
+          var md5url = self.$store.state.data[i]['md5url']
+          self.$http.post('http://127.0.0.8:8888/blog/delete/' + md5url)
+          .then(function (response) {
+            console.log(response)
+            if (p === 1) {
+              self.delete_success()
+              p = p - 1
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+        } else {
+          flag = true
+        }
+      }
     }
   }
 }

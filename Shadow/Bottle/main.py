@@ -21,9 +21,11 @@ from AI import get_grade    # ai预测模块
 '''
 该函数接收用户上传的URL，并且经过我们的ai预测返回一个可能的值作为预测的阅读量
 '''
-@route('/upload' , method = 'POST')
-def get_upload():
-    url = request.forms.get('url')    # 获取用户为文件定义的名字,一定要发布出去才可以使用
+@route('/urlupload' , method = 'POST')
+def get_url_upload():
+    # url = request.forms.get('url')    获取用户为文件定义的名字,一定要发布出去才可以使用
+    response.set_header('Access-Control-Allow-Origin','*')
+    url = (request.body.readlines()[0]).decode('utf8')
     import requests
     page = requests.get(url , headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     page.encoding = 'utf8'
@@ -36,6 +38,12 @@ def get_upload():
     force = None
     return force    
 
+@route('/htmlupload' , method = 'POST')
+def get_html_upload():
+    response.set_header('Access-Control-Allow-Origin','*')
+    data = (request.body.readlines()[0]).decode('utf8')
+    import pprint
+    pprint.pprint(data)
 
 # 用户信息数据获取响应
 
@@ -117,13 +125,13 @@ def blog_delete(md5url):
     sql.main(10 , **{'md5url' : md5url})
     return json.dumps({'delete': True} , ensure_ascii = False , skipkeys = True)
 
+''''
 @route('/blog/batch_delete/<grade:int>')
 def blog_batch_delete(grade):
-    '''
-    批量删除博文接口
-    '''
+    # 批量删除博文接口
     sql.main(11 , **{'grade' : grade})
     return '<p><b>Batch delete successfully!</b></p>'
+'''
 
 @route('/blog/comment' , method = 'POST')
 def blog_comment():
