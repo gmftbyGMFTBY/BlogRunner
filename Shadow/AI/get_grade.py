@@ -15,11 +15,17 @@ from math import log
 import operator
 import pprint
 
-def load_data_for_grade():
+def load_data_for_grade(inx = None):
     '''
     该函数从数据库中抽取所有的样本空间数据，将信息规整病返还给监督学习组件去学习
     '''
-    save = sql.main(5)    # 获取全部的样本信息
+    save = []
+    if inx == None:
+        save = sql.main(5)    # 获取全部的样本信息
+    else:
+        inx.append(0)
+        save = [inx]
+    print('save' , save)
     # data
     data = []
     for i in save:
@@ -27,15 +33,20 @@ def load_data_for_grade():
         p = []
         # size 离散化
         if 0 <= i[1] < 1000 : p.append(1)
-        elif 1000 <= i[1] < 5000 : p.append(2)
-        else : p.append(3)
+        elif 1000 <= i[1] < 2000 : p.append(2)
+        elif 2000 <= i[1] < 3000 : p.append(3)
+        elif 3000 <= i[1] < 5000 : p.append(4)
+        else : p.append(5)
         # number_reader
-        if 0 <= i[2] < 500 : p.append(1)
-        elif 500 <= i[2] < 1000 : p.append(2)
-        else : p.append(3)
+        if 0 <= i[2] < 200 : p.append(1)
+        elif 200 <= i[2] < 400 : p.append(2)
+        elif 400 <= i[2] < 600 : p.append(3)
+        elif 600 <= i[2] < 800 : p.append(4)
+        elif 800 <= i[2] < 1700 : p.append(5)
+        else : p.append(6)
         # number_like
         if i[3] == 0 : p.append(1)
-        elif 1 <= i[3] < 5 : p.append(2)
+        elif 1 <= i[3] <= 3 : p.append(2)
         else : p.append(3)
         # number_code
         if i[5] == 0 : p.append(1)
@@ -43,25 +54,28 @@ def load_data_for_grade():
         else : p.append(3)
         # number_photo
         if i[6] == 0 : p.append(1)
-        elif 1 <= i[6] <= 3 : p.append(2)
-        else : p.append(3)
+        elif 1 <= i[6] <= 2 : p.append(2)
+        elif 3 <= i[6] <= 4 : p.append(3)
+        else : p.append(4)
         # number_link
         if i[7] == 0 : p.append(1)
         elif 1 <= i[7] <= 3 : p.append(2)
         else : p.append(3)
         # grade --++
-        if 0 <= i[4] < 60 : p.append(1)
-        elif 60 <= i[4] < 80 : p.append(2)
-        else : p.append(3)
+        p.append(int(i[4]))
         data.append(p)
     label = ['content size' , 'number_reader' , 'number_like' , 'number_code' , 'number_photo' , 'number_link']
     return data , label
 
-def load_data_for_reader():
+def load_data_for_reader(inx = None):
     '''
     该函数一样使用决策树的代码，只不过改变我们的决策的目标，决策目标更换成对应的阅读量
     '''
-    save = sql.main(5)
+    save = []
+    if inx == None : save = sql.main(5)
+    else:
+        save = [inx]
+        print(save)
     data = []
     for i in save:
         p = []
@@ -158,7 +172,7 @@ def major(data):
         if i not in classcount.keys():
             classcount[i] = 0
         classcount[i] += 1
-    save = sorted(classcount.iteritems() , key = operator.itemgetter(1) , reverse = True)
+    save = sorted(classcount.items() , key = operator.itemgetter(1) , reverse = True)
     return save[0][0]
 
 def createtree(dataset , label):
@@ -187,7 +201,7 @@ def classify(tree , label , test):
     '''
     使用决策树决策的函数
     '''
-    feature = tree.keys()[0]
+    feature = list(tree.keys())[0]
     subtree = tree[feature]
     index = label.index(feature)
     true_label = None
@@ -218,9 +232,36 @@ def get_model_from_sql():
         model = pickle.load(f)
     return model
 
+def analyse(res):
+    # res is a list of dict
+    model = get_model_from_sql()
+    for i in res:
+        new = load_data_for_grade([0 , i['size'] , i['number_reader'] , i['number_like'] , 0 , i['number_code'] , i['number_photo'] , i['number_link']])[0][0][:-1]
+        p = classify(model , ['content size', 'number_reader', 'number_like', 'number_code', 'number_photo', 'number_link'] , new)
+        if p != None : i['grade'] = p
+        else : 
+            i['grade'] = 0
+            print('error')
+    return res
+
 if __name__ == "__main__":
-    dataset , label = load_data_for_grade()
-    model = createtree(dataset , label)
-    print(model)
+    '''
+    dataset , label = load_data_for_grade(None)
+    plabel = label.copy()
+    model = createtree(dataset , plabel)
     save_model_to_sql(model)
-    print(get_model_from_sql())
+    print(model)
+
+    # 检测正确率
+    number = 0
+    nonenumber = 0
+    for i in dataset:
+        res = classify(model , label , i[:-1])
+        if res == None : nonenumber += 1
+        elif res == i[-1]:
+            number += 1
+    print(len(dataset) , nonenumber , number)
+    print(number * 1.0 / len(dataset))
+    '''
+    # a = analyse([{'size':11140 , 'number_reader':562,'number_like':0,'number_code':16,'number_photo':24,'number_link':2}])
+    load_data_for_reader([0 , 4007,0, 4, 4 ,3, 2,0])

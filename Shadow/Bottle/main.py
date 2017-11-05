@@ -11,32 +11,42 @@ from bottle import request , response
 import sys
 sys.path.append('..')
 sys.path.append('../CSDN')
-
+import hashlib
 import MYSQL.sql as sql
 from CSDN import analyse
 from CSDN import website
 from CSDN import keyword
 from AI import get_grade    # ai预测模块
+from AI import KNN
+
+def get_result(ans):
+    return KNN.main(ans)    # 获取训练样本和测试样本,返回对应的k的number_reader的均值
 
 '''
 该函数接收用户上传的URL，并且经过我们的ai预测返回一个可能的值作为预测的阅读量
 '''
 @route('/urlupload' , method = 'POST')
 def get_url_upload():
+    import json
     # url = request.forms.get('url')    获取用户为文件定义的名字,一定要发布出去才可以使用
     response.set_header('Access-Control-Allow-Origin','*')
-    url = (request.body.readlines()[0]).decode('utf8')
+    data = eval((request.body.readlines()[0]).decode('utf8'))
     import requests
-    page = requests.get(url , headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+    page = requests.get(data['url'] , headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     page.encoding = 'utf8'
     f = page.text
-    # ...这个等待和前端的接口搭建完使用，或者可以开始着手进行博文的机器学习的算法训练集的搭建
-    # 这里可以考虑我们的网页的feature数据不存入数据库，但是可以将数据传递给我们的get_grade的AI模块去得到对应的预测值
-    # feature = analyse.crawl_sample( , , 0)
-    # get_grade <= feature
-    # ...
-    force = None
-    return force    
+    md5 = hashlib.md5()
+    md5.update(data['url'].encode('utf'))
+    filename = md5.hexdigest()
+    ans = analyse.crawl_sample(filename , f , 1)
+    ans['grade'] = data['grade']
+    print(ans['grade'])
+    number_reader = -1
+    if ans != None :
+        # 获得了对应文章的标签属性 , ans是一个含有grade但是没有number_reader的字典
+        number_reader = get_result(ans)
+    # 发送信号单元
+    return json.dumps({'result': int(number_reader)} , ensure_ascii = False , skipkeys = True)
 
 @route('/htmlupload' , method = 'POST')
 def get_html_upload():
@@ -91,6 +101,7 @@ def get_signup():
 @route('/spider/website' , method = 'POST')
 def get_website_spider():
     import json
+    import operator
     response.set_header('Access-Control-Allow-Origin','*')
     data = eval(request.body.readlines()[0].decode('utf8'))
     name = data['username']
@@ -99,18 +110,25 @@ def get_website_spider():
     domain = 'http://blog.csdn.net/'
     root_url = domain + name
     # 处理,信息返回
-    return json.dumps(website.crawl(root_url , domain , limit) , indent = 4 , ensure_ascii=False , skipkeys = True)
+    res = website.crawl(root_url , domain , limit)
+    res = get_grade.analyse(res)
+    res.sort(key = operator.itemgetter('grade') , reverse = True)
+    return json.dumps(res , indent = 4 , ensure_ascii=False , skipkeys = True)
 
 @route('/spider/keyword' , method = 'POST')
 def get_keyword_spider():
     import json
+    import operator
     # 这里因为跨域请求的问题，必须要加入该头信息
     response.set_header('Access-Control-Allow-Origin','*')
     data = eval(request.body.readlines()[0].decode('utf8'))
     limit = int(data['limit'])
     # print(data , type(data))
     root_url = 'http://so.csdn.net/so/search/s.do?q=%s&q=%s' % (data['keyword'] , data['keyword'])
-    return json.dumps(keyword.crawl(root_url , limit) , indent = 4 , ensure_ascii = False , skipkeys = True)
+    res = keyword.crawl(root_url , limit)
+    res = get_grade.analyse(res)
+    res.sort(key = operator.itemgetter('grade') , reverse = True)
+    return json.dumps(res , indent = 4 , ensure_ascii = False , skipkeys = True)
 
 '''
 博文信息管理，删除，评价，博文打开
@@ -152,6 +170,34 @@ def blog_open(md5url):
     '''
     response.set_header('Access-Control-Allow-Origin','*')
     return sql.main(3 , **{'md5url' :md5url})[0][1].decode('utf8')
+
+@route('/history' , method = 'POST')
+def history():
+    import json
+    response.set_header('Access-Control-Allow-Origin','*')
+    res = sql.main(5)
+    new = []
+    for i in res:
+        p = {}
+        p['md5url'] = i[0]
+        p['size'] = i[1]
+        p['number_reader'] = i[2]
+        p['number_like'] = i[3]
+        p['grade'] = i[4]
+        p['number_code'] = i[5]
+        p['number_photo'] = i[6]
+        p['number_link'] = i[7]
+        new.append(p)
+    return json.dumps(new , ensure_ascii = False , skipkeys = True)
+
+@route('/train' , method = "POST")
+def train():
+    # 该函数启动训练
+    dataset , label = get_grade.load_data_for_grade(None)
+    plabel = label.copy()
+    model = get_grade.createtree(dataset , plabel)
+    get_grade.save_model_to_sql(model)
+    print(model)
 
 # 启动服务器
 run(host = '127.0.0.8' , port = 8888)

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import aboutus from '@/components/aboutus'
 // import spider from '@/components/spider'
 import result from '@/components/result'
 import urlupload from '@/components/urlupload'
@@ -13,6 +14,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      name: 'root',
+      component: keyword
+    }, {
       path: '/keyword',
       name: 'keyword',
       component: keyword
@@ -36,6 +41,10 @@ export default new Router({
       path: '/result',
       name: 'result',
       component: result
+    }, {
+      path: '/aboutus',
+      name: 'aboutus',
+      component: aboutus
     }
   ]
 })

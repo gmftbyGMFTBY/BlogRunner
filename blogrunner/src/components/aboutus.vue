@@ -1,19 +1,10 @@
 <template>
   <el-container class='search'>
-    <el-form
-      v-loading.fullscreen.lock='loading'
-      element-loading-text="拼命加载中"
-      element-loading-spinner="el-icon-loading"
-      element-loading-background="rgba(0, 0, 0, 0.8)"
-      ref="form" :model="form" label-width="80px">
+    <el-form>
       <el-form-item>
-        <el-input v-model="value" placeholder="请输入检测的URL"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-rate type="primary" v-model=grade></el-rate>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="upload">上传</el-button>
+        <a color="red" href="http://github.com/gmftbyGMFTBY/BlogRunner" height="500px">
+          <img src="../assets/logo.png">
+        </a>
       </el-form-item>
     </el-form>
   </el-container>

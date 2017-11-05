@@ -11,6 +11,7 @@
     >
     <el-table-column type='index' width="55"></el-table-column>
     <el-table-column
+      v-if="show"
       prop="blog_name"
       label="名称"
       width="250"
@@ -89,6 +90,8 @@
       </el-option>
     </el-select>
     <el-button type="primary" @click="batchdelete">批量删除</el-button>
+    <el-button type="primary" @click="searchhistory">历史记录</el-button>
+    <el-button type="primary" @click="train">重新训练</el-button>
   </el-footer>
   </el-container>
 </template>
@@ -132,7 +135,8 @@ export default {
       chooselist: [],
       chooselength: 0,
       currenttype: 'All',
-      types: ['All', 0, 1, 2, 3, 4, 5]
+      types: ['All', 0, 1, 2, 3, 4, 5],
+      show: true
     }
   },
   computed: {
@@ -247,6 +251,27 @@ export default {
           flag = true
         }
       }
+    },
+    searchhistory () {
+      var self = this
+      self.$http.post('http://127.0.0.8:8888/history')
+      .then(function (response) {
+        self.$store.state.data = response.data
+        self.show = false
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    },
+    train () {
+      var self = this
+      self.$http.post('http://127.0.0.8:8888/train')
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     }
   }
 }
