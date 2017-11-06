@@ -16,15 +16,32 @@ import MYSQL.sql as sql
 from CSDN import analyse
 from CSDN import website
 from CSDN import keyword
-from AI import get_grade    # ai预测模块
-from AI import KNN
+from AI import get_grade    # ID3 - 决策树
+from AI import KNN    # K-临近算法求解最佳适应
 
 def get_result(ans):
     return KNN.main(ans)    # 获取训练样本和测试样本,返回对应的k的number_reader的均值
 
-'''
-该函数接收用户上传的URL，并且经过我们的ai预测返回一个可能的值作为预测的阅读量
-'''
+@route('/' , method = 'GET')
+def get_main():
+    return static_file('index.html' , '../../blogrunner/dist/')
+
+@route('/static/css/<filename>' , method = 'GET')
+def get_css(filename):
+    return static_file(filename , '../../blogrunner/dist/static/css/')
+
+@route('/static/js/<filename>' , method = 'GET')
+def get_js(filename):
+    return static_file(filename , '../../blogrunner/dist/static/js/')
+    
+@route('/static/img/<filename>' , method = 'GET')
+def get_img(filename):
+    return static_file(filename , '../../blogrunner/dist/static/img')
+
+@route('/static/fonts/<filename>' , method = 'GET')
+def get_fonts(filename):
+    return static_file(filename , '../../blogrunner/dist/static/fonts')
+
 @route('/urlupload' , method = 'POST')
 def get_url_upload():
     import json
